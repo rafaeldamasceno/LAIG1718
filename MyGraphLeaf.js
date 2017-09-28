@@ -4,5 +4,8 @@
 **/
 
 function MyGraphLeaf(graph, xmlelem) {
+  CGFobject.call(this, graph.scene);
 }
 
+MyGraphLeaf.prototype = Object.create(CGFobject.prototype);
+MyGraphLeaf.prototype.constructor = MyGraphLeaf;
