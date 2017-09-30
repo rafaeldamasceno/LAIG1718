@@ -3,7 +3,7 @@
  * @constructor
 **/
 
-function MyGraphLeaf(graph, xmlelem) {
+function MyGraphLeaf(graph) {
   CGFobject.call(this, graph.scene);
 }
 
