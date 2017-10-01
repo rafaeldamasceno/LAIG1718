@@ -1349,33 +1349,25 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
 
 						//parse leaf
             var args = this.reader.getString(descendants[j], 'args');
+            var argarr = args.split(" ");
 
             switch(type) {
               case 'rectangle':
-                  var argarr = args.split(" ");
                   this.nodes[nodeID].addLeaf(new MyRectangle(this, parseFloat(argarr[0]), parseFloat(argarr[1]), parseFloat(argarr[2]), parseFloat(argarr[3])));
-                  //ler args para 4 valores. Criar um retangulo.
                   break;
               case 'cylinder':
-
-                  //ler args para 5 valores. Criar um cilindro.
+                  this.nodes[nodeID].addLeaf(new MyCylinder(this, parseFloat(argarr[0]), parseFloat(argarr[1]), parseFloat(argarr[2]), parseInt(argarr[3]), parseInt(argarr[4])));
                   break;
               case 'sphere':
-
-                  //ler args para 3 valores. Criar uma esfera.
+                  this.nodes[nodeID].addLeaf(new MySphere(this, parseFloat(argarr[0]), parseInt(argarr[1]), parseInt(argarr[2])));
                   break;
               case 'triangle':
-
-                  //ler args para 9 valores. Criar um triangulo.
+                  this.nodes[nodeID].addLeaf(new MyTriangle(this, parseFloat(argarr[0]), parseFloat(argarr[1]), parseFloat(argarr[2]), parseFloat(argarr[3]), parseFloat(argarr[4]), parseFloat(argarr[5]), parseFloat(argarr[6]), parseFloat(argarr[7]), parseFloat(argarr[8])));
                   break;
               default:
                   break;
             }
-
-
-
-						//this.nodes[nodeID].addLeaf(new MyGraphLeaf(this,descendants[j]));
-                        sizeChildren++;
+            sizeChildren++;
 					}
 					else
 						this.onXMLMinorError("unknown tag <" + descendants[j].nodeName + ">");

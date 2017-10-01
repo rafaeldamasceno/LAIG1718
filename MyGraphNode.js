@@ -37,3 +37,22 @@ MyGraphNode.prototype.addChild = function(nodeID) {
 MyGraphNode.prototype.addLeaf = function(leaf) {
     this.leaves.push(leaf);
 }
+
+MyGraphNode.prototype.display = function(materialID, textureID, transMat) {
+
+    var newTexture = this.textureID;
+    if (this.textureID == null) {
+      newTexture = textureID;
+    }
+    var newMaterial = this.materialID;
+    if (this.materialID == null) {
+      newMaterial = materialID;
+    }
+    var newmat;
+    //var newMat = this.transformMatrix*transMat;
+    for (var i = 0; i < this.children.length; i++) {
+        this.children[i].display(newMaterial, newTexture, newmat);
+    }
+
+    //ciclo de leafs.
+}
