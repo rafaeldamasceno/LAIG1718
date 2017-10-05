@@ -1441,6 +1441,6 @@ MySceneGraph.generateRandomString = function(length) {
  */
 MySceneGraph.prototype.displayScene = function() {
 	// entry point for graph rendering
-	// remove log below to avoid performance issues
-	this.log("Graph should be rendered here...");
+	this.nodes["chao"].leaves[0].display();
+	//this.log("Graph should be rendered here...");
 }
