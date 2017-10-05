@@ -9,7 +9,7 @@ function MyCylinder(graph, height, bottomRadius, topRadius, slices, vertices) {
   this.slices = slices;
   this.stacks = vertices;
 
-  this.initBuffers();
+  //this.initBuffers();
 }
 
 MyCylinder.prototype = Object.create(MyGraphLeaf.prototype);
