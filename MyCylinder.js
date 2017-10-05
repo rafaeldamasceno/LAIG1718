@@ -7,8 +7,21 @@ function MyCylinder(graph, height, bottomRadius, topRadius, slices, vertices) {
   this.bottomRadius = bottomRadius;
   this.topRadius = topRadius;
   this.slices = slices;
-  this.vertices = vertices;
+  this.stacks = vertices;
+
+  this.initBuffers();
 }
 
 MyCylinder.prototype = Object.create(MyGraphLeaf.prototype);
 MyCylinder.prototype.constructor = MyCylinder;
+
+
+MyCylinder.prototype.initBuffers = function() {
+	this.vertices = [];
+ 	this.normals = [];
+ 	this.texCoords = [];
+
+
+ 	this.primitiveType = this.scene.gl.TRIANGLES;
+ 	this.initGLBuffers();
+ };
