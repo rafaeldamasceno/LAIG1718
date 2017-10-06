@@ -63,6 +63,7 @@ MyGraphNode.prototype.display = function(materialID = null, textureID = null) {
     for (var i = 0; i < this.leaves.length; i++) {
       this.graph.materials[newMaterial].apply();
       if (newTexture != null) {
+        this.leaves[i].updateTexScaling(this.graph.textures[newTexture][1], this.graph.textures[newTexture][2]);
         this.graph.textures[newTexture][0].bind();
       }
       this.leaves[i].display();

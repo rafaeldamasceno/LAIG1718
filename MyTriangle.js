@@ -31,14 +31,21 @@ MyTriangle.prototype.initBuffers = function () {
     0, 1, 2,
   ];
 
-  var v1 = [this.x2 - this.x1, this.y2 - this.y1, this.z2 - this.z1];
-  var v2 = [this.x3 - this.x1, this.y3 - this.y1, this.z3 - this.z1];
+  var v1 = [this.x1 - this.x3, this.y1 - this.y3, this.z1 - this.z3];
+  var v2 = [this.x2 - this.x1, this.y2 - this.y1, this.z2 - this.z1];
+  var v3 = [this.x3 - this.x2, this.y3 - this.y2, this.z3 - this.z2];
+
+  var a = Math.sqrt(v1[0] * v1[0] + v1[1] * v1[1] + v1[2] * v1[2]);
+  var b = Math.sqrt(v2[0] * v2[0] + v2[1] * v2[1] + v2[2] * v2[2]);
+  var c = Math.sqrt(v3[0] * v3[0] + v3[1] * v3[1] + v3[2] * v3[2]);
+
+  var cos = (a * a - b * b + c * c) / (2 * a * c);
 
   var normal = [v1[1] * v2[2] - v1[2] * v2[1], v1[0] * v2[2] - v1[2] * v2[0], v1[0] * v2[1] - v1[1] * v2[0]];
 
   this.normals = normal.concat(normal, normal);
 
-  this.texCoords = [0, 0, 0, Math.sqrt(v1[0] * v1[0] + v1[1] * v1[1] + v1[2] * v1[2]), 1, 1]
+  this.origTexCoords = [c - a * cos, a * Math.sqrt(1 - cos * cos), 0, 0, c, 0];
 
   this.primitiveType=this.scene.gl.TRIANGLES;
 	this.initGLBuffers();
