@@ -38,6 +38,8 @@ MyTriangle.prototype.initBuffers = function () {
 
   this.normals = normal.concat(normal, normal);
 
+  this.texCoords = [0, 0, 0, Math.sqrt(v1[0] * v1[0] + v1[1] * v1[1] + v1[2] * v1[2]), 1, 1]
+
   this.primitiveType=this.scene.gl.TRIANGLES;
 	this.initGLBuffers();
 };
