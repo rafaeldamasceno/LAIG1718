@@ -14,12 +14,12 @@ MyGraphLeaf.prototype = Object.create(CGFobject.prototype);
 MyGraphLeaf.prototype.constructor = MyGraphLeaf;
 
 MyGraphLeaf.prototype.updateTexScaling = function (saf, taf) {
-  this.saf = saf;
-  this.taf = taf;
-
   if (this.origTexCoords == null) {
     return;
   }
+  
+  this.saf = saf;
+  this.taf = taf;
 
   this.texCoords = this.origTexCoords.slice();;
 
