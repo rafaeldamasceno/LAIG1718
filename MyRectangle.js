@@ -16,14 +16,14 @@ MyRectangle.prototype.constructor = MyRectangle;
 MyRectangle.prototype.initBuffers = function () {
   this.vertices = [
     this.xi, this.yi, 0,
-    this.xf, this.yi, 0,
     this.xi, this.yf, 0,
     this.xf, this.yf, 0,
+    this.xf, this.yi, 0
   ];
 
   this.indices = [
-    2, 1, 0,
-    1, 2, 3,
+    0, 1, 2,
+    0, 2, 3
   ];
 
   this.normals = [
@@ -33,7 +33,7 @@ MyRectangle.prototype.initBuffers = function () {
     0, 0, 1
   ];
 
-  this.origTexCoords = [0, 0, 0, 1, 1, 0, 1, 1];  
+  this.origTexCoords = [0, this.yf - this. yi, 0, 0, this.xf - this. xi, 0, this.xf - this. xi, this.yf - this. yi];
 
   this.primitiveType=this.scene.gl.TRIANGLES;
 	this.initGLBuffers();
