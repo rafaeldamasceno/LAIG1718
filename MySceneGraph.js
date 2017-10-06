@@ -1441,6 +1441,9 @@ MySceneGraph.generateRandomString = function(length) {
  */
 MySceneGraph.prototype.displayScene = function() {
 	// entry point for graph rendering
-	this.nodes["facePiramide1"].leaves[0].display();
+	this.nodes[this.idRoot].display();
+
+  // console.log(this.initialTransforms);
+  // console.log(this.nodes[this.idRoot].transformMatrix);
 	//this.log("Graph should be rendered here...");
 }

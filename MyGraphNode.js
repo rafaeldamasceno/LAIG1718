@@ -38,21 +38,27 @@ MyGraphNode.prototype.addLeaf = function(leaf) {
     this.leaves.push(leaf);
 }
 
-MyGraphNode.prototype.display = function(materialID, textureID, transMat) {
+MyGraphNode.prototype.display = function(materialID = null, textureID = null) {
 
     var newTexture = this.textureID;
     if (this.textureID == null) {
       newTexture = textureID;
     }
+
     var newMaterial = this.materialID;
     if (this.materialID == null) {
       newMaterial = materialID;
     }
-    var newmat;
-    //var newMat = this.transformMatrix*transMat;
+
     for (var i = 0; i < this.children.length; i++) {
-        this.children[i].display(newMaterial, newTexture, newmat);
+      this.graph.scene.pushMatrix();
+      this.graph.scene.multMatrix(this.transformMatrix);
+      this.graph.nodes[this.children[i]].display();
+      this.graph.scene.popMatrix();
     }
 
-    //ciclo de leafs.
+    //ciclo de leafs
+    for (var i = 0; i < this.leaves.length; i++) {
+      this.leaves[i].display();
+    }
 }
