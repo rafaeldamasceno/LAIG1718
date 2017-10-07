@@ -38,6 +38,24 @@ for(i = 0; i <= this.stacks; i++) {
   }
 }
 
+/**
+this.vertices.push(0,0,0);
+this.normals.push(0,0,-1);
+this.vertices.push(0,0,this.height);
+this.normals.push(0,0,1);
+
+for(j = 0; j <= this.slices; j++) {
+  let xtop = this.topRadius*Math.cos(2*Math.PI*j/this.slices);
+  let ytop = this.topRadius*Math.sin(2*Math.PI*j/this.slices);
+  let xbot = this.bottomRadius*Math.cos(2*Math.PI*j/this.slices);
+  let ybot = this.bottomRadius*Math.sin(2*Math.PI*j/this.slices);
+  this.vertices.push(xbot,ybot,0);
+  this.normals.push(0,0,-1);
+  this.vertices.push(xtop,ytop,this.height);
+  this.normals.push(0,0,1);
+}
+
+**/
 for(j = 0; j < this.stacks; j++) {
   for(i = 0; i < this.slices; i++) {
 
@@ -48,12 +66,23 @@ for(j = 0; j < this.stacks; j++) {
     this.indices.push(i + j*(this.slices + 1));
     this.indices.push((i + 1)%this.slices + (j + 1)*(this.slices + 1));
     this.indices.push(i + (j + 1)*(this.slices + 1));
-
-
-
   }
 }
+/*
+var start = (this.vertices + 1)*(this.slices + 1) + 2;
 
+for(j = 0; j < this.slices; j++) {
+  this.indices.push(j*2 + start);
+  this.indices.push(j*2 + start + 2);
+  this.indices.push(start - 2)
+
+  this.indices.push(j*2 + start + 1);
+  this.indices.push(j*2 + start + 3);
+  this.indices.push(start - 1)
+
+}
+
+*/
 
  	this.primitiveType = this.scene.gl.TRIANGLES;
  	this.initGLBuffers();
