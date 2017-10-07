@@ -132,12 +132,12 @@
         <MATERIAL id="GrassMaterial" />
         <TEXTURE id="grass" />
 
-        <!--<TRANSLATION x="0" y="0" z="12" />-->
-        <ROTATION axis="x" angle="-90" /> -->
-        <SCALE sx="1" sy="-1" sz="1" />
+        <TRANSLATION x="0" y="0" z="12" />
+        <ROTATION axis="x" angle="-90" />
+        <SCALE sx="1" sy="1" sz="1" />
 
         <DESCENDANTS>
-			<LEAF  type="rectangle" args="0 0 12 12" />
+			<LEAF  type="rectangle" args="0 12 12 0" />
 		</DESCENDANTS>
 
     </NODE>
