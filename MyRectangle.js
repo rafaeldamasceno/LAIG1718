@@ -33,7 +33,7 @@ MyRectangle.prototype.initBuffers = function () {
     0, 0, 1
   ];
 
-  this.origTexCoords = [0, this.yf - this. yi, 0, 0, this.xf - this. xi, 0, this.xf - this. xi, this.yf - this. yi];
+  this.origTexCoords = [0, Math.abs(this.yf - this. yi), 0, 0, Math.abs(this.xf - this. xi), 0, Math.abs(this.xf - this. xi), Math.abs(this.yf - this. yi)];
 
   this.primitiveType=this.scene.gl.TRIANGLES;
 	this.initGLBuffers();
