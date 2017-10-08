@@ -21,7 +21,7 @@ MyCylinder.prototype.initBuffers = function() {
 this.vertices = [];
 this.normals = [];
 this.indices = [];
-this.origTexCoords = [];
+this.texCoords = [];
 
 var radDif = this.bottomRadius - this.topRadius;
 var sSize = Math.sin(Math.PI/this.slices)*this.bottomRadius*2;
@@ -37,7 +37,7 @@ for(i = 0; i <= this.stacks; i++) {
 
     this.normals.push(x, y,radDif*r/this.height);
 
-    this.origTexCoords.push(j*sSize, i*tSize);
+    this.texCoords.push(j*sSize, i*tSize);
   }
 }
 
