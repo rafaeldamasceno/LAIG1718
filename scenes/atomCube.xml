@@ -123,6 +123,9 @@
         <DESCENDANTS>
             <NODEREF id="floor" />
             <NODEREF id="monument" />
+			<NODEREF id="cornerstone1" />
+			<NODEREF id="cornerstone2" />
+			<NODEREF id="cornerstone3" />
         </DESCENDANTS>
 
     </NODE>
@@ -190,7 +193,7 @@
         <TEXTURE id="null" />
 
 		<DESCENDANTS>
-            <LEAF type="sphere" args="1 20 20" />
+            <LEAF type="sphere" args="1.4 20 20" />
         </DESCENDANTS>
 
 	</NODE>
@@ -593,6 +596,59 @@
 
 		<DESCENDANTS>
             <NODEREF id="cylinderIn" />
+        </DESCENDANTS>
+
+	</NODE>
+	
+	<NODE id="cornerstone1">
+		<MATERIAL id="null" />
+        <TEXTURE id="null" />
+		
+		<TRANSLATION x="7.03" y="5.267" z="12" />
+		
+		<DESCENDANTS>
+			<NODEREF id="cornerstone" />
+		</DESCENDANTS>
+		
+	</NODE>
+	
+	<NODE id="cornerstone2">
+		<MATERIAL id="null" />
+        <TEXTURE id="null" />
+		
+		<TRANSLATION x="14.483" y="5.267" z="16.3" />
+		
+		<DESCENDANTS>
+			<NODEREF id="cornerstone" />
+		</DESCENDANTS>
+		
+	</NODE>
+	
+	<NODE id="cornerstone3">
+		<MATERIAL id="null" />
+        <TEXTURE id="null" />
+		
+		<TRANSLATION x="14.483" y="5.267" z="7.7" />
+		
+		
+		<DESCENDANTS>
+			<NODEREF id="cornerstone" />
+		</DESCENDANTS>
+		
+	</NODE>
+	
+	<NODE id="cornerstone">
+		<MATERIAL id="MonumentMaterial" />
+        <TEXTURE id="inox" />
+		
+		<ROTATION axis="z" angle="90" />
+		<ROTATION axis="x" angle="180" />
+
+		<DESCENDANTS>
+            <LEAF type="triangle" args="0 0 0 -5.267 -1 0 -5.267 0.5 -0.866" />
+			<LEAF type="triangle" args="0 0 0 -5.267 0.5 -0.866 -5.267 0.5 0.866" />
+			<LEAF type="triangle" args="0 0 0 -5.267 0.5 0.866 -5.267 -1 0" />
+			<LEAF type="triangle" args="-5.267 -1 0 -5.267 0.5 0.866 -5.267 0.5 -0.866" />
         </DESCENDANTS>
 
 	</NODE>
