@@ -1356,7 +1356,7 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
                   this.nodes[nodeID].addLeaf(new MyRectangle(this, parseFloat(argarr[0]), parseFloat(argarr[1]), parseFloat(argarr[2]), parseFloat(argarr[3])));
                   break;
               case 'cylinder':
-                  this.nodes[nodeID].addLeaf(new MyCylinder(this, parseFloat(argarr[0]), parseFloat(argarr[1]), parseFloat(argarr[2]), parseInt(argarr[3]), parseInt(argarr[4])));
+                  this.nodes[nodeID].addLeaf(new MyCylinder(this, parseFloat(argarr[0]), parseFloat(argarr[1]), parseFloat(argarr[2]), parseInt(argarr[3]), parseInt(argarr[4]), parseInt(argarr[5]), parseInt(argarr[6])));
                   break;
               case 'sphere':
                   this.nodes[nodeID].addLeaf(new MySphere(this, parseFloat(argarr[0]), parseInt(argarr[1]), parseInt(argarr[2])));
