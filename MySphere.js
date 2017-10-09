@@ -20,7 +20,7 @@ MySphere.prototype.initBuffers = function() {
   this.vertices = [];
   this.normals = [];
   this.indices = [];
- // 	this.texCoords = [];
+ 	this.texCoords = [];
 
  for (i = 0; i <= this.slices; i++) {
    for (j = 0; j < this.stacks; j++) {
@@ -37,15 +37,16 @@ MySphere.prototype.initBuffers = function() {
        this.vertices.push(x, y, z);
        this.normals.push(x, y, z);
 
-      //  var texS = Math.sin(tetha) * Math.cos(phi) * 0.5 + 0.5;
-      //  var texT = Math.sin(tetha) * Math.sin(phi) * 0.5 + 0.5;
-       //
-      //  this.texCoords.push(texS, texT);
+       var texS = Math.sin(tetha) * Math.cos(phi) * 0.5 + 0.5;
+       var texT = Math.sin(tetha) * Math.sin(phi) * 0.5 + 0.5;
+
+       this.texCoords.push(texS, texT);
    }
  }
 
  this.vertices.push(0, 0, this.radius);
  this.normals.push(0, 0, this.radius);
+ this.texCoords.push(0.5, 0.5);
 
  for (i = 0; i < this.slices; i++) {
         for (j = 0; j < this.stacks - 1; j++) {
@@ -86,15 +87,16 @@ MySphere.prototype.initBuffers = function() {
           this.vertices.push(x, y, z);
           this.normals.push(x, y, z);
 
-         //  var texS = Math.sin(tetha) * Math.cos(phi) * 0.5 + 0.5;
-         //  var texT = Math.sin(tetha) * Math.sin(phi) * 0.5 + 0.5;
-          //
-         //  this.texCoords.push(texS, texT);
+          var texS = Math.sin(tetha) * Math.cos(phi) * 0.5 + 0.5;
+          var texT = Math.sin(tetha) * Math.sin(phi) * 0.5 + 0.5;
+
+          this.texCoords.push(texS, texT);
       }
     }
 
     this.vertices.push(0, 0, -this.radius);
     this.normals.push(0, 0, -this.radius);
+    this.texCoords.push(0.5, 0.5);
 
     for (i = 0; i < this.slices; i++) {
            for (j = 0; j < this.stacks - 1; j++) {
