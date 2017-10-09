@@ -41,7 +41,7 @@ MyTriangle.prototype.initBuffers = function () {
 
   var cos = (a * a - b * b + c * c) / (2 * a * c);
 
-  var normal = [v1[1] * v2[2] - v1[2] * v2[1], v1[0] * v2[2] - v1[2] * v2[0], v1[0] * v2[1] - v1[1] * v2[0]];
+  var normal = [v1[1] * v2[2] - v1[2] * v2[1], -v1[0] * v2[2] + v1[2] * v2[0], v1[0] * v2[1] - v1[1] * v2[0]];
 
   this.normals = normal.concat(normal, normal);
 
