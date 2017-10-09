@@ -14,8 +14,11 @@ function MyCylinder(graph, height, bottomRadius, topRadius, stacks, slices, topC
   this.topCap = topCap == 1 ? true : false;
   this.bottomCap = bottomCap == 1 ? true : false;
 
-  console.log(topCap + " " + this.topCap);
-  console.log(bottomCap + " " + this.bottomCap);
+  // console.log(topCap + " " + this.topCap);
+  // console.log(bottomCap + " " + this.bottomCap);
+
+  this.topCap = true;
+  this.bottomCap = true;
 
   this.angleDiff = 2 * Math.PI / this.slices;
 
@@ -99,9 +102,9 @@ lastIndex = this.vertices.length / 3;
 
 if (this.bottomCap) {
   for (i = 0; i < this.slices; i++) {
-      this.vertices.push(this.topRadius * Math.cos(i * -this.angleDiff));
-      this.vertices.push(this.topRadius * Math.sin(i * -this.angleDiff));
-      this.vertices.push(this.height);
+      this.vertices.push(this.bottomRadius * Math.cos(i * -this.angleDiff));
+      this.vertices.push(this.bottomRadius * Math.sin(i * -this.angleDiff));
+      this.vertices.push(0);
 
       var texS = Math.cos(i * -this.angleDiff) * 0.5 + 0.5;
       var texT = -Math.sin(i * -this.angleDiff) * 0.5 + 0.5;
