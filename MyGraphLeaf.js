@@ -17,11 +17,11 @@ MyGraphLeaf.prototype.updateTexScaling = function (saf, taf) {
   if (this.origTexCoords == null) {
     return;
   }
-  
+
   this.saf = saf;
   this.taf = taf;
 
-  this.texCoords = this.origTexCoords.slice();;
+  this.texCoords = this.origTexCoords.slice();
 
   for (var i = 0; i < this.texCoords.length; i++) {
     this.texCoords[i] /= i % 2 == 0 ? this.saf : this.taf;
