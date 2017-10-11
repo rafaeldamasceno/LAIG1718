@@ -1321,58 +1321,102 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
 
             var sizeChildren = 0;
             for (var j = 0; j < descendants.length; j++) {
-                if (descendants[j].nodeName == "NODEREF")
-				{
+                if (descendants[j].nodeName == "NODEREF") {
+  					           var curId = this.reader.getString(descendants[j], 'id');
 
-					var curId = this.reader.getString(descendants[j], 'id');
+  					           this.log("   Descendant: "+curId);
 
-					this.log("   Descendant: "+curId);
+                      if (curId == null )
+                          this.onXMLMinorError("unable to parse descendant id");
+                      else if (curId == nodeID)
+                          return "a node may not be a child of its own";
+                      else {
+                          this.nodes[nodeID].addChild(curId);
+                          sizeChildren++;
+                      }
+                  }
+                  else
+  					if (descendants[j].nodeName == "LEAF")
+  					{
+  						var type=this.reader.getItem(descendants[j], 'type', ['rectangle', 'cylinder', 'sphere', 'triangle', 'patch']);
 
-                    if (curId == null )
-                        this.onXMLMinorError("unable to parse descendant id");
-                    else if (curId == nodeID)
-                        return "a node may not be a child of its own";
-                    else {
-                        this.nodes[nodeID].addChild(curId);
-                        sizeChildren++;
+  						if (type != null)
+  							this.log("   Leaf: "+ type);
+  						else
+  							this.warn("Error in leaf");
+
+  						//parse leaf
+              var args = this.reader.getString(descendants[j], 'args');
+              var argarr = args.split(" ");
+
+              switch(type) {
+                case 'rectangle':
+                    this.nodes[nodeID].addLeaf(new MyRectangle(this, parseFloat(argarr[0]), parseFloat(argarr[1]), parseFloat(argarr[2]), parseFloat(argarr[3])));
+                    break;
+                case 'cylinder':
+                    this.nodes[nodeID].addLeaf(new MyCylinder(this, parseFloat(argarr[0]), parseFloat(argarr[1]), parseFloat(argarr[2]), parseInt(argarr[3]), parseInt(argarr[4]), parseInt(argarr[5]), parseInt(argarr[6])));
+                    break;
+                case 'sphere':
+                    this.nodes[nodeID].addLeaf(new MySphere(this, parseFloat(argarr[0]), parseInt(argarr[1]), parseInt(argarr[2])));
+                    break;
+                case 'triangle':
+                    this.nodes[nodeID].addLeaf(new MyTriangle(this, parseFloat(argarr[0]), parseFloat(argarr[1]), parseFloat(argarr[2]), parseFloat(argarr[3]), parseFloat(argarr[4]), parseFloat(argarr[5]), parseFloat(argarr[6]), parseFloat(argarr[7]), parseFloat(argarr[8])));
+                    break;
+                case 'patch':
+                    var ctrlLines = [];
+                    var cplines = descendants[j].children;
+                    for (var l = 0; l < cplines.length; l++) {
+                      var ctrlPoints = [];
+                      var cppoint = cplines[l].children;
+                      for (var p = 0; p < cppoint.length; p++) {
+                        var x = this.reader.getFloat(cppoint[p], 'xx');
+                        if (x == null ) {
+                            this.onXMLMinorError("unable to parse x-coordinate of control point");
+                            break;
+                        }
+                        else if (isNaN(x))
+                            return "non-numeric value for x-coordinate of control point";
+
+                        var y = this.reader.getFloat(cppoint[p], 'yy');
+                        if (y == null ) {
+                            this.onXMLMinorError("unable to parse y-coordinate of control point");
+                            break;
+                        }
+                        else if (isNaN(y))
+                            return "non-numeric value for y-coordinate of control point";
+
+                        var z = this.reader.getFloat(cppoint[p], 'zz');
+                        if (z == null ) {
+                            this.onXMLMinorError("unable to parse z-coordinate of control point");
+                            break;
+                        }
+                        else if (isNaN(z))
+                            return "non-numeric value for z-coordinate of control point";
+
+                        var w = this.reader.getFloat(cppoint[p], 'ww');
+                        if (w == null ) {
+                            this.onXMLMinorError("unable to parse w of control point");
+                            break;
+                        }
+                        else if (isNaN(w))
+                            return "non-numeric value for w of control point";
+
+                        ctrlPoints.push([x,y,z,w]);
+                      }
+                      ctrlLines.push(ctrlPoints);
                     }
-                }
-                else
-					if (descendants[j].nodeName == "LEAF")
-					{
-						var type=this.reader.getItem(descendants[j], 'type', ['rectangle', 'cylinder', 'sphere', 'triangle']);
+                    //this.nodes[nodeID].addLeaf(MyNurb(this, parseInt(argarr[0]), parseInt(argarr[1]), ctrlLines));
+                    break;
 
-						if (type != null)
-							this.log("   Leaf: "+ type);
-						else
-							this.warn("Error in leaf");
+                default:
+                    break;
+              }
+              sizeChildren++;
+  					}
+  					else
+  						this.onXMLMinorError("unknown tag <" + descendants[j].nodeName + ">");
 
-						//parse leaf
-            var args = this.reader.getString(descendants[j], 'args');
-            var argarr = args.split(" ");
-
-            switch(type) {
-              case 'rectangle':
-                  this.nodes[nodeID].addLeaf(new MyRectangle(this, parseFloat(argarr[0]), parseFloat(argarr[1]), parseFloat(argarr[2]), parseFloat(argarr[3])));
-                  break;
-              case 'cylinder':
-                  this.nodes[nodeID].addLeaf(new MyCylinder(this, parseFloat(argarr[0]), parseFloat(argarr[1]), parseFloat(argarr[2]), parseInt(argarr[3]), parseInt(argarr[4]), parseInt(argarr[5]), parseInt(argarr[6])));
-                  break;
-              case 'sphere':
-                  this.nodes[nodeID].addLeaf(new MySphere(this, parseFloat(argarr[0]), parseInt(argarr[1]), parseInt(argarr[2])));
-                  break;
-              case 'triangle':
-                  this.nodes[nodeID].addLeaf(new MyTriangle(this, parseFloat(argarr[0]), parseFloat(argarr[1]), parseFloat(argarr[2]), parseFloat(argarr[3]), parseFloat(argarr[4]), parseFloat(argarr[5]), parseFloat(argarr[6]), parseFloat(argarr[7]), parseFloat(argarr[8])));
-                  break;
-              default:
-                  break;
-            }
-            sizeChildren++;
-					}
-					else
-						this.onXMLMinorError("unknown tag <" + descendants[j].nodeName + ">");
-
-            }
+              }
             if (sizeChildren == 0)
                 return "at least one descendant must be defined for each intermediate node";
         }
