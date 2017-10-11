@@ -38,7 +38,7 @@ MyGraphNode.prototype.addLeaf = function(leaf) {
     this.leaves.push(leaf);
 }
 
-MyGraphNode.prototype.display = function(materialID = null, textureID = null) {
+MyGraphNode.prototype.display = function(materialID, textureID = null) {
 
     var newTexture = this.textureID;
     if (this.textureID == "null") {
@@ -55,18 +55,21 @@ MyGraphNode.prototype.display = function(materialID = null, textureID = null) {
     this.graph.scene.pushMatrix();
     this.graph.scene.multMatrix(this.transformMatrix);
 
-    for (var i = 0; i < this.children.length; i++) {
-      this.graph.nodes[this.children[i]].display(newMaterial, newTexture);
+    this.graph.materials[newMaterial].apply();
+    if (newTexture != null) {
+      this.graph.textures[newTexture][0].bind();
     }
 
     //ciclo de leafs
     for (var i = 0; i < this.leaves.length; i++) {
-      this.graph.materials[newMaterial].apply();
       if (newTexture != null) {
         this.leaves[i].updateTexScaling(this.graph.textures[newTexture][1], this.graph.textures[newTexture][2]);
-        this.graph.textures[newTexture][0].bind();
       }
       this.leaves[i].display();
+    }
+
+    for (var i = 0; i < this.children.length; i++) {
+      this.graph.nodes[this.children[i]].display(newMaterial, newTexture);
     }
 
     this.graph.scene.popMatrix();
