@@ -7,15 +7,10 @@ function MyCylinder(graph, height, bottomRadius, topRadius, stacks, slices, topC
   this.bottomRadius = bottomRadius;
   this.topRadius = topRadius;
   this.slices = slices;
-  // this.slices = 3;
   this.stacks = stacks;
-  // this.stacks = 1;
 
   this.topCap = topCap == 1 ? true : false;
   this.bottomCap = bottomCap == 1 ? true : false;
-
-  // console.log(topCap + " " + this.topCap);
-  // console.log(bottomCap + " " + this.bottomCap);
 
   this.topCap = true;
   this.bottomCap = true;
@@ -42,19 +37,19 @@ var radDif = this.bottomRadius - this.topRadius;
 for (i = 0; i <= this.slices; i++) {
   var x = Math.cos(i * this.angleDiff);
   var y = Math.sin(i * this.angleDiff);
- 		for (j = 0; j <= this.stacks; j++) {
-      var r = this.bottomRadius - j*radDif/this.stacks;
- 			this.vertices.push(x*r);
-			this.vertices.push(y*r);
-			this.vertices.push(this.height / this.stacks * j);
+     for (j = 0; j <= this.stacks; j++) {
+      var r = this.bottomRadius - j * radDif / this.stacks;
+       this.vertices.push(x * r);
+      this.vertices.push(y * r);
+      this.vertices.push(this.height / this.stacks * j);
 
-			this.normals.push(x*r);
-			this.normals.push(y*r);
-			this.normals.push(radDif*r/this.height);
+      this.normals.push(x * r);
+      this.normals.push(y * r);
+      this.normals.push(radDif * r / this.height);
 
-			this.texCoords.push(1 / this.slices * i, - 1 / this.stacks * j);
- 		}
- 	}
+      this.texCoords.push(1 / this.slices * i, - 1 / this.stacks * j);
+     }
+   }
 
   for (i = 0; i < this.slices; i++) {
         for (j = 0; j < this.stacks; j++) {
@@ -128,6 +123,6 @@ if (this.bottomCap) {
 
 }
 
- 	this.primitiveType = this.scene.gl.TRIANGLES;
- 	this.initGLBuffers();
+   this.primitiveType = this.scene.gl.TRIANGLES;
+   this.initGLBuffers();
 };

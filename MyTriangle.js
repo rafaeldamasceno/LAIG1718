@@ -45,8 +45,21 @@ MyTriangle.prototype.initBuffers = function () {
 
   this.normals = normal.concat(normal, normal);
 
-  this.origTexCoords = [c - a * cos, a * Math.sqrt(1 - cos * cos), 0, 0, c, 0];
+  this.origTexCoords = [c - a * cos, a * Math.sqrt(1 - cos * cos), c];
 
   this.primitiveType=this.scene.gl.TRIANGLES;
 	this.initGLBuffers();
 };
+
+MyTriangle.prototype.updateTexScaling = function (saf, taf) {
+  this.texCoords = [
+    this.origTexCoords[0] / saf,
+    1 - this.origTexCoords[1] / taf,
+    0,
+    1,
+    this.origTexCoords[2] / saf,
+    1
+  ]
+
+  this.initGLBuffers();
+}

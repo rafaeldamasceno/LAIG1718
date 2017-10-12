@@ -45,3 +45,13 @@ MyRectangle.prototype.initBuffers = function () {
 	this.initGLBuffers();
 
 };
+
+MyRectangle.prototype.updateTexScaling = function (saf, taf) {
+  this.texCoords = this.origTexCoords.slice();
+
+  for (var i = 0; i < this.texCoords.length; i++) {
+    this.texCoords[i] /= i % 2 == 0 ? saf : taf;
+  }
+
+  this.initGLBuffers();
+}
