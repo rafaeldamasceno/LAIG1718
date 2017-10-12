@@ -38,35 +38,35 @@ this.texCoords = [];
 
 
 var radDif = this.bottomRadius - this.topRadius;
-var sSize = 1 / this.slices;
-var tSize = 1 / this.stacks;
 
-for(i = 0; i <= this.stacks; i++) {
-  var r = this.bottomRadius - radDif*(i/this.stacks);
-  for(j = 0; j <= this.slices; j++) {
+for (i = 0; i <= this.slices; i++) {
+  var x = Math.cos(i * this.angleDiff);
+  var y = Math.sin(i * this.angleDiff);
+ 		for (j = 0; j <= this.stacks; j++) {
+      var r = this.bottomRadius - j*radDif/this.stacks;
+ 			this.vertices.push(x*r);
+			this.vertices.push(y*r);
+			this.vertices.push(this.height / this.stacks * j);
 
-    var x = r*Math.cos(this.angleDiff*j);
-    var y = r*Math.sin(this.angleDiff*j);
-    this.vertices.push(x, y, this.height*i/this.stacks);
+			this.normals.push(x*r);
+			this.normals.push(y*r);
+			this.normals.push(radDif*r/this.height);
 
-    this.normals.push(x, y,radDif*r/this.height);
+			this.texCoords.push(1 / this.slices * i, - 1 / this.stacks * j);
+ 		}
+ 	}
 
-    this.texCoords.push(j*sSize, 1 - i*tSize);
-  }
-}
+  for (i = 0; i < this.slices; i++) {
+        for (j = 0; j < this.stacks; j++) {
+            this.indices.push(i * (this.stacks + 1) + j);
+            this.indices.push((i + 1) * (this.stacks + 1) + j);
+            this.indices.push((i + 1) * (this.stacks + 1) + j + 1);
 
-for(j = 0; j < this.stacks; j++) {
-  for(i = 0; i < this.slices; i++) {
-
-    this.indices.push(i + j*(this.slices + 1));
-    this.indices.push((i + 1)%this.slices + j*(this.slices + 1));
-    this.indices.push((i + 1)%this.slices + (j + 1)*(this.slices + 1));
-
-    this.indices.push(i + j*(this.slices + 1));
-    this.indices.push((i + 1)%this.slices + (j + 1)*(this.slices + 1));
-    this.indices.push(i + (j + 1)*(this.slices + 1));
-  }
-}
+            this.indices.push(i * (this.stacks + 1) + j);
+            this.indices.push((i + 1) * (this.stacks + 1) + j + 1);
+            this.indices.push(i * (this.stacks + 1) + j + 1);
+            }
+        }
 
 var lastIndex = this.vertices.length / 3;
 
