@@ -38,20 +38,20 @@ this.texCoords = [];
 
 
 var radDif = this.bottomRadius - this.topRadius;
-var sSize = Math.sin(Math.PI/this.slices) * this.bottomRadius * 2;
-var tSize = Math.sqrt(this.height * this.height + radDif * radDif) / this.stacks;
+var sSize = 1 / this.slices;
+var tSize = 1 / this.stacks;
 
 for(i = 0; i <= this.stacks; i++) {
   var r = this.bottomRadius - radDif*(i/this.stacks);
   for(j = 0; j <= this.slices; j++) {
 
-    var x = r*Math.cos(2*Math.PI*j/this.slices);
-    var y = r*Math.sin(2*Math.PI*j/this.slices);
+    var x = r*Math.cos(this.angleDiff*j);
+    var y = r*Math.sin(this.angleDiff*j);
     this.vertices.push(x, y, this.height*i/this.stacks);
 
     this.normals.push(x, y,radDif*r/this.height);
 
-    this.texCoords.push(j*sSize, i*tSize);
+    this.texCoords.push(j*sSize, 1 - i*tSize);
   }
 }
 
