@@ -1,11 +1,11 @@
 
 
-function MyRectangle(graph, xi, yi, xf, yf) {
+function MyRectangle(graph, xtl, ytl, xbr, ybr) {
   MyGraphLeaf.call(this, graph);
-  this.xi = xi;
-  this.xf = xf;
-  this.yi = yi;
-  this.yf = yf;
+  this.xtl = xtl;
+  this.xbr = xbr;
+  this.ytl = ytl;
+  this.ybr = ybr;
 
   this.initBuffers();
 };
@@ -15,10 +15,10 @@ MyRectangle.prototype.constructor = MyRectangle;
 
 MyRectangle.prototype.initBuffers = function () {
   this.vertices = [
-    this.xi, this.yi, 0,
-    this.xi, this.yf, 0,
-    this.xf, this.yf, 0,
-    this.xf, this.yi, 0
+    this.xtl, this.ytl, 0,
+    this.xtl, this.ybr, 0,
+    this.xbr, this.ybr, 0,
+    this.xbr, this.ytl, 0
   ];
 
   this.indices = [
@@ -33,12 +33,12 @@ MyRectangle.prototype.initBuffers = function () {
     0, 0, 1
   ];
 
-  // this.origTexCoords = [0, Math.abs(this.yf - this. yi), 0, 0, Math.abs(this.xf - this. xi), 0, Math.abs(this.xf - this. xi), Math.abs(this.yf - this. yi)];
+  // this.origTexCoords = [0, Math.abs(this.ybr - this. ytl), 0, 0, Math.abs(this.xbr - this. xtl), 0, Math.abs(this.xbr - this. xtl), Math.abs(this.ybr - this. ytl)];
   this.origTexCoords = [
-    0, this.yi - this.yf,
     0, 0,
-    this.xf - this.xi, 0,
-    this.xf - this.xi, this.yi - this. yf
+    0, this.ytl - this.ybr,
+    this.xbr - this.xtl, this.ytl - this. ybr,
+    this.xbr - this.xtl, 0
   ];
 
   this.primitiveType=this.scene.gl.TRIANGLES;

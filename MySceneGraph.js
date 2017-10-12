@@ -1405,7 +1405,7 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
                       }
                       ctrlLines.push(ctrlPoints);
                     }
-                    //this.nodes[nodeID].addLeaf(MyNurb(this, parseInt(argarr[0]), parseInt(argarr[1]), ctrlLines));
+                    this.nodes[nodeID].addLeaf(MyNurb(this, parseInt(argarr[0]), parseInt(argarr[1]), ctrlLines));
                     break;
 
                 default:
