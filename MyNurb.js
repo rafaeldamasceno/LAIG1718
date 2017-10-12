@@ -1,6 +1,11 @@
- function MyNurb(graph, degreeU, degreeV, controlvertexes) {
+ function MyNurb(graph, divU, divV, controlvertexes) {
   MyGraphLeaf.call(this, graph)
 
+  // this.divU = divU;
+  // this.divV = divV;
+
+  var degreeU = controlvertexes.length - 1;
+  var degreeV = controlvertexes[0].length - 1;
   var knots1 = this.getKnotsVector(degreeU);
   var knots2 = this.getKnotsVector(degreeV);
 
@@ -9,6 +14,8 @@
   getSurfacePoint = function(u, v) {
   return nurbsSurface.getPoint(u, v);
 };
+
+  this.nurbsObject = new CGFnurbsObject(graph.scene, getSurfacePoint, divU, divV);
 
 };
 
@@ -25,4 +32,9 @@ MyNurb.prototype.getKnotsVector = function(degree) {
 		knotsAux.push(1);
 	}
 
+  return knotsAux;
 };
+
+MyNurb.prototype.display = function() {
+  this.nurbsObject.display();
+}
