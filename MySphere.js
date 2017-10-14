@@ -37,8 +37,10 @@ MySphere.prototype.initBuffers = function() {
        this.vertices.push(x, y, z);
        this.normals.push(x, y, z);
 
-       var texS = Math.sin(tetha) * Math.cos(phi) * 0.5 + 0.5;
-       var texT = Math.sin(tetha) * Math.sin(phi) * 0.5 + 0.5;
+
+       var texS = i * this.slicesAngle / (Math.PI*2);
+       var texT = (-j * this.stacksAngle) / Math.PI + 0.5;
+
 
        this.texCoords.push(texS, texT);
    }
@@ -87,8 +89,10 @@ MySphere.prototype.initBuffers = function() {
           this.vertices.push(x, y, z);
           this.normals.push(x, y, z);
 
-          var texS = Math.sin(tetha) * Math.cos(phi) * 0.5 + 0.5;
-          var texT = Math.sin(tetha) * Math.sin(phi) * 0.5 + 0.5;
+
+          var texS = -i * this.slicesAngle / (Math.PI*2) + 1;
+          var texT = (j * this.stacksAngle) / Math.PI + 0.5;
+
 
           this.texCoords.push(texS, texT);
       }
