@@ -23,7 +23,7 @@ MySphere.prototype.initBuffers = function() {
  	this.texCoords = [];
 
  for (i = 0; i <= this.slices; i++) {
-   for (j = 0; j < this.stacks; j++) {
+   for (j = 0; j <= this.stacks; j++) {
        var x, y, z;
        var tetha, phi;
 
@@ -38,44 +38,48 @@ MySphere.prototype.initBuffers = function() {
        this.normals.push(x, y, z);
 
 
-       var texS = i * this.slicesAngle / (Math.PI*2);
-       var texT = (-j * this.stacksAngle) / Math.PI + 0.5;
+       var texS = i * this.slicesAngle / (2 * Math.PI);
+       var texT = -j * this.stacksAngle / Math.PI + 0.5;
 
 
        this.texCoords.push(texS, texT);
    }
  }
 
- this.vertices.push(0, 0, this.radius);
- this.normals.push(0, 0, this.radius);
- this.texCoords.push(0.5, 0.5);
+ // this.vertices.push(0, 0, this.radius);
+ // this.normals.push(0, 0, this.radius);
+ // this.texCoords.push(0, 0);
 
  for (i = 0; i < this.slices; i++) {
-        for (j = 0; j < this.stacks - 1; j++) {
-            this.indices.push(i * this.stacks + j);
-            this.indices.push((i + 1) * this.stacks + j);
-            this.indices.push((i + 1) * this.stacks + j + 1);
+        for (j = 0; j < this.stacks; j++) {
+            this.indices.push(i * (this.stacks + 1) + j);
+            this.indices.push((i + 1) * (this.stacks + 1) + j);
+            this.indices.push((i + 1) * (this.stacks + 1) + j + 1);
 
-            this.indices.push(i * this.stacks + j);
-            this.indices.push((i + 1) * this.stacks + j + 1);
-            this.indices.push(i * this.stacks + j + 1);
+            this.indices.push(i * (this.stacks + 1) + j);
+            this.indices.push((i + 1) * (this.stacks + 1) + j + 1);
+            this.indices.push(i * (this.stacks + 1) + j + 1);
         }
     }
 
-    var topVertex = this.vertices.length / 3 - 1;
+    // var topVertex = this.vertices.length / 3 - 1;
+    //
+    // for (i = 0; i < this.slices; i++) {
+    //     this.indices.push(i * this.stacks + this.stacks - 1);
+    //     this.indices.push((i + 1) * this.stacks + this.stacks - 1);
+    //     this.indices.push(topVertex);
+    // }
 
-    for (i = 0; i < this.slices; i++) {
-        this.indices.push(i * this.stacks + this.stacks - 1);
-        this.indices.push((i + 1) * this.stacks + this.stacks - 1);
-        this.indices.push(topVertex);
-    }
+
+    console.log(this.indices.length / 3);
+    console.log(this.vertices.length / 3);
 
     var lastVertex = this.vertices.length / 3;
 
     // other half
 
     for (i = 0; i <= this.slices; i++) {
-      for (j = 0; j < this.stacks; j++) {
+      for (j = 0; j <= this.stacks; j++) {
           var x, y, z;
           var tetha, phi;
 
@@ -98,29 +102,29 @@ MySphere.prototype.initBuffers = function() {
       }
     }
 
-    this.vertices.push(0, 0, -this.radius);
-    this.normals.push(0, 0, -this.radius);
-    this.texCoords.push(0.5, 0.5);
+    // this.vertices.push(0, 0, -this.radius);
+    // this.normals.push(0, 0, -this.radius);
+    // this.texCoords.push(0, 1);
 
     for (i = 0; i < this.slices; i++) {
-           for (j = 0; j < this.stacks - 1; j++) {
-               this.indices.push(lastVertex + i * this.stacks + j);
-               this.indices.push(lastVertex + (i + 1) * this.stacks + j);
-               this.indices.push(lastVertex + (i + 1) * this.stacks + j + 1);
+           for (j = 0; j < this.stacks; j++) {
+               this.indices.push(lastVertex + i * (this.stacks + 1) + j);
+               this.indices.push(lastVertex + (i + 1) * (this.stacks + 1) + j);
+               this.indices.push(lastVertex + (i + 1) * (this.stacks + 1) + j + 1);
 
-               this.indices.push(lastVertex + i * this.stacks + j);
-               this.indices.push(lastVertex + (i + 1) * this.stacks + j + 1);
-               this.indices.push(lastVertex + i * this.stacks + j + 1);
+               this.indices.push(lastVertex + i * (this.stacks + 1) + j);
+               this.indices.push(lastVertex + (i + 1) * (this.stacks + 1) + j + 1);
+               this.indices.push(lastVertex + i * (this.stacks + 1) + j + 1);
            }
        }
 
-    topVertex = this.vertices.length / 3 - 1;
-
-       for (i = 0; i < this.slices; i++) {
-           this.indices.push(lastVertex + i * this.stacks + this.stacks - 1);
-           this.indices.push(lastVertex + (i + 1) * this.stacks + this.stacks - 1);
-           this.indices.push(topVertex);
-       }
+    // topVertex = this.vertices.length / 3 - 1;
+    //
+    //    for (i = 0; i < this.slices; i++) {
+    //        this.indices.push(lastVertex + i * this.stacks + this.stacks - 1);
+    //        this.indices.push(lastVertex + (i + 1) * this.stacks + this.stacks - 1);
+    //        this.indices.push(topVertex);
+    //    }
 
  	this.primitiveType = this.scene.gl.TRIANGLES;
  	this.initGLBuffers();
