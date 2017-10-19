@@ -68,6 +68,10 @@ MyGraphNode.prototype.display = function(materialID, textureID = null) {
       this.leaves[i].display();
     }
 
+    if (newTexture != null) {
+      this.graph.textures[newTexture][0].unbind();
+    }
+
     for (var i = 0; i < this.children.length; i++) {
       this.graph.nodes[this.children[i]].display(newMaterial, newTexture);
     }
