@@ -1,5 +1,3 @@
-
-
 function MyRectangle(graph, xtl, ytl, xbr, ybr) {
   MyGraphLeaf.call(this, graph);
   this.xtl = xtl;
@@ -33,16 +31,15 @@ MyRectangle.prototype.initBuffers = function () {
     0, 0, 1
   ];
 
-  // this.origTexCoords = [0, Math.abs(this.ybr - this. ytl), 0, 0, Math.abs(this.xbr - this. xtl), 0, Math.abs(this.xbr - this. xtl), Math.abs(this.ybr - this. ytl)];
   this.origTexCoords = [
     0, 0,
     0, this.ytl - this.ybr,
-    this.xbr - this.xtl, this.ytl - this. ybr,
+    this.xbr - this.xtl, this.ytl - this.ybr,
     this.xbr - this.xtl, 0
   ];
 
-  this.primitiveType=this.scene.gl.TRIANGLES;
-	this.initGLBuffers();
+  this.primitiveType = this.scene.gl.TRIANGLES;
+  this.initGLBuffers();
 
 };
 

@@ -1,6 +1,3 @@
-
-
-
 function MyTriangle(graph, x1, y1, z1, x2, y2, z2, x3, y3, z3) {
   MyGraphLeaf.call(this, graph);
   this.x1 = x1;
@@ -18,7 +15,6 @@ function MyTriangle(graph, x1, y1, z1, x2, y2, z2, x3, y3, z3) {
 
 MyTriangle.prototype = Object.create(MyGraphLeaf.prototype);
 MyTriangle.prototype.constructor = MyTriangle;
-
 
 MyTriangle.prototype.initBuffers = function () {
   this.vertices = [
@@ -47,8 +43,8 @@ MyTriangle.prototype.initBuffers = function () {
 
   this.origTexCoords = [c - a * cos, a * Math.sqrt(1 - cos * cos), c];
 
-  this.primitiveType=this.scene.gl.TRIANGLES;
-	this.initGLBuffers();
+  this.primitiveType = this.scene.gl.TRIANGLES;
+  this.initGLBuffers();
 };
 
 MyTriangle.prototype.updateTexScaling = function (saf, taf) {
@@ -59,7 +55,7 @@ MyTriangle.prototype.updateTexScaling = function (saf, taf) {
     1,
     this.origTexCoords[2] / saf,
     1
-  ]
+  ];
 
   this.initGLBuffers();
 }

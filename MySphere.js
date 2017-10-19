@@ -13,7 +13,7 @@ function MySphere(graph, radius, slices, stacks) {
 MySphere.prototype = Object.create(MyGraphLeaf.prototype);
 MySphere.prototype.constructor = MySphere;
 
-MySphere.prototype.initBuffers = function() {
+MySphere.prototype.initBuffers = function () {
   this.vertices = [];
   this.normals = [];
   this.indices = [];
@@ -72,10 +72,8 @@ MySphere.prototype.initBuffers = function() {
       this.vertices.push(x, y, z);
       this.normals.push(x, y, z);
 
-
       var texS = -i * this.slicesAngle / (Math.PI * 2) + 1;
       var texT = (j * this.stacksAngle) / Math.PI + 0.5;
-
 
       this.texCoords.push(texS, texT);
     }
