@@ -265,7 +265,6 @@
             <TEXTURE id="null" />
             <TRANSLATION x="7.5" y="-2" z="4" />
             <ANIMATIONREFS>
-
                 <ANIMATIONREF id="ss" />
             </ANIMATIONREFS>
 
