@@ -125,9 +125,9 @@
     </MATERIALS>
     <!-- The animations -->
     <ANIMATIONS>
-        <ANIMATION id="ss" speed="1.5" type="linear">
-            <controlpoint xx="1" yy="1" zz="1" />
-            <controlpoint xx="1" yy="1" zz="1" />
+        <ANIMATION id="ss" speed="1" type="linear">
+            <controlpoint xx="0" yy="0" zz="0" />
+            <controlpoint xx="0" yy="10" zz="0" />
         </ANIMATION>
         <ANIMATION id="ss1" speed="1" type="circular" centerx="1" centery="1" centerz="1" radius="1" startang="1" rotang="1" />
         <ANIMATION id="ss2" speed="1" type="bezier">

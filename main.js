@@ -1,8 +1,8 @@
 //From https://github.com/EvanHahn/ScriptInclude
-include = function() {
+include = function () {
   function f() {
     var a = this.readyState;
-    (!a || /ded|te/.test(a)) && (c--, !c && e && d())
+    (!a || /ded|te/.test(a)) && (c-- , !c && e && d())
   }
   var a = arguments,
     b = document,
@@ -12,7 +12,7 @@ include = function() {
   e && c--;
   for (var g, h = 0; c > h; h++) g = b.createElement("script"), g.src = arguments[h], g.async = !0, g.onload = g.onerror = g.onreadystatechange = f, (b.head || b.getElementsByTagName("head")[0]).appendChild(g)
 };
-serialInclude = function(a) {
+serialInclude = function (a) {
   var b = console,
     c = serialInclude.l;
   if (a.length > 0) c.splice(0, 0, a);
@@ -21,7 +21,7 @@ serialInclude = function(a) {
     if (c[0].length > 1) {
       var d = c[0].splice(0, 1);
       b.log("Loading " + d + "...");
-      include(d, function() {
+      include(d, function () {
         serialInclude([]);
       });
     } else {
@@ -36,17 +36,18 @@ serialInclude.l = new Array();
 function getUrlVars() {
   var vars = {};
   var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi,
-    function(m, key, value) {
+    function (m, key, value) {
       vars[decodeURIComponent(key)] = decodeURIComponent(value);
     });
   return vars;
 }
 
 serialInclude(['../lib/CGF.js', 'XMLscene.js', 'MySceneGraph.js',
-			 'MyGraphNode.js', 'MyGraphLeaf.js', 'MyInterface.js', 'MyRectangle.js', 'MySphere.js', 'MyTriangle.js', 'MyCylinder.js', 'MyNurb.js',
+  'MyGraphNode.js', 'MyGraphLeaf.js', 'MyInterface.js', 'MyRectangle.js',
+  'MySphere.js', 'MyTriangle.js', 'MyCylinder.js', 'MyNurb.js', 'Animation.js',
+  'LinearAnimation.js', 'CircularAnimation.js', 'BezierAnimation.js', 'ComboAnimation.js',
 
-main = function()
-  {
+main = function () {
     // Standard application, scene and interface setup
     var app = new CGFapplication(document.body);
     var myInterface = new MyInterface();
@@ -70,6 +71,6 @@ main = function()
 
     // start
     app.run();
-}
+  }
 
 ]);

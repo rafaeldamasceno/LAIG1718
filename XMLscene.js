@@ -33,6 +33,9 @@ XMLscene.prototype.init = function (application) {
   this.axis = new CGFaxis(this);
 }
 
+XMLscene.prototype.update = function (currTime) {
+  this.graph.update(currTime);
+}
 /**
  * Initializes the scene lights with the values read from the LSX file.
  */
@@ -91,6 +94,8 @@ XMLscene.prototype.onGraphLoaded = function () {
 
   // Adds lights group.
   this.interface.addLightsGroup(this.graph.lights);
+
+  this.setUpdatePeriod(1000 / 30);
 }
 
 /**

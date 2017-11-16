@@ -15,6 +15,8 @@ function MyGraphNode(graph, nodeID) {
 
   // IDs of animations.
   this.animations = [];
+  this.animationsTimes = [0];
+  this.currAnimation = null;
 
   // The material ID.
   this.materialID = null;
@@ -22,8 +24,15 @@ function MyGraphNode(graph, nodeID) {
   // The texture ID.
   this.textureID = null;
 
+  // Last time that the node was updated.
+  this.startTime = null;
+
+  this.coords = [];
+
   this.transformMatrix = mat4.create();
   mat4.identity(this.transformMatrix);
+
+  this.animationMatrix = null;
 }
 
 /**
@@ -56,6 +65,10 @@ MyGraphNode.prototype.display = function (materialID, textureID = null) {
 
   this.graph.scene.pushMatrix();
   this.graph.scene.multMatrix(this.transformMatrix);
+  if(this.animationMatrix != null) {
+    this.graph.scene.multMatrix(this.animationMatrix);
+    // console.log("applying animation");
+  }
 
   this.graph.materials[newMaterial].apply();
   if (newTexture != null) {
@@ -77,6 +90,41 @@ MyGraphNode.prototype.display = function (materialID, textureID = null) {
   for (var i = 0; i < this.children.length; i++) {
     this.graph.nodes[this.children[i]].display(newMaterial, newTexture);
   }
-
   this.graph.scene.popMatrix();
+}
+
+MyGraphNode.prototype.update = function (currTime) {
+  for (let i = 0; i < this.children.length; i++) {
+    this.graph.nodes[this.children[i]].update(currTime);
+  }
+  if (this.animations.length == 0 || this.currAnimation >= this.animations.length) {
+    return;
+  }
+
+  if (!this.startTime) {
+    this.startTime = currTime;
+    let time = 0;
+    for (ani of this.animations) {
+      time += ani.getAnimationTime();
+      this.animationsTimes.push(time);
+    }
+    this.currAnimation = 0;
+    return;
+  }
+
+  let elapsedTime = currTime - this.startTime;
+  let i = 0;
+
+  for (i = this.currAnimation + 1; i < this.animationsTimes.length; i++) {
+    if (elapsedTime < this.animationsTimes[i]) {
+      elapsedTime -= this.animationsTimes[i - 1];
+      break;
+    }
+  }
+  this.currAnimation = i - 1;
+  if (this.currAnimation == this.animations.length) {
+    return;
+  }
+
+  this.animationMatrix = this.animations[this.currAnimation].getTransMatrix(elapsedTime);
 }

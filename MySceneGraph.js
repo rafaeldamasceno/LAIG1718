@@ -1144,14 +1144,16 @@ MySceneGraph.prototype.parseAnimations = function (animationsNode) {
         this.log("Type: " + type);
       else
         this.warn("Error in animation");
-
+      var animationSpeed;
       if (type != 'combo') {
-        var animationSpeed = this.reader.getFloat(children[j], 'speed');
+        animationSpeed = this.reader.getFloat(children[j], 'speed');
         if (animationSpeed == null) {
           this.onXMLMinorError("unable to parse animation speed");
           break;
         } else if (isNaN(animationSpeed))
           return "non-numeric value for animation speed";
+        else 
+          console.log("parsed speed " + animationSpeed);
       }
 
       //parse animation
@@ -1188,8 +1190,8 @@ MySceneGraph.prototype.parseAnimations = function (animationsNode) {
 
             ctrlPoints.push([x, y, z]);
           }
-          this.animations[animationId] = 0;
-          // this.animations[animationId] = new LinearAnimation(this, animationId, animationSpeed, ctrlPoints);
+          // this.animations[animationId] = 0;
+          this.animations[animationId] = new LinearAnimation(this, animationSpeed, ctrlPoints);
           break;
 
         case 'circular':
@@ -1229,9 +1231,9 @@ MySceneGraph.prototype.parseAnimations = function (animationsNode) {
             break;
           } else if (isNaN(rotang))
             return "non-numeric value for animation rotang";
-          this.animations[animationId] = 0;
-        // this.animations[animationId] = new CircularAnimation(this, animationId, animationSpeed, centerx, centery, centerz, radius, startang, rotang);
-            break;
+          // this.animations[animationId] = 0;
+          this.animations[animationId] = new CircularAnimation(this, animationSpeed, centerx, centery, centerz, radius, startang, rotang);
+          break;
 
         case 'bezier':
           var ctrlPoints = [];
@@ -1269,8 +1271,8 @@ MySceneGraph.prototype.parseAnimations = function (animationsNode) {
           if (sizeChildren != 4) {
             return "bezier animation requires exactly 4 control points";
           }
-          // this.animations[animationId] = new BezierAnimation(this, animationId, animationSpeed, ctrlPoints);
-          this.animations[animationId] = 0;
+          this.animations[animationId] = new BezierAnimation(this, animationSpeed, ctrlPoints);
+          // this.animations[animationId] = 0;
           break;
 
         case 'combo':
@@ -1289,11 +1291,13 @@ MySceneGraph.prototype.parseAnimations = function (animationsNode) {
               break;
             } else if (this.animations[refId] == null) {
               return "unknown animation " + refId;
+            } else if (this.animations[refId] instanceof ComboAnimation) {
+              return "a combo animation cannot contain another combo animation " + refId;
             }
 
             animationIds.push(refId);
-            this.animations[animationId] = 0;
-            // this.animations[animationId] = new ComboAnimation(this, animationId, animationIds);
+            // this.animations[animationId] = 0;
+            this.animations[animationId] = new ComboAnimation(this, animationIds);
             sizeChildren++;
           }
           if (sizeChildren < 1)
@@ -1652,4 +1656,8 @@ MySceneGraph.prototype.displayScene = function () {
   // console.log(this.initialTransforms);
   // console.log(this.nodes[this.idRoot].transformMatrix);
   //this.log("Graph should be rendered here...");
+}
+
+MySceneGraph.prototype.update = function (currTime) {
+  this.nodes[this.idRoot].update(currTime);
 }
