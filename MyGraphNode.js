@@ -126,5 +126,5 @@ MyGraphNode.prototype.update = function (currTime) {
     return;
   }
 
-  this.animationMatrix = this.animations[this.currAnimation].getTransMatrix(elapsedTime);
+  this.animationMatrix = this.animations[this.currAnimation].getTransMatrix(elapsedTime / 1000.0);
 }
