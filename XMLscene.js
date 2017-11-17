@@ -95,7 +95,7 @@ XMLscene.prototype.onGraphLoaded = function () {
   // Adds lights group.
   this.interface.addLightsGroup(this.graph.lights);
 
-  this.setUpdatePeriod(1000 / 30);
+  this.setUpdatePeriod(1000 / 60);
 }
 
 /**

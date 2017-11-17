@@ -10,21 +10,18 @@ function LinearAnimation(graph, animationSpeed, ctrlPoints) {
     let distance = Math.sqrt(Math.pow(ctrlPoints[i + 1][0] - ctrlPoints[i][0], 2) +
       Math.pow(ctrlPoints[i + 1][1] - ctrlPoints[i][1], 2) +
       Math.pow(ctrlPoints[i + 1][2] - ctrlPoints[i][2], 2));
-    this.animationTime += distance / this.animationSpeed;
+    this.animationTime += distance / this.animationSpeed * 1000;
     this.segsTimes.push(this.animationTime);
   }
-  console.log(this.animationTime);
-  this.animationTime *= 1000;
-  console.log(this.animationTime);
 };
 
 LinearAnimation.prototype = Object.create(Animation.prototype);
 LinearAnimation.prototype.constructor = LinearAnimation;
 
 LinearAnimation.prototype.getTransMatrix = function (elapsedTime) {
-  let segElapsedTime = 1;
-  let segTime = 1;
-  let seg = this.ctrlPoints.length - 1;
+  let segElapsedTime;
+  let segTime;
+  let seg;
 
   for (let i = 1; i < this.segsTimes.length; i++) {
    
@@ -46,20 +43,15 @@ LinearAnimation.prototype.getTransMatrix = function (elapsedTime) {
   ];
 
   let coords = [0,0,0];
-
   
   coords[0] += this.ctrlPoints[seg - 1][0] + segVector[0] * perTime;
   coords[1] += this.ctrlPoints[seg - 1][1] + segVector[1] * perTime;
   coords[2] += this.ctrlPoints[seg - 1][2] + segVector[2] * perTime;
 
-  console.log(this.ctrlPoints[seg - 1][1]);
-
   let transMatrix = mat4.create();
   mat4.identity(transMatrix);
   mat4.translate(transMatrix, transMatrix, coords);
   mat4.rotate(transMatrix, transMatrix, Math.atan2(segVector[0], segVector[2]), [0, 1, 0]);
-
-
 
   return transMatrix;
 }

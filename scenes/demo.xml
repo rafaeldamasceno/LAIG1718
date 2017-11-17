@@ -125,7 +125,7 @@
     </MATERIALS>
     <!-- The animations -->
     <ANIMATIONS>
-        <ANIMATION id="ss" speed="4" type="linear">
+        <ANIMATION id="ss" speed="3" type="linear">
             <controlpoint xx="0" yy="0" zz="0" />
             <controlpoint xx="0" yy="10" zz="0" />
             <controlpoint xx="0" yy="10" zz="17" />

@@ -97,6 +97,7 @@ MyGraphNode.prototype.update = function (currTime) {
   for (let i = 0; i < this.children.length; i++) {
     this.graph.nodes[this.children[i]].update(currTime);
   }
+  
   if (this.animations.length == 0 || this.currAnimation >= this.animations.length) {
     return;
   }
@@ -126,5 +127,5 @@ MyGraphNode.prototype.update = function (currTime) {
     return;
   }
 
-  this.animationMatrix = this.animations[this.currAnimation].getTransMatrix(elapsedTime / 1000.0);
+  this.animationMatrix = this.animations[this.currAnimation].getTransMatrix(elapsedTime);
 }
