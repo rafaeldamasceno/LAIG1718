@@ -51,11 +51,15 @@ LinearAnimation.prototype.getTransMatrix = function (elapsedTime) {
   let transMatrix = mat4.create();
   mat4.identity(transMatrix);
   mat4.translate(transMatrix, transMatrix, coords);
-  mat4.rotate(transMatrix, transMatrix, Math.atan2(segVector[0], segVector[2]), [0, 1, 0]);
+  mat4.rotate(transMatrix, transMatrix, -Math.PI/2 + Math.atan2(segVector[0], segVector[2]), [0, 1, 0]);
 
   return transMatrix;
 }
 
 LinearAnimation.prototype.getAnimationTime = function () {
   return this.animationTime;
+}
+
+LinearAnimation.prototype.getType = function (){
+  return "Linear";
 }

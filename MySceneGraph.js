@@ -1297,9 +1297,12 @@ MySceneGraph.prototype.parseAnimations = function (animationsNode) {
 
             animationIds.push(refId);
             // this.animations[animationId] = 0;
-            this.animations[animationId] = new ComboAnimation(this, animationIds);
+           
             sizeChildren++;
           }
+
+          this.animations[animationId] = new ComboAnimation(this, animationIds);
+
           if (sizeChildren < 1)
             return "combo animations must have at least one spanref"
           break;
@@ -1476,6 +1479,11 @@ MySceneGraph.prototype.parseNodes = function (nodesNode) {
             this.onXMLMinorError("unable to parse animation id");
           else if (this.animations[aniId] == null)
             return "node references unexisting animation";
+          else if (this.animations[aniId].getType() == "Combo") {
+            for(let comboi = 0; comboi < this.animations[aniId].animationIds.length; comboi++) {
+              this.nodes[nodeID].animations.push(this.animations[this.animations[aniId].animationIds[comboi]]);
+            }
+          }
           else {
             this.nodes[nodeID].animations.push(this.animations[aniId]);
           }

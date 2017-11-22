@@ -21,7 +21,6 @@ BezierAnimation.prototype = Object.create(Animation.prototype);
 BezierAnimation.prototype.constructor = BezierAnimation;
 
 BezierAnimation.prototype.getTransMatrix = function (elapsedTime) {
-  console.log("here");
   let t = (elapsedTime / 1000) / this.animationTime;
   
 
@@ -46,12 +45,7 @@ BezierAnimation.prototype.getTransMatrix = function (elapsedTime) {
     - 6 * this.p2[0] * (1 - t) * t
     + 3 * this.p2[0] * Math.pow(1 - t, 2)
     - 3 * this.p1[0] * Math.pow(1 - t, 2);
-  dy = 3 * this.p4[1] * t * t
-    - 3 * this.p3[1] * t * t
-    + 6 * this.p3[1] * (1 - t) * t
-    - 6 * this.p2[1] * (1 - t) * t
-    + 3 * this.p2[1] * Math.pow(1 - t, 2)
-    - 3 * this.p1[1] * Math.pow(1 - t, 2);
+
   dz = 3 * this.p4[2] * t * t
     - 3 * this.p3[2] * t * t
     + 6 * this.p3[2] * (1 - t) * t
@@ -59,10 +53,16 @@ BezierAnimation.prototype.getTransMatrix = function (elapsedTime) {
     + 3 * this.p2[2] * Math.pow(1 - t, 2)
     - 3 * this.p1[2] * Math.pow(1 - t, 2);
 
+
+  let phi = -Math.atan2(dz, dx);
+
   let coords = [x, y, z];
   let transMatrix = mat4.create();
   mat4.identity(transMatrix);
   mat4.translate(transMatrix, transMatrix, coords);
+  mat4.rotate(transMatrix, transMatrix, phi, [0, 1, 0]);
+
+  
 
 
   return transMatrix;
@@ -92,3 +92,6 @@ BezierAnimation.prototype.getAnimationTime = function () {
   return this.animationTime * 1000;
 }
 
+BezierAnimation.prototype.getType = function (){
+  return "Bezier";
+}

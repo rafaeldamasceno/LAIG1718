@@ -106,6 +106,7 @@ MyGraphNode.prototype.update = function (currTime) {
     this.startTime = currTime;
     let time = 0;
     for (ani of this.animations) {
+      console.log(ani);
       time += ani.getAnimationTime();
       this.animationsTimes.push(time);
     }

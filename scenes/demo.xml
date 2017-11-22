@@ -132,11 +132,11 @@
             <controlpoint xx="4" yy="2" zz="17" />
         </ANIMATION>
         <ANIMATION id="ss1" speed="3" type="circular" centerx="1" centery="1" centerz="1" radius="10" startang="40" rotang="360" />
-        <ANIMATION id="ss2" speed="3" type="bezier">
+        <ANIMATION id="ss2" speed="7" type="bezier">
             <controlpoint xx="0" yy="0" zz="0" />
             <controlpoint xx="5" yy="5" zz="5" />
             <controlpoint xx="10.5" yy="0" zz="7" />
-            <controlpoint xx="-10.5" yy="0" zz="20" />
+            <controlpoint xx="-10.5" yy="5" zz="20" />
         </ANIMATION>
         <ANIMATION id="ss3" type="combo">
             <SPANREF id="ss" />
@@ -267,7 +267,8 @@
             <TEXTURE id="null" />
             <TRANSLATION x="7.5" y="-2" z="4" />
             <ANIMATIONREFS>
-                <ANIMATIONREF id="ss2" />
+                <ANIMATIONREF id="ss1" />
+                <ANIMATIONREF id="ss" />
             </ANIMATIONREFS>
 
             <DESCENDANTS>
