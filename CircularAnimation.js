@@ -15,12 +15,9 @@ CircularAnimation.prototype = Object.create(Animation.prototype);
 CircularAnimation.prototype.constructor = CircularAnimation;
 
 CircularAnimation.prototype.getTransMatrix = function (elapsedTime) {
-  console.log(elapsedTime);
   let angrad = (this.startang * Math.PI/180) + (this.animationSpeed/this.radius)*(elapsedTime/1000);
-  console.log(angrad);
 
   let coords = [this.centerx, this.centery, this.centerz];
-  console.log(this.centerx);
   coords[0] += Math.cos(angrad)*this.radius;
   coords[2] += Math.sin(angrad)*this.radius;
 
