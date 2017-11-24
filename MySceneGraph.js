@@ -43,8 +43,10 @@ function MySceneGraph(filename, scene) {
   this.shadersFactor = 0;
 
   this.testShaders=[
-		new CGFshader(this.scene.gl, "shaders/uScale.vert", "shaders/uScale.frag")
-	];
+		new CGFshader(this.scene.gl, "shaders/MyShader.vert", "shaders/MyShader.frag")
+  ];
+  
+  
 }
 
 /*
@@ -1330,6 +1332,7 @@ MySceneGraph.prototype.parseNodes = function (nodesNode) {
 
   // Traverses nodes.
   var children = nodesNode.children;
+  this.selectables = [];
 
   for (var i = 0; i < children.length; i++) {
     var nodeName;
@@ -1346,6 +1349,7 @@ MySceneGraph.prototype.parseNodes = function (nodesNode) {
     } else if (nodeName == "NODE") {
       // Retrieves node ID.
       var nodeID = this.reader.getString(children[i], 'id');
+      
       if (nodeID == null)
         return "failed to retrieve node ID";
       // Checks if ID is valid.
@@ -1353,6 +1357,11 @@ MySceneGraph.prototype.parseNodes = function (nodesNode) {
         return "node ID must be unique (conflict: ID = " + nodeID + ")";
 
       this.log("Processing node " + nodeID);
+
+    var selectable = this.reader.getBoolean(children[i], 'selectable', 0);
+    if (selectable) {
+      this.selectables.push(nodeID);
+    }
 
       // Creates node.
       this.nodes[nodeID] = new MyGraphNode(this, nodeID);
@@ -1603,9 +1612,11 @@ MySceneGraph.prototype.parseNodes = function (nodesNode) {
     } else
       this.onXMLMinorError("unknown tag name <" + nodeName);
   }
-
+  this.scene.interface.addSelectables(this.selectables);
   console.log("Parsed nodes");
   return null;
+
+  
 }
 
 /*
@@ -1665,9 +1676,9 @@ MySceneGraph.generateRandomString = function (length) {
  */
 MySceneGraph.prototype.displayScene = function () {
   // entry point for graph rendering
-  //this.scene.setActiveShader(this.testShaders[0]);
+  
   this.nodes[this.idRoot].display(this.defaultMaterialID);
-  //this.scene.setActiveShader(this.defaultShader);
+  this.scene.setActiveShader(this.defaultShader);
 
   // console.log(this.initialTransforms);
   // console.log(this.nodes[this.idRoot].transformMatrix);
@@ -1676,9 +1687,8 @@ MySceneGraph.prototype.displayScene = function () {
 
 MySceneGraph.prototype.update = function (currTime) {
   this.shadersFactor = (Math.cos(currTime/400) + 1) / 2;
-  console.log(this.shadersFactor);
+
   this.testShaders[0].setUniformsValues({normScale: this.shadersFactor, colourScale: this.shadersFactor});
-  this.scene.setActiveShader(this.testShaders[0]);
+  
   this.nodes[this.idRoot].update(currTime);
-  this.scene.setActiveShader(this.scene.defaultShader);
 }

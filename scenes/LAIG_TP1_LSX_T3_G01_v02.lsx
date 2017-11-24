@@ -97,25 +97,26 @@
 
     <ANIMATION id="earthquake" speed="1" type="linear">
       <controlpoint xx="0" yy="0" zz="0" />
-      <controlpoint xx="0" yy="1" zz="0" />
+      <controlpoint xx="0" yy="0.5" zz="0" />
       <controlpoint xx="0" yy="0" zz="0" />
-      <controlpoint xx="0" yy="1" zz="0" />
+      <controlpoint xx="0" yy="0.5" zz="0" />
       <controlpoint xx="0" yy="0" zz="0" />
-      <controlpoint xx="0" yy="1" zz="0" />
+      <controlpoint xx="0" yy="0.5" zz="0" />
       <controlpoint xx="0" yy="0" zz="0" />
-      <controlpoint xx="0" yy="1" zz="0" />
+      <controlpoint xx="0" yy="0.5" zz="0" />
       <controlpoint xx="0" yy="0" zz="0" />
-      <controlpoint xx="0" yy="1" zz="0" />
+      <controlpoint xx="0" yy="0.5" zz="0" />
       <controlpoint xx="0" yy="0" zz="0" />
-      <controlpoint xx="0" yy="1" zz="0" />
+      <controlpoint xx="0" yy="0.5" zz="0" />
       <controlpoint xx="0" yy="0" zz="0" />
-      <controlpoint xx="0" yy="1" zz="0" />
+      <controlpoint xx="0" yy="0.5" zz="0" />
+      <controlpoint xx="0" yy="0" zz="0" />
     </ANIMATION>
 
     <ANIMATION id="liftoff" speed="4" type="linear">
       <controlpoint xx="0" yy="0" zz="0" />
-      <controlpoint xx="0" yy="5" zz="3" />
-      <controlpoint xx="0" yy="5" zz="0" />
+      <controlpoint xx="0" yy="8" zz="0" />
+      <controlpoint xx="0" yy="0" zz="0" />
     </ANIMATION>
     <ANIMATION id="landing" speed="4" type="linear">
       <controlpoint xx="0" yy="5" zz="0" />
@@ -124,7 +125,7 @@
     </ANIMATION>
 
     <ANIMATION id="roudabout" speed="4" type="circular"
-      centerx="0" centery="5" centerz="5"
+      centerx="0" centery="5" centerz="0"
       radius="5" startang="0" rotang="360" />
 
     <ANIMATION id="diveup" speed="4" type="bezier">
@@ -139,7 +140,7 @@
       <controlpoint xx="0" yy="7" zz="-5" />
       <controlpoint xx="0" yy="5" zz="0" />
     </ANIMATION>
-    <ANIMATION id="monument" type="combo">
+    <ANIMATION id="monumentAnimation" type="combo">
       <SPANREF id="liftoff" />
       <SPANREF id="roudabout" />
       <SPANREF id="diveup" />
@@ -167,7 +168,7 @@
       </DESCENDANTS>
     </NODE>
     <!-- The floor -->
-    <NODE id="floor">
+    <NODE id="floor" selectable="true">
       <MATERIAL id="GrassMaterial" />
       <TEXTURE id="grass" />
       <ANIMATIONREFS>
@@ -189,52 +190,52 @@
     <NODE id="upfloor">
       <MATERIAL id="null" />
       <TEXTURE id="null" />
-      <TRANSLATION x="0" y="0" z="24" />
-      
+      <TRANSLATION x="12" y="0" z="12" />
       <DESCENDANTS>
         <LEAF type="patch" args="30 30">
           <CPLINE>
-            <CPOINT xx="24" yy="0" zz="0" ww="1" />
-            <CPOINT xx="18" yy="0" zz="0" ww="1" />
-            <CPOINT xx="12" yy="0" zz="0" ww="1" />
+            <CPOINT xx="-12" yy="0" zz="-12" ww="1" />
+            <CPOINT xx="-6" yy="0" zz="-12" ww="1" />
+            <CPOINT xx="0" yy="0" zz="-12" ww="1" />
+            <CPOINT xx="6" yy="0" zz="-12" ww="1" />
+            <CPOINT xx="12" yy="0" zz="-12" ww="1" />
+          </CPLINE>
+          <CPLINE>
+            <CPOINT xx="-12" yy="0" zz="-6" ww="1" />
+            <CPOINT xx="-6" yy="0" zz="-6" ww="1" />
+            <CPOINT xx="0" yy="0" zz="-6" ww="1" />
+            <CPOINT xx="6" yy="0" zz="-6" ww="1" />
+            <CPOINT xx="12" yy="0" zz="-6" ww="1" />
+          </CPLINE>
+          <CPLINE>
+            <CPOINT xx="-12" yy="0" zz="0" ww="1" />
+            <CPOINT xx="-6" yy="0" zz="0" ww="1" />
+            <CPOINT xx="0" yy="5" zz="0" ww="4" />
             <CPOINT xx="6" yy="0" zz="0" ww="1" />
-            <CPOINT xx="0" yy="0" zz="0" ww="1" />
+            <CPOINT xx="12" yy="0" zz="0" ww="1" />
           </CPLINE>
           <CPLINE>
-            <CPOINT xx="24" yy="6" zz="0" ww="1" />
-            <CPOINT xx="18" yy="6" zz="0" ww="1" />
-            <CPOINT xx="12" yy="6" zz="0" ww="1" />
-            <CPOINT xx="6" yy="6" zz="0" ww="1" />
-            <CPOINT xx="0" yy="6" zz="0" ww="1" />
+            <CPOINT xx="-12" yy="0" zz="6" ww="1" />
+            <CPOINT xx="-6" yy="0" zz="6" ww="1" />
+            <CPOINT xx="0" yy="0" zz="6" ww="1" />
+            <CPOINT xx="6" yy="0" zz="6" ww="1" />
+            <CPOINT xx="12" yy="0" zz="6" ww="1" />
           </CPLINE>
           <CPLINE>
-            <CPOINT xx="24" yy="12" zz="0" ww="1" />
-            <CPOINT xx="18" yy="12" zz="0" ww="1" />
-            <CPOINT xx="12" yy="12" zz="5" ww="4" />
-            <CPOINT xx="6" yy="12" zz="0" ww="1" />
-            <CPOINT xx="0" yy="12" zz="0" ww="1" />
-          </CPLINE>
-          <CPLINE>
-            <CPOINT xx="24" yy="18" zz="0" ww="1" />
-            <CPOINT xx="18" yy="18" zz="0" ww="1" />
-            <CPOINT xx="12" yy="18" zz="0" ww="1" />
-            <CPOINT xx="6" yy="18" zz="0" ww="1" />
-            <CPOINT xx="0" yy="18" zz="0" ww="1" />
-          </CPLINE>
-          <CPLINE>
-            <CPOINT xx="24" yy="24" zz="0" ww="1" />
-            <CPOINT xx="18" yy="24" zz="0" ww="1" />
-            <CPOINT xx="12" yy="24" zz="0" ww="1" />
-            <CPOINT xx="6" yy="24" zz="0" ww="1" />
-            <CPOINT xx="0" yy="24" zz="0" ww="1" />
+            <CPOINT xx="-12" yy="0" zz="12" ww="1" />
+            <CPOINT xx="-6" yy="0" zz="12" ww="1" />
+            <CPOINT xx="0" yy="0" zz="12" ww="1" />
+            <CPOINT xx="6" yy="0" zz="12" ww="1" />
+            <CPOINT xx="12" yy="0" zz="12" ww="1" />
           </CPLINE>
         </LEAF>
       </DESCENDANTS>
     </NODE>
     <!-- The monument -->
-    <NODE id="bars">
+    <NODE id="bars" selectable="true">
       <MATERIAL id="MatteMaterial" />
       <TEXTURE id="clear" />
+      
       <DESCENDANTS>
         <NODEREF id="cylinderOut1" />
         <NODEREF id="cylinderOut2" />
@@ -258,7 +259,7 @@
         <NODEREF id="cylinderIn8" />
       </DESCENDANTS>
     </NODE>
-    <NODE id="spheres">
+    <NODE id="spheres" selectable="true">
       <MATERIAL id="MetalMaterial" />
       <TEXTURE id="inox" />
       <DESCENDANTS>
@@ -276,9 +277,14 @@
     <NODE id="monument">
       <MATERIAL id="null" />
       <TEXTURE id="null" />
+      
       <TRANSLATION x="12" y="9" z="12" />
       <ROTATION axis="z" angle="-35.26" />
       <ROTATION axis="x" angle="45" />
+      <ANIMATIONREFS>
+          <ANIMATIONREF id="monumentAnimation" />
+      </ANIMATIONREFS>
+      
       <DESCENDANTS>
         <NODEREF id="bars" />
         <NODEREF id="spheres" />
@@ -287,6 +293,7 @@
     <NODE id="sphere">
       <MATERIAL id="null" />
       <TEXTURE id="null" />
+      
       <DESCENDANTS>
         <LEAF type="sphere" args="1.4 32 32" />
       </DESCENDANTS>

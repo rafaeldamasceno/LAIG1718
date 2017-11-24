@@ -37,7 +37,7 @@ BezierAnimation.prototype.getTransMatrix = function (elapsedTime) {
     + 3 * t * t * (1 - t) * this.p3[2]
     + t * t * t * this.p4[2];
 
-  var dx, dy, dz;
+  let dx, dz;
   
   dx = 3 * this.p4[0] * t * t
     - 3 * this.p3[0] * t * t

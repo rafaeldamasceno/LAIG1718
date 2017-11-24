@@ -74,8 +74,11 @@ MyGraphNode.prototype.display = function (materialID, textureID = null) {
   if (newTexture != null) {
     this.graph.textures[newTexture][0].bind();
   }
-
   //ciclo de leafs
+  if(this.graph.scene.selectedObject == this.nodeID) {
+    this.graph.scene.setActiveShader(this.graph.testShaders[0]);
+  }
+  
   for (var i = 0; i < this.leaves.length; i++) {
     if (newTexture != null) {
       this.leaves[i].updateTexScaling(this.graph.textures[newTexture][1], this.graph.textures[newTexture][2]);
@@ -90,7 +93,11 @@ MyGraphNode.prototype.display = function (materialID, textureID = null) {
   for (var i = 0; i < this.children.length; i++) {
     this.graph.nodes[this.children[i]].display(newMaterial, newTexture);
   }
+ 
   this.graph.scene.popMatrix();
+  if(this.graph.scene.selectedObject == this.nodeID) {
+    this.graph.scene.setActiveShader(this.graph.scene.defaultShader);
+  }
 }
 
 MyGraphNode.prototype.update = function (currTime) {

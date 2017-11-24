@@ -8,6 +8,7 @@ function XMLscene(interface) {
   CGFscene.call(this);
 
   this.interface = interface;
+  this.selectedObject = "";
 
   this.lightValues = {};
 }

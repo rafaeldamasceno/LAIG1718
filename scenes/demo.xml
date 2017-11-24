@@ -262,7 +262,7 @@
             </DESCENDANTS>
         </NODE>
         <!-- Another bench -->
-        <NODE id="banco1">
+        <NODE id="banco1" selectable = "true">
             <MATERIAL id="null" />
             <TEXTURE id="null" />
             <TRANSLATION x="7.5" y="-2" z="4" />
