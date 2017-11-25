@@ -1678,7 +1678,6 @@ MySceneGraph.prototype.displayScene = function () {
   // entry point for graph rendering
   
   this.nodes[this.idRoot].display(this.defaultMaterialID);
-  this.scene.setActiveShader(this.defaultShader);
 
   // console.log(this.initialTransforms);
   // console.log(this.nodes[this.idRoot].transformMatrix);
