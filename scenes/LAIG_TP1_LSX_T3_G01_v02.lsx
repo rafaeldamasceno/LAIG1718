@@ -125,8 +125,8 @@
     </ANIMATION>
 
     <ANIMATION id="roudabout" speed="4" type="circular"
-      centerx="0" centery="5" centerz="0"
-      radius="5" startang="0" rotang="360" />
+      centerx="3" centery="0" centerz="0"
+      radius="3" startang="0" rotang="360" />
 
     <ANIMATION id="diveup" speed="4" type="bezier">
       <controlpoint xx="0" yy="5" zz="0" />
@@ -161,7 +161,7 @@
       <TEXTURE id="null" />
       <DESCENDANTS>
         <NODEREF id="floor" />
-        <NODEREF id="monument" />
+        <NODEREF id="monumentWrapper" />
         <NODEREF id="cornerstone1" />
         <NODEREF id="cornerstone2" />
         <NODEREF id="cornerstone3" />
@@ -274,16 +274,25 @@
         <NODEREF id="sphere9" />
       </DESCENDANTS>
     </NODE>
-    <NODE id="monument">
+    <NODE id="monumentWrapper">
       <MATERIAL id="null" />
       <TEXTURE id="null" />
       
-      <TRANSLATION x="12" y="9" z="12" />
-      <ROTATION axis="z" angle="-35.26" />
-      <ROTATION axis="x" angle="45" />
+      
       <ANIMATIONREFS>
           <ANIMATIONREF id="monumentAnimation" />
       </ANIMATIONREFS>
+      
+      <DESCENDANTS>
+        <NODEREF id="monument" />
+      </DESCENDANTS>
+    </NODE>
+    <NODE id="monument">
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+      <TRANSLATION x="12" y="9" z="12" />
+      <ROTATION axis="z" angle="-35.26" />
+      <ROTATION axis="x" angle="45" />
       
       <DESCENDANTS>
         <NODEREF id="bars" />
