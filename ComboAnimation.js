@@ -17,10 +17,6 @@ ComboAnimation.prototype.getAnimationTime = function () {
   return this.animationTime;
 }
 
-ComboAnimation.prototype.getType = function (){
-  return "Combo";
-}
-
 ComboAnimation.prototype.getAnimationTime = function() {
   return 0;
 }

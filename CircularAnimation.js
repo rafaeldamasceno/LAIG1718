@@ -24,7 +24,7 @@ CircularAnimation.prototype.getTransMatrix = function (elapsedTime) {
   let transMatrix = mat4.create();
   mat4.identity(transMatrix);
   mat4.translate(transMatrix, transMatrix, coords);
-  mat4.rotate(transMatrix, transMatrix, -(Math.PI/2 + angrad), [0, 1, 0]);
+  mat4.rotate(transMatrix, transMatrix, -angrad, [0, 1, 0]);
 
   return transMatrix;
 
@@ -32,8 +32,4 @@ CircularAnimation.prototype.getTransMatrix = function (elapsedTime) {
 
 CircularAnimation.prototype.getAnimationTime = function () {
   return this.animationTime;
-}
-
-CircularAnimation.prototype.getType = function (){
-  return "Circular";
 }

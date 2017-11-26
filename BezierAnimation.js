@@ -53,14 +53,11 @@ BezierAnimation.prototype.getTransMatrix = function (elapsedTime) {
     + 3 * this.p2[2] * Math.pow(1 - t, 2)
     - 3 * this.p1[2] * Math.pow(1 - t, 2);
 
-
-  let phi = -Math.atan2(dz, dx);
-
   let coords = [x, y, z];
   let transMatrix = mat4.create();
   mat4.identity(transMatrix);
   mat4.translate(transMatrix, transMatrix, coords);
-  mat4.rotate(transMatrix, transMatrix, phi, [0, 1, 0]);
+  mat4.rotate(transMatrix, transMatrix, Math.atan2(dx, dz), [0, 1, 0]);
 
   
 
@@ -90,8 +87,4 @@ BezierAnimation.prototype.calcDist = function (Point1, Point2) {
 
 BezierAnimation.prototype.getAnimationTime = function () {
   return this.animationTime * 1000;
-}
-
-BezierAnimation.prototype.getType = function (){
-  return "Bezier";
 }

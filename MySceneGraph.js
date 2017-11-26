@@ -1494,7 +1494,7 @@ MySceneGraph.prototype.parseNodes = function (nodesNode) {
             this.onXMLMinorError("unable to parse animation id");
           else if (this.animations[aniId] == null)
             return "node references unexisting animation";
-          else if (this.animations[aniId].getType() == "Combo") {
+          else if (this.animations[aniId] instanceof ComboAnimation) {
             for(let comboi = 0; comboi < this.animations[aniId].animationIds.length; comboi++) {
               this.nodes[nodeID].animations.push(this.animations[this.animations[aniId].animationIds[comboi]]);
             }

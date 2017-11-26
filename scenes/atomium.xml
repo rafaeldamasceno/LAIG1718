@@ -92,10 +92,18 @@
       <emission r="0.0" g="0.0" b="0.0" a="1" />
     </MATERIAL>
   </MATERIALS>
-
   <ANIMATIONS>
-
-    <ANIMATION id="earthquake" speed="1" type="linear">
+    <ANIMATION id="windupMonument" speed="0.0001" type="linear">
+      <controlpoint xx="12" yy="9" zz="12" />
+      <controlpoint xx="12" yy="9.0004" zz="12" />
+    </ANIMATION>
+    <ANIMATION id="windupFloor" speed="0.0001" type="linear">
+      <controlpoint xx="0" yy="0" zz="0" />
+      <controlpoint xx="0" yy="0.0004" zz="0" />
+    </ANIMATION>
+    <ANIMATION id="earthquake" speed="2" type="linear">
+      <controlpoint xx="0" yy="0" zz="0" />
+      <controlpoint xx="0" yy="0.5" zz="0" />
       <controlpoint xx="0" yy="0" zz="0" />
       <controlpoint xx="0" yy="0.5" zz="0" />
       <controlpoint xx="0" yy="0" zz="0" />
@@ -112,46 +120,70 @@
       <controlpoint xx="0" yy="0.5" zz="0" />
       <controlpoint xx="0" yy="0" zz="0" />
     </ANIMATION>
-
-    <ANIMATION id="liftoff" speed="4" type="linear">
-      <controlpoint xx="0" yy="0" zz="0" />
-      <controlpoint xx="0" yy="8" zz="0" />
-      <controlpoint xx="0" yy="0" zz="0" />
+    <ANIMATION id="liftoff" speed="1" type="linear">
+      <controlpoint xx="12" yy="9" zz="12" />
+      <controlpoint xx="12" yy="13" zz="12" />
     </ANIMATION>
-    <ANIMATION id="landing" speed="4" type="linear">
-      <controlpoint xx="0" yy="5" zz="0" />
-      <controlpoint xx="0" yy="5" zz="-3" />
-      <controlpoint xx="0" yy="0" zz="0" />
+    <ANIMATION id="requirementA1" speed="4" type="linear">
+      <controlpoint xx="12" yy="13" zz="12" />
+      <controlpoint xx="12" yy="13" zz="17" />
     </ANIMATION>
-
-    <ANIMATION id="roudabout" speed="4" type="circular"
-      centerx="3" centery="0" centerz="0"
-      radius="3" startang="0" rotang="360" />
-
+    <ANIMATION id="requirementA2" speed="8" type="circular"
+    centerx="7" centery="13" centerz="17"
+    radius="5" startang="0" rotang="180" />
+    <ANIMATION id="requirementA3" speed="16" type="linear">
+      <controlpoint xx="2" yy="13" zz="17" />
+      <controlpoint xx="2" yy="13" zz="12" />
+    </ANIMATION>
+    <ANIMATION id="requirementA" type="combo">
+      <SPANREF id="requirementA1" />
+      <SPANREF id="requirementA2" />
+      <SPANREF id="requirementA3" />
+    </ANIMATION>
+    <ANIMATION id="fullCircle" speed="24" type="circular"
+    centerx="12" centery="13" centerz="12"
+    radius="10" startang="180" rotang="360" />
+    <ANIMATION id="requirementB1" speed="24" type="bezier">
+      <controlpoint xx="2" yy="13" zz="12" />
+      <controlpoint xx="2" yy="13" zz="0.333" />
+      <controlpoint xx="19.5" yy="13" zz="0.333" />
+      <controlpoint xx="19.5" yy="13" zz="12" />
+    </ANIMATION>
+    <ANIMATION id="requirementB2" speed="24" type="bezier">
+      <controlpoint xx="19.5" yy="13" zz="12" />
+      <controlpoint xx="19.5" yy="13" zz="20.333" />
+      <controlpoint xx="7" yy="13" zz="20.333" />
+      <controlpoint xx="7" yy="13" zz="12" />
+    </ANIMATION>
+    <ANIMATION id="requirementB3" speed="24" type="bezier">
+      <controlpoint xx="7" yy="13" zz="12" />
+      <controlpoint xx="7" yy="13" zz="7" />
+      <controlpoint xx="14.5" yy="13" zz="7" />
+      <controlpoint xx="14.5" yy="13" zz="12" />
+    </ANIMATION>
+    <ANIMATION id="requirementB4" speed="8" type="circular"
+    centerx="13.75" centery="13" centerz="12"
+    radius="1.75" startang="0" rotang="180" />
+    <ANIMATION id="requirementB" type="combo">
+      <SPANREF id="requirementB1" />
+      <SPANREF id="requirementB2" />
+      <SPANREF id="requirementB3" />
+      <SPANREF id="requirementB4" />
+    </ANIMATION>
+    <ANIMATION id="spin" speed="0.00157" type="circular"
+    centerx="12" centery="13" centerz="12"
+    radius="0.0001" startang="0" rotang="2880" />
     <ANIMATION id="diveup" speed="4" type="bezier">
       <controlpoint xx="0" yy="5" zz="0" />
       <controlpoint xx="0" yy="7" zz="5" />
       <controlpoint xx="0" yy="9" zz="5" />
       <controlpoint xx="0" yy="10" zz="0" />
     </ANIMATION>
-    <ANIMATION id="divedown" speed="4" type="bezier">
-      <controlpoint xx="0" yy="10" zz="0" />
-      <controlpoint xx="0" yy="9" zz="-5" />
-      <controlpoint xx="0" yy="7" zz="-5" />
-      <controlpoint xx="0" yy="5" zz="0" />
-    </ANIMATION>
-    <ANIMATION id="monumentAnimation" type="combo">
-      <SPANREF id="liftoff" />
-      <SPANREF id="roudabout" />
-      <SPANREF id="diveup" />
-      <SPANREF id="divedown" />
-      <SPANREF id="landing" />
-    <!-- ... -->
+    <ANIMATION id="landing" speed="1" type="linear">
+      <controlpoint xx="12" yy="13" zz="12" />
+      <controlpoint xx="12" yy="9" zz="12" />
     </ANIMATION>
   </ANIMATIONS>
-
-  <!-- The leaves -->
-  <LEAVES />
   <!-- The nodes -->
   <NODES>
     <ROOT id="root" />
@@ -160,20 +192,29 @@
       <MATERIAL id="defaultMaterial" />
       <TEXTURE id="null" />
       <DESCENDANTS>
-        <NODEREF id="floor" />
+        <NODEREF id="floorWrapper" />
         <NODEREF id="monumentWrapper" />
+      </DESCENDANTS>
+    </NODE>
+    <!-- The floor -->
+    <NODE id="floorWrapper">
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+      <ANIMATIONREFS>
+        <ANIMATIONREF id="windupFloor" />
+        <ANIMATIONREF id="earthquake" />
+      </ANIMATIONREFS>
+      <DESCENDANTS>
+        <NODEREF id="floor" />
         <NODEREF id="cornerstone1" />
         <NODEREF id="cornerstone2" />
         <NODEREF id="cornerstone3" />
       </DESCENDANTS>
     </NODE>
-    <!-- The floor -->
     <NODE id="floor" selectable="true">
       <MATERIAL id="GrassMaterial" />
       <TEXTURE id="grass" />
-      <ANIMATIONREFS>
-          <ANIMATIONREF id="earthquake" />
-      </ANIMATIONREFS>
+
       <DESCENDANTS>
         <NODEREF id="upfloor" />
         <NODEREF id="downfloor" />
@@ -235,7 +276,6 @@
     <NODE id="bars" selectable="true">
       <MATERIAL id="MatteMaterial" />
       <TEXTURE id="clear" />
-      
       <DESCENDANTS>
         <NODEREF id="cylinderOut1" />
         <NODEREF id="cylinderOut2" />
@@ -277,12 +317,16 @@
     <NODE id="monumentWrapper">
       <MATERIAL id="null" />
       <TEXTURE id="null" />
-      
-      
+      <!-- <TRANSLATION xx=""> -->
       <ANIMATIONREFS>
-          <ANIMATIONREF id="monumentAnimation" />
+        <ANIMATIONREF id="windupMonument" />
+        <ANIMATIONREF id="liftoff" />
+        <ANIMATIONREF id="requirementA" />
+        <ANIMATIONREF id="fullCircle" />
+        <ANIMATIONREF id="requirementB" />
+        <ANIMATIONREF id="spin" />
+        <ANIMATIONREF id="landing" />
       </ANIMATIONREFS>
-      
       <DESCENDANTS>
         <NODEREF id="monument" />
       </DESCENDANTS>
@@ -290,10 +334,9 @@
     <NODE id="monument">
       <MATERIAL id="null" />
       <TEXTURE id="null" />
-      <TRANSLATION x="12" y="9" z="12" />
+      <!-- <TRANSLATION x="12" y="9" z="12" /> -->
       <ROTATION axis="z" angle="-35.26" />
       <ROTATION axis="x" angle="45" />
-      
       <DESCENDANTS>
         <NODEREF id="bars" />
         <NODEREF id="spheres" />
@@ -302,7 +345,6 @@
     <NODE id="sphere">
       <MATERIAL id="null" />
       <TEXTURE id="null" />
-      
       <DESCENDANTS>
         <LEAF type="sphere" args="1.4 32 32" />
       </DESCENDANTS>
@@ -475,7 +517,7 @@
         <NODEREF id="cylinderOut" />
       </DESCENDANTS>
     </NODE>
-    <NODE id="cylinderOut10">
+    <NODE id="cylinderOut10" selectable="true">
       <MATERIAL id="null" />
       <TEXTURE id="null" />
       <TRANSLATION x="3" y="3" z="3" />
