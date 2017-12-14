@@ -21,55 +21,6 @@ MyToro.prototype.initBuffers = function() {
   this.indices = [];
   this.texCoords = [];
 
-  var radPer = this.smallRadius/this.bigRadius;
-
-  for (i = 0; i <= this.slices; i++) {
-    var x = Math.cos(i * this.angleDiff);
-    var y = Math.sin(i * this.angleDiff);
-    for (j = 0; j <= this.stacks; j++) {
-      this.vertices.push(x * this.smallRadius);
-      this.vertices.push(y * this.smallRadius);
-      this.vertices.push(this.height / this.stacks * j);
-
-      this.normals.push(x);
-      this.normals.push(y);
-      this.normals.push(0);
-
-      this.texCoords.push(1 / this.slices * i, -1 / this.stacks * j);
-
-      this.vertices.push(x * this.bigRadius);
-      this.vertices.push(y * this.bigRadius);
-      this.vertices.push(this.height / this.stacks * j);
-
-      this.normals.push(-x);
-      this.normals.push(-y);
-      this.normals.push(0);
-
-      this.texCoords.push(radPer / this.slices * i, -radPer / this.stacks * j);
-    }
-  }
-
-  for (i = 0; i < this.slices; i++) {
-    for (j = 0; j < this.stacks; j++) {
-      this.indices.push(((i + 1) * (this.stacks + 1) + j + 1) * 2);
-      this.indices.push((i * (this.stacks + 1) + j) * 2);
-      this.indices.push(((i + 1) * (this.stacks + 1) + j) * 2);
-      
-      this.indices.push((i * (this.stacks + 1) + j + 1) * 2);
-      this.indices.push((i * (this.stacks + 1) + j) * 2);
-      this.indices.push(((i + 1) * (this.stacks + 1) + j + 1) * 2);
-      
-
-
-      this.indices.push(((i * (this.stacks + 1) + j) * 2) + 1);
-      this.indices.push((((i + 1) * (this.stacks + 1) + j) * 2) + 1);
-      this.indices.push((((i + 1) * (this.stacks + 1) + j + 1) * 2) + 1);
-
-      this.indices.push(((i * (this.stacks + 1) + j) * 2) + 1);
-      this.indices.push((((i + 1) * (this.stacks + 1) + j + 1) * 2) + 1);
-      this.indices.push(((i * (this.stacks + 1) + j + 1) * 2) + 1);
-    }
-  }
 /*
   var lastIndex = this.vertices.length / 3;
 
@@ -134,6 +85,71 @@ MyToro.prototype.initBuffers = function() {
     }
 
 }*/
+
+  //Outer shell
+
+  for (i = 0; i <= this.slices; i++) {
+    var x = Math.cos(i * this.angleDiff);
+    var y = Math.sin(i * this.angleDiff);
+    for (j = 0; j <= this.stacks; j++) {
+      this.vertices.push(x * this.bigRadius);
+      this.vertices.push(y * this.bigRadius);
+      this.vertices.push(this.height / this.stacks * j);
+
+      this.normals.push(x);
+      this.normals.push(y);
+      this.normals.push(0);
+
+      this.texCoords.push(i / this.slices, j / this.stacks);
+
+
+    }
+  }
+
+  for (i = 0; i < this.slices; i++) {
+    for (j = 0; j < this.stacks; j++) {
+      this.indices.push(i * (this.stacks + 1) + j);
+      this.indices.push((i + 1) * (this.stacks + 1) + j);
+      this.indices.push((i + 1) * (this.stacks + 1) + j + 1);
+
+      this.indices.push(i * (this.stacks + 1) + j);
+      this.indices.push((i + 1) * (this.stacks + 1) + j + 1);
+      this.indices.push(i * (this.stacks + 1) + j + 1);
+    }
+  }
+
+  // Inner shell
+  console.log(this.smallRadius);
+
+  for (i = 0; i <= this.slices; i++) {
+    var x = Math.cos(i * this.angleDiff);
+    var y = Math.sin(i * this.angleDiff);
+    for (j = 0; j <= this.stacks; j++) {
+      this.vertices.push(x * this.smallRadius);
+      this.vertices.push(y * this.smallRadius);
+      this.vertices.push(this.height / this.stacks * j);
+
+      this.normals.push(-x);
+      this.normals.push(-y);
+      this.normals.push(0);
+
+      this.texCoords.push(i / this.slices, j / this.stacks);
+    }
+  }
+
+  for (i = 0; i < this.slices; i++) {
+    for (j = 0; j < this.stacks; j++) {
+      this.indices.push((i + 1) * (this.stacks + 1) + j + 1);
+      this.indices.push(i * (this.stacks + 1) + j);
+      this.indices.push((i + 1) * (this.stacks + 1) + j);
+      
+      this.indices.push(i * (this.stacks + 1) + j + 1);
+      this.indices.push(i * (this.stacks + 1) + j);
+      this.indices.push((i + 1) * (this.stacks + 1) + j + 1);
+      
+    }
+  }
+
 
   this.primitiveType = this.scene.gl.TRIANGLES;
   this.initGLBuffers();
