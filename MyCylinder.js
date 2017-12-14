@@ -9,9 +9,6 @@ function MyCylinder(graph, height, bottomRadius, topRadius, stacks, slices, topC
   this.topCap = topCap == 1 ? true : false;
   this.bottomCap = bottomCap == 1 ? true : false;
 
-  this.topCap = true;
-  this.bottomCap = true;
-
   this.angleDiff = 2 * Math.PI / this.slices;
 
   this.initBuffers();
@@ -38,9 +35,9 @@ MyCylinder.prototype.initBuffers = function() {
       this.vertices.push(y * r);
       this.vertices.push(this.height / this.stacks * j);
 
-      this.normals.push(x * r);
-      this.normals.push(y * r);
-      this.normals.push(radDif * r / this.height);
+      this.normals.push(x * r *this.height);
+      this.normals.push(y * r * this.height);
+      this.normals.push(radDif * r);
 
       this.texCoords.push(1 / this.slices * i, -1 / this.stacks * j);
     }

@@ -150,8 +150,28 @@
             <MATERIAL id="defaultMaterial" />
             <TEXTURE id="null" />
             <DESCENDANTS>
-                <LEAF id="cylinder1" type="torus" args="4 4 8 20 20" />
+                <NODEREF id="holedPiece" />
             </DESCENDANTS>
         </NODE>
+
+        <NODE id="holedPiece">
+            <MATERIAL id="null" />
+            <TEXTURE id="null" />
+            <DESCENDANTS>
+                <LEAF type="torus" args="4 4 8 20 20" />
+                <LEAF type="cylinder" args="0 4 8 1 20 0 0" />
+                <NODEREF id="holedPieceCap" />
+            </DESCENDANTS>
+        </NODE>
+
+        <NODE id="holedPieceCap">
+            <MATERIAL id="null" />
+            <TEXTURE id="null" />
+            <TRANSLATION x="0" y="0" z="4" />
+            <DESCENDANTS>
+                <LEAF type="cylinder" args="0 8 4 1 20 0 0" />
+            </DESCENDANTS>
+        </NODE>        
+
     </NODES>
 </SCENE>
