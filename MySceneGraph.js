@@ -1533,7 +1533,7 @@ MySceneGraph.prototype.parseNodes = function (nodesNode) {
           }
         } else
         if (descendants[j].nodeName == "LEAF") {
-          var type = this.reader.getItem(descendants[j], 'type', ['rectangle', 'cylinder', 'sphere', 'triangle', 'patch', 'toro']);
+          var type = this.reader.getItem(descendants[j], 'type', ['rectangle', 'cylinder', 'sphere', 'triangle', 'patch', 'torus']);
 
           if (type != null)
             this.log("   Leaf: " + type);
@@ -1545,8 +1545,8 @@ MySceneGraph.prototype.parseNodes = function (nodesNode) {
           var argarr = args.split(" ");
 
           switch (type) {
-          case 'toro':
-            this.nodes[nodeID].addLeaf(new MyToro(this, parseFloat(argarr[0]), parseFloat(argarr[1]), parseFloat(argarr[2]), parseInt(argarr[3]), parseInt(argarr[4])));
+          case 'torus':
+            this.nodes[nodeID].addLeaf(new MyTorus(this, parseFloat(argarr[0]), parseFloat(argarr[1]), parseFloat(argarr[2]), parseInt(argarr[3]), parseInt(argarr[4])));
             break;
           case 'rectangle':
             this.nodes[nodeID].addLeaf(new MyRectangle(this, parseFloat(argarr[0]), parseFloat(argarr[1]), parseFloat(argarr[2]), parseFloat(argarr[3])));
