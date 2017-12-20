@@ -150,7 +150,7 @@
             <MATERIAL id="defaultMaterial" />
             <TEXTURE id="null" />
             <DESCENDANTS>
-                <LEAF id="cylinder1" type="toro" args="4 4 8 20 20" />
+                <LEAF id="cylinder1" type="torus" args="4 4 8 20 20" />
             </DESCENDANTS>
         </NODE>
     </NODES>
