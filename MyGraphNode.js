@@ -83,6 +83,8 @@ MyGraphNode.prototype.display = function (materialID, textureID = null) {
     if (newTexture != null) {
       this.leaves[i].updateTexScaling(this.graph.textures[newTexture][1], this.graph.textures[newTexture][2]);
     }
+    this.graph.scene.registerForPick(this.graph.pickingId, this);
+    this.graph.pickingId += 1;
     this.leaves[i].display();
   }
 

@@ -46,7 +46,7 @@ function MySceneGraph(filename, scene) {
 		new CGFshader(this.scene.gl, "shaders/MyShader.vert", "shaders/MyShader.frag")
   ];
   
-  
+  this.pickingId = 1;
 }
 
 /*
@@ -1688,6 +1688,8 @@ MySceneGraph.prototype.displayScene = function () {
 }
 
 MySceneGraph.prototype.update = function (currTime) {
+
+  this.pickingId = 1;
   this.shadersFactor = (Math.cos(currTime/400) + 1) / 2;
 
   this.testShaders[0].setUniformsValues({normScale: this.shadersFactor, colourScale: this.shadersFactor});
