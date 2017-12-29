@@ -16,8 +16,10 @@ MyGame.prototype.play = function(x, y, piece) {
 }
 
 MyGame.prototype.toString = function() {
+  var returnString = "";
   for(let i = 0; i < this.board.length; i++) {
       for(let j = 0; j < this.board.length; j++) {
+        console.log(this.board.length);
         let type;
         if(this.board[i][j] % 10 == 1) {
           type = "p";
@@ -25,7 +27,7 @@ MyGame.prototype.toString = function() {
           type = "h";
         } else {
           returnString += "empty,";
-          break;
+          continue;
         }
         returnString += "n";
         returnString += this.board[i][j] / 10;
@@ -33,35 +35,53 @@ MyGame.prototype.toString = function() {
         returnString += ",";
       }
   }
-  returnString += stockHoledPieces;
+  returnString += this.stockHoledPieces;
   returnString += ",";
-  returnString += stockPlainPieces;
+  returnString += this.stockPlainPieces;
   returnString += ",";
-  returnString += stockDualPieces;
+  returnString += this.stockDualPieces;
   returnString += ",";
 
   return returnString;
 }
 
-function getPrologRequest(requestString, onSuccess, onError, port) {
+function getPrologRequest(requestString, onSuccess, onError, port, response) {
 		var requestPort = port || 8081;
 		var request = new XMLHttpRequest();
 		request.open('GET', 'http://localhost:'+requestPort+'/'+requestString, true);
 
-		request.onload = onSuccess || function(data){console.log("Request successful. Reply: " + data.target.response);};
+		request.onload = onSuccess || function(data){console.log("Request successful. Reply: " + data.target.response); response = data.target.response};
 		request.onerror = onError || function(){console.log("Error waiting for response");};
 
-		request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
-		request.send();
+    request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+    request.send();
 }
 
 MyGame.prototype.AIplay = function() {
   var sendString = "[b,";
   sendString += this.toString();
-  sendString += difficulty;
+  sendString += this.difficulty;
   sendString += "]";
 
-  getPrologRequest(sendString, "", "", 8081);
-  return data.target.response;
+  var response;
+  getPrologRequest(sendString, "", "", 8081, response);
+ 
+  return response;
 
+}
+
+MyGame.prototype.PersonPlay = function(x, y, piece) {
+  var sendString = "[p,";
+  sendString += this.toString();
+  sendString += x;
+  sendString += ",";
+  sendString += y;
+  sendString += ",";
+  sendString += piece;
+  sendString += "]";
+
+  var response;
+  getPrologRequest(sendString, "", "", 8081, response);
+ 
+  return response;
 }

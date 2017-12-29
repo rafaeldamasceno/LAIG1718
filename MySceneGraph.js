@@ -32,6 +32,8 @@ function MySceneGraph(filename, scene) {
   // File reading
   this.reader = new CGFXMLreader();
 
+  this.game = new MyGame(this, 1);
+
   /*
    * Read the contents of the xml file, and refer to this class for loading and error handlers.
    * After the file is read, the reader calls onXMLReady on this object.
@@ -1695,4 +1697,6 @@ MySceneGraph.prototype.update = function (currTime) {
   this.testShaders[0].setUniformsValues({normScale: this.shadersFactor, colourScale: this.shadersFactor});
   
   this.nodes[this.idRoot].update(currTime);
+
+  this.game.PersonPlay(1,1,"n1h");
 }
