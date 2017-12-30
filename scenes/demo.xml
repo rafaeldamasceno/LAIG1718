@@ -393,9 +393,9 @@
          <NODE id="menu">
             <MATERIAL id="null" />
             <TEXTURE id="null" />
-            <TRANSLATION x="45" y="45" z="45" />
+            <TRANSLATION x="0" y="20" z="0" />
             <ROTATION axis="y" angle="-45" />
-            <ROTATION axis="z" angle="30" />
+            <ROTATION axis="z" angle="90" />
              
             <DESCENDANTS>
                 <NODEREF id="buttonAIDiff0" />
