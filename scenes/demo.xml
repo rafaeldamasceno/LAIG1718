@@ -52,6 +52,51 @@
             <file path="images/trunk-image.jpg" />
             <amplif_factor s="2" t="2" />
         </TEXTURE>
+
+        <TEXTURE id="pvpButton">
+            <file path="images/pvp.png" />
+            <amplif_factor s="2" t="1" />
+        </TEXTURE>
+
+        <TEXTURE id="pveButton">
+            <file path="images/pve.png" />
+            <amplif_factor s="2" t="1" />
+        </TEXTURE>
+
+        <TEXTURE id="eveButton">
+            <file path="images/eve.png" />
+            <amplif_factor s="2" t="1" />
+        </TEXTURE>
+
+        <TEXTURE id="menuPanel">
+            <file path="images/menuPanel.png" />
+            <amplif_factor s="20" t="20" />
+        </TEXTURE>
+
+        <TEXTURE id="dif0">
+            <file path="images/dif0.png" />
+            <amplif_factor s="20" t="20" />
+        </TEXTURE>
+
+        <TEXTURE id="dif1">
+            <file path="images/dif1.png" />
+            <amplif_factor s="20" t="20" />
+        </TEXTURE>
+
+        <TEXTURE id="dif2">
+            <file path="images/dif2.png" />
+            <amplif_factor s="20" t="20" />
+        </TEXTURE>
+
+        <TEXTURE id="dif3">
+            <file path="images/dif3.png" />
+            <amplif_factor s="20" t="20" />
+        </TEXTURE>
+
+        <TEXTURE id="playButton">
+            <file path="images/playButton.png" />
+            <amplif_factor s="20" t="20" />
+        </TEXTURE>
     </TEXTURES>
     <MATERIALS>
         <!-- A default material -->
@@ -108,7 +153,7 @@
     </ANIMATIONS>
     <!-- The nodes -->
     <NODES>
-        <ROOT id="root" />
+        <ROOT id="menu" />
         <!-- The root node -->
         <NODE id="root">
             <MATERIAL id="defaultMaterial" />
@@ -345,5 +390,118 @@
             </DESCENDANTS>
         </NODE>                                
 
+         <NODE id="menu">
+            <MATERIAL id="null" />
+            <TEXTURE id="null" />
+            <TRANSLATION x="45" y="45" z="45" />
+            <ROTATION axis="y" angle="-45" />
+            <ROTATION axis="z" angle="30" />
+             
+            <DESCENDANTS>
+                <NODEREF id="buttonAIDiff0" />
+                <NODEREF id="buttonAIDiff1" />
+                <NODEREF id="buttonAIDiff2" />
+                <NODEREF id="buttonAIDiff3" />
+                <NODEREF id="buttonGameType0" />
+                <NODEREF id="buttonGameType1" />
+                <NODEREF id="buttonGameType2" />
+                <NODEREF id="buttonStartGame" />
+                <NODEREF id="menuPanel" />
+            </DESCENDANTS>
+        </NODE>     
+
+        <NODE id="buttonAIDiff0">
+            <MATERIAL id="null" />
+            <TEXTURE id="dif0" />
+            <TRANSLATION x="0" y="-3" z="5.5" />
+            <DESCENDANTS>
+              <NODEREF id="button" />
+            </DESCENDANTS>
+        </NODE>     
+
+        <NODE id="buttonAIDiff1">
+            <MATERIAL id="null" />
+            <TEXTURE id="dif1" />
+            <TRANSLATION x="0" y="-3" z="2.5" />
+            <DESCENDANTS>
+               <NODEREF id="button" />
+            </DESCENDANTS>
+        </NODE>     
+
+        <NODE id="buttonAIDiff2">
+            <MATERIAL id="null" />
+            <TEXTURE id="dif2" />
+            <TRANSLATION x="0" y="-3" z="-0.5" />
+            <DESCENDANTS>
+              <NODEREF id="button" />
+            </DESCENDANTS>
+        </NODE>     
+
+        <NODE id="buttonAIDiff3">
+            <MATERIAL id="null" />
+            <TEXTURE id="dif3" />
+            <TRANSLATION x="0" y="-3" z="-3.5" />
+            <DESCENDANTS>
+              <NODEREF id="button" />
+            </DESCENDANTS>
+        </NODE>     
+
+        <NODE id="buttonGameType0">
+            <MATERIAL id="null" />
+            <TEXTURE id="pvpButton" />
+            <TRANSLATION x="0" y="2" z="4" />
+            <DESCENDANTS>
+              <NODEREF id="button" />
+            </DESCENDANTS>
+        </NODE>     
+
+        <NODE id="buttonGameType1">
+            <MATERIAL id="null" />
+            <TEXTURE id="pveButton" />
+            <TRANSLATION x="0" y="2" z="1" />
+            <DESCENDANTS>
+              <NODEREF id="button" />
+            </DESCENDANTS>
+        </NODE>     
+
+        <NODE id="buttonGameType2">
+            <MATERIAL id="null" />
+            <TEXTURE id="eveButton" />
+            <TRANSLATION x="0" y="2" z="-2" />
+            <DESCENDANTS>
+              <NODEREF id="button" />
+            </DESCENDANTS>
+        </NODE>     
+
+        <NODE id="buttonStartGame">
+            <MATERIAL id="null" />
+            <TEXTURE id="playButton" />
+            <TRANSLATION x="0" y="-7" z="1" />
+            <DESCENDANTS>
+              <NODEREF id="button" />
+            </DESCENDANTS>
+        </NODE>
+
+        <NODE id="button">
+            <MATERIAL id="null" />
+            <TEXTURE id="null" />
+            <ROTATION axis="y" angle="180" />
+            <ROTATION axis="x" angle="-90" />
+            <DESCENDANTS>
+                <LEAF type="sphere" args="1 10 10" />
+            </DESCENDANTS>
+        </NODE>
+
+        <NODE id="menuPanel">
+            <MATERIAL id="null" />
+            <TEXTURE id="menuPanel" />
+            <ROTATION axis="y" angle="90" />
+            <DESCENDANTS>
+                <LEAF type="rectangle" args="-10 10 10 -10" />
+            </DESCENDANTS>
+        </NODE>
+            
     </NODES>
+
+    
 </SCENE>
