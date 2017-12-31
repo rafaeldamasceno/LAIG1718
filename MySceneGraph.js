@@ -1360,13 +1360,17 @@ MySceneGraph.prototype.parseNodes = function (nodesNode) {
 
       this.log("Processing node " + nodeID);
 
-    var selectable = this.reader.getBoolean(children[i], 'selectable', 0);
-    if (selectable) {
-      this.selectables.push(nodeID);
-    }
+      var selectable = this.reader.getBoolean(children[i], 'selectable', 0);
+      if (selectable) {
+        this.selectables.push(nodeID);
+      }
 
+      var pickingID = this.reader.getFloat(children[i], 'pickingID');
+      if (pickingID != null) {
+        pickingID = -1;
+      }
       // Creates node.
-      this.nodes[nodeID] = new MyGraphNode(this, nodeID);
+      this.nodes[nodeID] = new MyGraphNode(this, nodeID, parseInt(pickingID));
 
       // Gathers child nodes.
       var nodeSpecs = children[i].children;
@@ -1618,6 +1622,11 @@ MySceneGraph.prototype.parseNodes = function (nodesNode) {
       this.onXMLMinorError("unknown tag name <" + nodeName);
   }
   this.scene.interface.addSelectables(this.selectables);
+
+  for(var i in this.nodes) {
+    //console.log("here");
+    this.nodes[i].updateChildPickingIds();
+  }
   console.log("Parsed nodes");
   return null;
 
@@ -1698,5 +1707,5 @@ MySceneGraph.prototype.update = function (currTime) {
   
   this.nodes[this.idRoot].update(currTime);
 
-  this.game.PersonPlay(1,1,"n1h");
+  //this.game.PersonPlay(1,1,"n1h");
 }

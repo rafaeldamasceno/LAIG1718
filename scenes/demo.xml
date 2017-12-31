@@ -410,7 +410,7 @@
             </DESCENDANTS>
         </NODE>     
 
-        <NODE id="buttonAIDiff0">
+        <NODE id="buttonAIDiff0" pickingID="21">
             <MATERIAL id="null" />
             <TEXTURE id="dif0" />
             <TRANSLATION x="0" y="-3" z="5.5" />
@@ -419,7 +419,7 @@
             </DESCENDANTS>
         </NODE>     
 
-        <NODE id="buttonAIDiff1">
+        <NODE id="buttonAIDiff1" pickingID="22">
             <MATERIAL id="null" />
             <TEXTURE id="dif1" />
             <TRANSLATION x="0" y="-3" z="2.5" />
@@ -428,7 +428,7 @@
             </DESCENDANTS>
         </NODE>     
 
-        <NODE id="buttonAIDiff2">
+        <NODE id="buttonAIDiff2" pickingID="23">
             <MATERIAL id="null" />
             <TEXTURE id="dif2" />
             <TRANSLATION x="0" y="-3" z="-0.5" />
@@ -437,7 +437,7 @@
             </DESCENDANTS>
         </NODE>     
 
-        <NODE id="buttonAIDiff3">
+        <NODE id="buttonAIDiff3" pickingID="24">
             <MATERIAL id="null" />
             <TEXTURE id="dif3" />
             <TRANSLATION x="0" y="-3" z="-3.5" />
@@ -446,7 +446,7 @@
             </DESCENDANTS>
         </NODE>     
 
-        <NODE id="buttonGameType0">
+        <NODE id="buttonGameType0" pickingID="11">
             <MATERIAL id="null" />
             <TEXTURE id="pvpButton" />
             <TRANSLATION x="0" y="2" z="4" />
@@ -455,7 +455,7 @@
             </DESCENDANTS>
         </NODE>     
 
-        <NODE id="buttonGameType1">
+        <NODE id="buttonGameType1" pickingID="12">
             <MATERIAL id="null" />
             <TEXTURE id="pveButton" />
             <TRANSLATION x="0" y="2" z="1" />
@@ -464,7 +464,7 @@
             </DESCENDANTS>
         </NODE>     
 
-        <NODE id="buttonGameType2">
+        <NODE id="buttonGameType2" pickingID="13">
             <MATERIAL id="null" />
             <TEXTURE id="eveButton" />
             <TRANSLATION x="0" y="2" z="-2" />
@@ -473,7 +473,7 @@
             </DESCENDANTS>
         </NODE>     
 
-        <NODE id="buttonStartGame">
+        <NODE id="buttonStartGame" pickingID="1">
             <MATERIAL id="null" />
             <TEXTURE id="playButton" />
             <TRANSLATION x="0" y="-7" z="1" />

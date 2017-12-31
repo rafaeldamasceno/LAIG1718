@@ -2,10 +2,13 @@
  * MyGraphNode class, representing an intermediate node in the scene graph.
  * @constructor
  **/
-function MyGraphNode(graph, nodeID) {
+function MyGraphNode(graph, nodeID, pickingID) {
   this.graph = graph;
 
   this.nodeID = nodeID;
+
+  this.pickingID = pickingID;
+
 
   // IDs of child nodes.
   this.children = [];
@@ -40,6 +43,19 @@ function MyGraphNode(graph, nodeID) {
  */
 MyGraphNode.prototype.addChild = function (nodeID) {
   this.children.push(nodeID);
+}
+
+MyGraphNode.prototype.updateChildPickingIds = function() {
+  
+  if (this.pickingID == -1) {
+    return;
+  }
+  for(var i = 0; i < this.children.length; i++) {
+    console.log(this.pickingID);
+    if (this.graph.nodes[this.children[i]].pickingID == -1) {
+      this.graph.nodes[this.children[i]].pickingID = this.pickingID;
+    }
+  }
 }
 
 /**
@@ -83,8 +99,7 @@ MyGraphNode.prototype.display = function (materialID, textureID = null) {
     if (newTexture != null) {
       this.leaves[i].updateTexScaling(this.graph.textures[newTexture][1], this.graph.textures[newTexture][2]);
     }
-    this.graph.scene.registerForPick(this.graph.pickingId, this);
-    this.graph.pickingId += 1;
+    this.graph.scene.registerForPick(this.pickingID, this);
     this.leaves[i].display();
   }
 
