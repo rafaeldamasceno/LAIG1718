@@ -109,17 +109,37 @@ XMLscene.prototype.logPicking = function ()
 {
 	if (this.pickMode == false) {
 		if (this.pickResults != null && this.pickResults.length > 0) {
-			for (var i=0; i< this.pickResults.length; i++) {
-				var obj = this.pickResults[i][0];
+				var obj = this.pickResults[0][0];
 				if (obj)
 				{
-					var customId = this.pickResults[i][1];				
-					console.log("Picked object: " + obj + ", with pick id " + customId);
+          var customId = this.pickResults[0][1];				
+          this.pickingHandle(customId, obj);
 				}
 			}
 			this.pickResults.splice(0,this.pickResults.length);
 		}		
 	}
+
+XMLscene.prototype.pickingHandle = function(ID, object) {
+    if(ID == 1) {
+      this.graph.idRoot = "root";
+      return;
+    }
+    if(10 < ID && ID < 20) {
+      let currentID = 10 + this.graph.game.gamemode;
+      //console.log(this.graph.nodes[this.graph.pickingIdToId[currentID]]);
+      this.graph.nodes[this.graph.pickingIdToId[currentID]].shaderFlag = false;
+      this.graph.game.gamemode = ID % 10;
+      object.shaderFlag = true;
+      return;
+    }
+    if(20 < ID && ID < 30) {
+      let currentID = 20 + this.graph.game.difficulty;
+      this.graph.nodes[this.graph.pickingIdToId[currentID]].shaderFlag = false;
+      this.graph.game.difficulty = ID % 10;
+      object.shaderFlag = true;
+      return;
+    }
 }
 XMLscene.prototype.display = function () {
   this.logPicking();

@@ -1,4 +1,4 @@
-function MyGame(graph, difficulty) { //1 - plain  2 - holed
+function MyGame(graph) { //1 - plain  2 - holed
     this.graph = graph;
 
     this.board = [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]];
@@ -6,7 +6,8 @@ function MyGame(graph, difficulty) { //1 - plain  2 - holed
     this.stockPlainPieces = 8;
     this.stockDualPieces = 8;
 
-    this.difficulty = difficulty;
+    this.difficulty = 1;
+    this.gamemode = 1; //1 - pvp, 2 - pve, 3 - eve
 
 
 }
@@ -60,7 +61,7 @@ function getPrologRequest(requestString, onSuccess, onError, port, response) {
 MyGame.prototype.AIplay = function() {
   var sendString = "[b,";
   sendString += this.toString();
-  sendString += this.difficulty;
+  sendString += this.difficulty - 1;
   sendString += "]";
 
   var response;

@@ -22,6 +22,8 @@ function MySceneGraph(filename, scene) {
 
   this.nodes = [];
 
+  this.pickingIdToId = [];
+
   this.idRoot = null; // The id of the root element.
 
   this.axisCoords = [];
@@ -32,7 +34,7 @@ function MySceneGraph(filename, scene) {
   // File reading
   this.reader = new CGFXMLreader();
 
-  this.game = new MyGame(this, 1);
+  this.game = new MyGame(this);
 
   /*
    * Read the contents of the xml file, and refer to this class for loading and error handlers.
@@ -1365,9 +1367,11 @@ MySceneGraph.prototype.parseNodes = function (nodesNode) {
         this.selectables.push(nodeID);
       }
 
-      var pickingID = this.reader.getFloat(children[i], 'pickingID');
-      if (pickingID != null) {
+      var pickingID = this.reader.getFloat(children[i], 'pickingID', 0);
+      if (pickingID == null) {
         pickingID = -1;
+      } else {
+        this.pickingIdToId[pickingID] = nodeID;
       }
       // Creates node.
       this.nodes[nodeID] = new MyGraphNode(this, nodeID, parseInt(pickingID));
@@ -1623,10 +1627,10 @@ MySceneGraph.prototype.parseNodes = function (nodesNode) {
   }
   this.scene.interface.addSelectables(this.selectables);
 
-  for(var i in this.nodes) {
+  /* for(var i in this.nodes) {
     //console.log("here");
     this.nodes[i].updateChildPickingIds();
-  }
+  } */
   console.log("Parsed nodes");
   return null;
 

@@ -9,6 +9,8 @@ function MyGraphNode(graph, nodeID, pickingID) {
 
   this.pickingID = pickingID;
 
+  this.shaderFlag = false;
+
 
   // IDs of child nodes.
   this.children = [];
@@ -45,7 +47,7 @@ MyGraphNode.prototype.addChild = function (nodeID) {
   this.children.push(nodeID);
 }
 
-MyGraphNode.prototype.updateChildPickingIds = function() {
+/* MyGraphNode.prototype.updateChildPickingIds = function() {
   
   if (this.pickingID == -1) {
     return;
@@ -56,7 +58,7 @@ MyGraphNode.prototype.updateChildPickingIds = function() {
       this.graph.nodes[this.children[i]].pickingID = this.pickingID;
     }
   }
-}
+} */
 
 /**
  * Adds a leaf to this node's leaves array.
@@ -91,7 +93,7 @@ MyGraphNode.prototype.display = function (materialID, textureID = null) {
     this.graph.textures[newTexture][0].bind();
   }
   //ciclo de leafs
-  if(this.graph.scene.selectedObject == this.nodeID) {
+  if(this.shaderFlag) {
     this.graph.scene.setActiveShader(this.graph.testShaders[0]);
   }
   
@@ -99,9 +101,12 @@ MyGraphNode.prototype.display = function (materialID, textureID = null) {
     if (newTexture != null) {
       this.leaves[i].updateTexScaling(this.graph.textures[newTexture][1], this.graph.textures[newTexture][2]);
     }
-    this.graph.scene.registerForPick(this.pickingID, this);
     this.leaves[i].display();
   }
+  if(this.pickingID != -1) {
+    this.graph.scene.registerForPick(this.pickingID, this);
+  }
+  
 
   if (newTexture != null) {
     this.graph.textures[newTexture][0].unbind();
@@ -112,7 +117,7 @@ MyGraphNode.prototype.display = function (materialID, textureID = null) {
   }
  
   this.graph.scene.popMatrix();
-  if(this.graph.scene.selectedObject == this.nodeID) {
+  if(this.shaderFlag) {
     this.graph.scene.setActiveShader(this.graph.scene.defaultShader);
   }
 }
