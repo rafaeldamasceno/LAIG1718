@@ -10,7 +10,7 @@ function MyGraphNode(graph, nodeID, pickingID) {
   this.pickingID = pickingID;
 
   this.shaderFlag = false;
-
+  this.played = false;
 
   // IDs of child nodes.
   this.children = [];
@@ -86,6 +86,24 @@ MyGraphNode.prototype.display = function (materialID, textureID = null) {
   if(this.animationMatrix != null) {
     this.graph.scene.multMatrix(this.animationMatrix);
     // console.log("applying animation");
+  }
+
+  // Add position to pieces
+  if(this.pickingID > 30 && this.pickingID < 60 && !this.played) {
+    let transMatrix = mat4.create();
+    mat4.identity(transMatrix);
+    //mat4.translate(transMatrix, transMatrix, coords);
+    
+    if(this.pickingID > 30 && this.pickingID < 40) {
+      mat4.translate(transMatrix, transMatrix, this.graph.plainPiecesPosition[(this.pickingID % 10) - 1]);
+    }
+    if(this.pickingID > 40 && this.pickingID < 50) {
+      mat4.translate(transMatrix, transMatrix, this.graph.holedPiecesPosition[(this.pickingID % 10) - 1]);
+    }
+    if(this.pickingID > 50 && this.pickingID < 60) {
+      mat4.translate(transMatrix, transMatrix, this.graph.dualPiecesPosition[(this.pickingID % 10) - 1]);
+    }
+    this.graph.scene.multMatrix(transMatrix);
   }
 
   this.graph.materials[newMaterial].apply();

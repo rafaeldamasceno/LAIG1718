@@ -160,10 +160,210 @@
             <TEXTURE id="null" />
             <!-- <TRANSLATION x="5" y="1" z="5" /> -->
             <DESCENDANTS>
-                <NODEREF id="board" />
+               <NODEREF id="board" />
+               <NODEREF id="plainPiece1" />
+               <NODEREF id="plainPiece2" />
+               <NODEREF id="plainPiece3" />
+               <NODEREF id="plainPiece4" />
+               <NODEREF id="plainPiece5" />
+               <NODEREF id="plainPiece6" />
+               <NODEREF id="plainPiece7" />
+               <NODEREF id="plainPiece8" />
+               <NODEREF id="holedPiece1" />
+               <NODEREF id="holedPiece2" />
+               <NODEREF id="holedPiece3" />
+               <NODEREF id="holedPiece4" />
+               <NODEREF id="holedPiece5" />
+               <NODEREF id="holedPiece6" />
+               <NODEREF id="holedPiece7" />
+               <NODEREF id="holedPiece8" />
+               <NODEREF id="dualPiece1" />
+               <NODEREF id="dualPiece2" />
+               <NODEREF id="dualPiece3" />
+               <NODEREF id="dualPiece4" />
+               <NODEREF id="dualPiece5" />
+               <NODEREF id="dualPiece6" />
+               <NODEREF id="dualPiece7" />
+               <NODEREF id="dualPiece8" />
             </DESCENDANTS>
         </NODE>
 
+        <!-- Plain Pieces -->
+
+        <NODE id="plainPiece1" pickingID="31">
+            <MATERIAL id="null" />
+            <TEXTURE id="null" />
+            <DESCENDANTS>
+               <NODEREF id="plainPiece" />
+            </DESCENDANTS>
+        </NODE>
+        <NODE id="plainPiece2" pickingID="32">
+            <MATERIAL id="null" />
+            <TEXTURE id="null" />
+            <DESCENDANTS>
+               <NODEREF id="plainPiece" />
+            </DESCENDANTS>
+        </NODE>
+        <NODE id="plainPiece3" pickingID="33">
+            <MATERIAL id="null" />
+            <TEXTURE id="null" />
+            <DESCENDANTS>
+               <NODEREF id="plainPiece" />
+            </DESCENDANTS>
+        </NODE>
+        <NODE id="plainPiece4" pickingID="34">
+            <MATERIAL id="null" />
+            <TEXTURE id="null" />
+            <DESCENDANTS>
+               <NODEREF id="plainPiece" />
+            </DESCENDANTS>
+        </NODE>
+        <NODE id="plainPiece5" pickingID="35">
+            <MATERIAL id="null" />
+            <TEXTURE id="null" />
+            <DESCENDANTS>
+               <NODEREF id="plainPiece" />
+            </DESCENDANTS>
+        </NODE>
+        <NODE id="plainPiece6" pickingID="36">
+            <MATERIAL id="null" />
+            <TEXTURE id="null" />
+            <DESCENDANTS>
+               <NODEREF id="plainPiece" />
+            </DESCENDANTS>
+        </NODE>
+        <NODE id="plainPiece7" pickingID="37">
+            <MATERIAL id="null" />
+            <TEXTURE id="null" />
+            <DESCENDANTS>
+               <NODEREF id="plainPiece" />
+            </DESCENDANTS>
+        </NODE>
+        <NODE id="plainPiece8" pickingID="38">
+            <MATERIAL id="null" />
+            <TEXTURE id="null" />
+            <DESCENDANTS>
+               <NODEREF id="plainPiece" />
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- Holed Pieces -->
+
+        <NODE id="holedPiece1" pickingID="41">
+            <MATERIAL id="null" />
+            <TEXTURE id="null" />
+            <DESCENDANTS>
+               <NODEREF id="holedPiece" />
+            </DESCENDANTS>
+        </NODE>
+        <NODE id="holedPiece2" pickingID="42">
+            <MATERIAL id="null" />
+            <TEXTURE id="null" />
+            <DESCENDANTS>
+               <NODEREF id="holedPiece" />
+            </DESCENDANTS>
+        </NODE>
+        <NODE id="holedPiece3" pickingID="43">
+            <MATERIAL id="null" />
+            <TEXTURE id="null" />
+            <DESCENDANTS>
+               <NODEREF id="holedPiece" />
+            </DESCENDANTS>
+        </NODE>
+        <NODE id="holedPiece4" pickingID="44">
+            <MATERIAL id="null" />
+            <TEXTURE id="null" />
+            <DESCENDANTS>
+               <NODEREF id="holedPiece" />
+            </DESCENDANTS>
+        </NODE>
+        <NODE id="holedPiece5" pickingID="45">
+            <MATERIAL id="null" />
+            <TEXTURE id="null" />
+            <DESCENDANTS>
+               <NODEREF id="holedPiece" />
+            </DESCENDANTS>
+        </NODE>
+        <NODE id="holedPiece6" pickingID="46">
+            <MATERIAL id="null" />
+            <TEXTURE id="null" />
+            <DESCENDANTS>
+               <NODEREF id="holedPiece" />
+            </DESCENDANTS>
+        </NODE>
+        <NODE id="holedPiece7" pickingID="47">
+            <MATERIAL id="null" />
+            <TEXTURE id="null" />
+            <DESCENDANTS>
+               <NODEREF id="holedPiece" />
+            </DESCENDANTS>
+        </NODE>
+        <NODE id="holedPiece8" pickingID="48">
+            <MATERIAL id="null" />
+            <TEXTURE id="null" />
+            <DESCENDANTS>
+               <NODEREF id="holedPiece" />
+            </DESCENDANTS>
+        </NODE>
+
+        <!-- Dual Pieces -->
+
+        <NODE id="dualPiece1" pickingID="51">
+            <MATERIAL id="null" />
+            <TEXTURE id="null" />
+            <DESCENDANTS>
+               <NODEREF id="dualPiece" />
+            </DESCENDANTS>
+        </NODE>
+        <NODE id="dualPiece2" pickingID="52">
+            <MATERIAL id="null" />
+            <TEXTURE id="null" />
+            <DESCENDANTS>
+               <NODEREF id="dualPiece" />
+            </DESCENDANTS>
+        </NODE>
+        <NODE id="dualPiece3" pickingID="53">
+            <MATERIAL id="null" />
+            <TEXTURE id="null" />
+            <DESCENDANTS>
+               <NODEREF id="dualPiece" />
+            </DESCENDANTS>
+        </NODE>
+        <NODE id="dualPiece4" pickingID="54">
+            <MATERIAL id="null" />
+            <TEXTURE id="null" />
+            <DESCENDANTS>
+               <NODEREF id="dualPiece" />
+            </DESCENDANTS>
+        </NODE>
+        <NODE id="dualPiece5" pickingID="55">
+            <MATERIAL id="null" />
+            <TEXTURE id="null" />
+            <DESCENDANTS>
+               <NODEREF id="dualPiece" />
+            </DESCENDANTS>
+        </NODE>
+        <NODE id="dualPiece6" pickingID="56">
+            <MATERIAL id="null" />
+            <TEXTURE id="null" />
+            <DESCENDANTS>
+               <NODEREF id="dualPiece" />
+            </DESCENDANTS>
+        </NODE>
+        <NODE id="dualPiece7" pickingID="57">
+            <MATERIAL id="null" />
+            <TEXTURE id="null" />
+            <DESCENDANTS>
+               <NODEREF id="dualPiece" />
+            </DESCENDANTS>
+        </NODE>
+        <NODE id="dualPiece8" pickingID="58">
+            <MATERIAL id="null" />
+            <TEXTURE id="null" />
+            <DESCENDANTS>
+               <NODEREF id="dualPiece" />
+            </DESCENDANTS>
+        </NODE>
 
         <!-- Plain piece -->
 
@@ -296,6 +496,7 @@
         <NODE id="board">
             <MATERIAL id="oak" />
             <TEXTURE id="null" />
+            <TRANSLATION x="-7.5" y="0" z="-7.5"/>
             <DESCENDANTS>
                 <NODEREF id="boardBottom" />
                 <NODEREF id="bars" />
@@ -388,7 +589,10 @@
             <DESCENDANTS>
                 <NODEREF id="cube" />
             </DESCENDANTS>
-        </NODE>                                
+        </NODE>       
+
+
+        <!-- MENU -->                         
 
          <NODE id="menu">
             <MATERIAL id="null" />
