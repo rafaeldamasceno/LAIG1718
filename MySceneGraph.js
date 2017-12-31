@@ -1401,9 +1401,7 @@ MySceneGraph.prototype.parseNodes = function (nodesNode) {
       }
 
       var pickingID = this.reader.getFloat(children[i], 'pickingID', 0);
-      if (pickingID == null) {
-        pickingID = -1;
-      } else {
+      if (pickingID) {
         this.pickingIdToId[pickingID] = nodeID;
       }
       // Creates node.

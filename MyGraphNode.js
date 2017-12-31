@@ -83,24 +83,24 @@ MyGraphNode.prototype.display = function (materialID, textureID = null) {
 
   this.graph.scene.pushMatrix();
   this.graph.scene.multMatrix(this.transformMatrix);
-  if(this.animationMatrix != null) {
+  if (this.animationMatrix) {
     this.graph.scene.multMatrix(this.animationMatrix);
     // console.log("applying animation");
   }
 
   // Add position to pieces
-  if(this.pickingID > 30 && this.pickingID < 60 && !this.played) {
+  if (this.pickingID > 30 && this.pickingID < 60 && !this.played) {
     let transMatrix = mat4.create();
     mat4.identity(transMatrix);
     //mat4.translate(transMatrix, transMatrix, coords);
-    
-    if(this.pickingID > 30 && this.pickingID < 40) {
+
+    if (this.pickingID > 30 && this.pickingID < 40) {
       mat4.translate(transMatrix, transMatrix, this.graph.plainPiecesPosition[(this.pickingID % 10) - 1]);
     }
-    if(this.pickingID > 40 && this.pickingID < 50) {
+    if (this.pickingID > 40 && this.pickingID < 50) {
       mat4.translate(transMatrix, transMatrix, this.graph.holedPiecesPosition[(this.pickingID % 10) - 1]);
     }
-    if(this.pickingID > 50 && this.pickingID < 60) {
+    if (this.pickingID > 50 && this.pickingID < 60) {
       mat4.translate(transMatrix, transMatrix, this.graph.dualPiecesPosition[(this.pickingID % 10) - 1]);
     }
     this.graph.scene.multMatrix(transMatrix);
@@ -111,20 +111,20 @@ MyGraphNode.prototype.display = function (materialID, textureID = null) {
     this.graph.textures[newTexture][0].bind();
   }
   //ciclo de leafs
-  if(this.shaderFlag) {
+  if (this.shaderFlag) {
     this.graph.scene.setActiveShader(this.graph.testShaders[0]);
   }
-  
+
+  if (this.pickingID) {
+    this.graph.scene.registerForPick(this.pickingID, this);
+  }
+
   for (var i = 0; i < this.leaves.length; i++) {
     if (newTexture != null) {
       this.leaves[i].updateTexScaling(this.graph.textures[newTexture][1], this.graph.textures[newTexture][2]);
     }
     this.leaves[i].display();
   }
-  if(this.pickingID != -1) {
-    this.graph.scene.registerForPick(this.pickingID, this);
-  }
-  
 
   if (newTexture != null) {
     this.graph.textures[newTexture][0].unbind();
@@ -133,18 +133,22 @@ MyGraphNode.prototype.display = function (materialID, textureID = null) {
   for (var i = 0; i < this.children.length; i++) {
     this.graph.nodes[this.children[i]].display(newMaterial, newTexture);
   }
- 
-  this.graph.scene.popMatrix();
-  if(this.shaderFlag) {
+
+  if (this.shaderFlag) {
     this.graph.scene.setActiveShader(this.graph.scene.defaultShader);
   }
+
+  this.graph.scene.clearPickRegistration();
+
+  this.graph.scene.popMatrix();
+
 }
 
 MyGraphNode.prototype.update = function (currTime) {
   for (let i = 0; i < this.children.length; i++) {
     this.graph.nodes[this.children[i]].update(currTime);
   }
-  
+
   if (this.animations.length == 0 || this.currAnimation >= this.animations.length) {
     return;
   }
