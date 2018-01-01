@@ -24,6 +24,8 @@ function MySceneGraph(filename, scene) {
 
   this.pickingIdToId = [];
 
+  this.holeDown = true;
+
   this.idRoot = null; // The id of the root element.
 
   this.axisCoords = [];

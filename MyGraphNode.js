@@ -89,19 +89,25 @@ MyGraphNode.prototype.display = function (materialID, textureID = null) {
   }
 
   // Add position to pieces
-  if (this.pickingID > 30 && this.pickingID < 60 && !this.played) {
+  if (this.pickingID > 30 && this.pickingID < 60 && !this.played) { //if para melhorar a eficiência (só as peças é que executam o que está a seguir)
     let transMatrix = mat4.create();
     mat4.identity(transMatrix);
     //mat4.translate(transMatrix, transMatrix, coords);
-
-    if (this.pickingID > 30 && this.pickingID < 40) {
+    switch (this.pickingID / 10 >> 0) {
+    case 3:
       mat4.translate(transMatrix, transMatrix, this.graph.plainPiecesPosition[(this.pickingID % 10) - 1]);
-    }
-    if (this.pickingID > 40 && this.pickingID < 50) {
+      break;
+    case 4:
       mat4.translate(transMatrix, transMatrix, this.graph.holedPiecesPosition[(this.pickingID % 10) - 1]);
-    }
-    if (this.pickingID > 50 && this.pickingID < 60) {
+      break;
+    case 5:
       mat4.translate(transMatrix, transMatrix, this.graph.dualPiecesPosition[(this.pickingID % 10) - 1]);
+      if(this.graph.holeDown) {
+        mat4.rotate(transMatrix, transMatrix, Math.PI, [0, 0, 1]);
+      }
+      break;
+    default:
+      break;
     }
     this.graph.scene.multMatrix(transMatrix);
   }

@@ -125,16 +125,18 @@ XMLscene.prototype.pickingHandle = function(ID, object) {
       this.graph.idRoot = "root";
       return;
     }
-    if(10 < ID && ID < 20) {
-      let currentID = 10 + this.graph.game.gamemode;
+    let currentID;
+    switch (ID / 10 >> 0) {
+    case 1: //Ids para os botões de tipo de jogo
+      currentID = 10 + this.graph.game.gamemode;
+      console.log("here");
       //console.log(this.graph.nodes[this.graph.pickingIdToId[currentID]]);
       this.graph.nodes[this.graph.pickingIdToId[currentID]].shaderFlag = false;
       this.graph.game.gamemode = ID % 10;
       object.shaderFlag = true;
       return;
-    }
-    if(20 < ID && ID < 30) {
-      let currentID = 20 + this.graph.game.difficulty;
+    case 2: //Ids para os botões de dificuldade do AI
+      currentID = 20 + this.graph.game.difficulty;
       this.graph.nodes[this.graph.pickingIdToId[currentID]].shaderFlag = false;
       this.graph.game.difficulty = ID % 10;
       object.shaderFlag = true;
