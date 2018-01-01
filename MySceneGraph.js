@@ -1658,7 +1658,7 @@ MySceneGraph.prototype.parseNodes = function (nodesNode) {
     } else
       this.onXMLMinorError("unknown tag name <" + nodeName);
   }
-  this.scene.interface.addSelectables(this.selectables);
+  //this.scene.interface.addSelectables(this.selectables);
 
   /* for(var i in this.nodes) {
     //console.log("here");
