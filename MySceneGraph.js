@@ -83,20 +83,20 @@ function MySceneGraph(filename, scene) {
 
   this.shadersFactor = 0;
 
-  this.testShaders=[
-		new CGFshader(this.scene.gl, "shaders/MyShader.vert", "shaders/MyShader.frag")
+  this.testShaders = [
+    new CGFshader(this.scene.gl, "shaders/MyShader.vert", "shaders/MyShader.frag")
   ];
 
   this.invisiblePieces = [];
 }
 
-MySceneGraph.prototype.createInvisiblePieces = function() {
-  for(let i = 0; i < 4; i++) {
-    for(let j = 0; j < 4; j++) {
+MySceneGraph.prototype.createInvisiblePieces = function () {
+  for (let i = 0; i < 4; i++) {
+    for (let j = 0; j < 4; j++) {
       if (this.game.board[i][j] >= 20) {
         continue;
       }
-      var invisiblePiece = new MyPiece(this, "", 100 + j*10 + i);
+      var invisiblePiece = new MyPiece(this, "", 100 + j * 10 + i);
       invisiblePiece.position = this.game.getPosition(j, i);
       invisiblePiece.leaves = this.nodes["plainPiece"].leaves;
       invisiblePiece.children = this.nodes["plainPiece"].children;
@@ -205,7 +205,7 @@ MySceneGraph.prototype.parseLSXFile = function (rootElement) {
   }
 
   // <ANIMATIONS>
-    if ((index = nodeNames.indexOf("ANIMATIONS")) == -1)
+  if ((index = nodeNames.indexOf("ANIMATIONS")) == -1)
     return "tag <ANIMATIONS> missing";
   else {
     if (index != ANIMATIONS_INDEX)
@@ -1218,7 +1218,7 @@ MySceneGraph.prototype.parseAnimations = function (animationsNode) {
           break;
         } else if (isNaN(animationSpeed))
           return "non-numeric value for animation speed";
-        else 
+        else
           console.log("parsed speed " + animationSpeed);
       }
 
@@ -1363,7 +1363,7 @@ MySceneGraph.prototype.parseAnimations = function (animationsNode) {
 
             animationIds.push(refId);
             // this.animations[animationId] = 0;
-           
+
             sizeChildren++;
           }
 
@@ -1407,7 +1407,7 @@ MySceneGraph.prototype.parseNodes = function (nodesNode) {
     } else if (nodeName == "NODE") {
       // Retrieves node ID.
       var nodeID = this.reader.getString(children[i], 'id');
-      
+
       if (nodeID == null)
         return "failed to retrieve node ID";
       // Checks if ID is valid.
@@ -1428,14 +1428,14 @@ MySceneGraph.prototype.parseNodes = function (nodesNode) {
 
       var isPiece = this.reader.getBoolean(children[i], 'piece', 0);
 
-      if(isPiece) {
+      if (isPiece) {
         this.nodes[nodeID] = new MyPiece(this, nodeID, parseInt(pickingID));
       } else {
         this.nodes[nodeID] = new MyGraphNode(this, nodeID, parseInt(pickingID));
       }
 
       // Creates node.
-      
+
 
       // Gathers child nodes.
       var nodeSpecs = children[i].children;
@@ -1477,74 +1477,74 @@ MySceneGraph.prototype.parseNodes = function (nodesNode) {
       // Retrieves possible transformations.
       for (var j = 0; j < nodeSpecs.length; j++) {
         switch (nodeSpecs[j].nodeName) {
-        case "TRANSLATION":
-          // Retrieves translation parameters.
-          var x = this.reader.getFloat(nodeSpecs[j], 'x');
-          if (x == null) {
-            this.onXMLMinorError("unable to parse x-coordinate of translation; discarding transform");
-            break;
-          } else if (isNaN(x))
-            return "non-numeric value for x-coordinate of translation (node ID = " + nodeID + ")";
+          case "TRANSLATION":
+            // Retrieves translation parameters.
+            var x = this.reader.getFloat(nodeSpecs[j], 'x');
+            if (x == null) {
+              this.onXMLMinorError("unable to parse x-coordinate of translation; discarding transform");
+              break;
+            } else if (isNaN(x))
+              return "non-numeric value for x-coordinate of translation (node ID = " + nodeID + ")";
 
-          var y = this.reader.getFloat(nodeSpecs[j], 'y');
-          if (y == null) {
-            this.onXMLMinorError("unable to parse y-coordinate of translation; discarding transform");
-            break;
-          } else if (isNaN(y))
-            return "non-numeric value for y-coordinate of translation (node ID = " + nodeID + ")";
+            var y = this.reader.getFloat(nodeSpecs[j], 'y');
+            if (y == null) {
+              this.onXMLMinorError("unable to parse y-coordinate of translation; discarding transform");
+              break;
+            } else if (isNaN(y))
+              return "non-numeric value for y-coordinate of translation (node ID = " + nodeID + ")";
 
-          var z = this.reader.getFloat(nodeSpecs[j], 'z');
-          if (z == null) {
-            this.onXMLMinorError("unable to parse z-coordinate of translation; discarding transform");
-            break;
-          } else if (isNaN(z))
-            return "non-numeric value for z-coordinate of translation (node ID = " + nodeID + ")";
+            var z = this.reader.getFloat(nodeSpecs[j], 'z');
+            if (z == null) {
+              this.onXMLMinorError("unable to parse z-coordinate of translation; discarding transform");
+              break;
+            } else if (isNaN(z))
+              return "non-numeric value for z-coordinate of translation (node ID = " + nodeID + ")";
 
-          mat4.translate(this.nodes[nodeID].transformMatrix, this.nodes[nodeID].transformMatrix, [x, y, z]);
-          break;
-        case "ROTATION":
-          // Retrieves rotation parameters.
-          var axis = this.reader.getItem(nodeSpecs[j], 'axis', ['x', 'y', 'z']);
-          if (axis == null) {
-            this.onXMLMinorError("unable to parse rotation axis; discarding transform");
+            mat4.translate(this.nodes[nodeID].transformMatrix, this.nodes[nodeID].transformMatrix, [x, y, z]);
             break;
-          }
-          var angle = this.reader.getFloat(nodeSpecs[j], 'angle');
-          if (angle == null) {
-            this.onXMLMinorError("unable to parse rotation angle; discarding transform");
-            break;
-          } else if (isNaN(angle))
-            return "non-numeric value for rotation angle (node ID = " + nodeID + ")";
+          case "ROTATION":
+            // Retrieves rotation parameters.
+            var axis = this.reader.getItem(nodeSpecs[j], 'axis', ['x', 'y', 'z']);
+            if (axis == null) {
+              this.onXMLMinorError("unable to parse rotation axis; discarding transform");
+              break;
+            }
+            var angle = this.reader.getFloat(nodeSpecs[j], 'angle');
+            if (angle == null) {
+              this.onXMLMinorError("unable to parse rotation angle; discarding transform");
+              break;
+            } else if (isNaN(angle))
+              return "non-numeric value for rotation angle (node ID = " + nodeID + ")";
 
-          mat4.rotate(this.nodes[nodeID].transformMatrix, this.nodes[nodeID].transformMatrix, angle * DEGREE_TO_RAD, this.axisCoords[axis]);
-          break;
-        case "SCALE":
-          // Retrieves scale parameters.
-          var sx = this.reader.getFloat(nodeSpecs[j], 'sx');
-          if (sx == null) {
-            this.onXMLMinorError("unable to parse x component of scaling; discarding transform");
+            mat4.rotate(this.nodes[nodeID].transformMatrix, this.nodes[nodeID].transformMatrix, angle * DEGREE_TO_RAD, this.axisCoords[axis]);
             break;
-          } else if (isNaN(sx))
-            return "non-numeric value for x component of scaling (node ID = " + nodeID + ")";
+          case "SCALE":
+            // Retrieves scale parameters.
+            var sx = this.reader.getFloat(nodeSpecs[j], 'sx');
+            if (sx == null) {
+              this.onXMLMinorError("unable to parse x component of scaling; discarding transform");
+              break;
+            } else if (isNaN(sx))
+              return "non-numeric value for x component of scaling (node ID = " + nodeID + ")";
 
-          var sy = this.reader.getFloat(nodeSpecs[j], 'sy');
-          if (sy == null) {
-            this.onXMLMinorError("unable to parse y component of scaling; discarding transform");
+            var sy = this.reader.getFloat(nodeSpecs[j], 'sy');
+            if (sy == null) {
+              this.onXMLMinorError("unable to parse y component of scaling; discarding transform");
+              break;
+            } else if (isNaN(sy))
+              return "non-numeric value for y component of scaling (node ID = " + nodeID + ")";
+
+            var sz = this.reader.getFloat(nodeSpecs[j], 'sz');
+            if (sz == null) {
+              this.onXMLMinorError("unable to parse z component of scaling; discarding transform");
+              break;
+            } else if (isNaN(sz))
+              return "non-numeric value for z component of scaling (node ID = " + nodeID + ")";
+
+            mat4.scale(this.nodes[nodeID].transformMatrix, this.nodes[nodeID].transformMatrix, [sx, sy, sz]);
             break;
-          } else if (isNaN(sy))
-            return "non-numeric value for y component of scaling (node ID = " + nodeID + ")";
-
-          var sz = this.reader.getFloat(nodeSpecs[j], 'sz');
-          if (sz == null) {
-            this.onXMLMinorError("unable to parse z component of scaling; discarding transform");
+          default:
             break;
-          } else if (isNaN(sz))
-            return "non-numeric value for z component of scaling (node ID = " + nodeID + ")";
-
-          mat4.scale(this.nodes[nodeID].transformMatrix, this.nodes[nodeID].transformMatrix, [sx, sy, sz]);
-          break;
-        default:
-          break;
         }
       }
 
@@ -1566,7 +1566,7 @@ MySceneGraph.prototype.parseNodes = function (nodesNode) {
           else if (this.animations[aniId] == null)
             return "node references unexisting animation";
           else if (this.animations[aniId] instanceof ComboAnimation) {
-            for(let comboi = 0; comboi < this.animations[aniId].animationIds.length; comboi++) {
+            for (let comboi = 0; comboi < this.animations[aniId].animationIds.length; comboi++) {
               this.nodes[nodeID].animations.push(this.animations[this.animations[aniId].animationIds[comboi]]);
             }
           }
@@ -1603,82 +1603,82 @@ MySceneGraph.prototype.parseNodes = function (nodesNode) {
             sizeChildren++;
           }
         } else
-        if (descendants[j].nodeName == "LEAF") {
-          var type = this.reader.getItem(descendants[j], 'type', ['rectangle', 'cylinder', 'sphere', 'triangle', 'patch', 'torus']);
+          if (descendants[j].nodeName == "LEAF") {
+            var type = this.reader.getItem(descendants[j], 'type', ['rectangle', 'cylinder', 'sphere', 'triangle', 'patch', 'torus']);
 
-          if (type != null)
-            this.log("   Leaf: " + type);
-          else
-            this.warn("Error in leaf");
+            if (type != null)
+              this.log("   Leaf: " + type);
+            else
+              this.warn("Error in leaf");
 
-          //parse leaf
-          var args = this.reader.getString(descendants[j], 'args');
-          var argarr = args.split(" ");
+            //parse leaf
+            var args = this.reader.getString(descendants[j], 'args');
+            var argarr = args.split(" ");
 
-          switch (type) {
-          case 'torus':
-            this.nodes[nodeID].addLeaf(new MyTorus(this, parseFloat(argarr[0]), parseFloat(argarr[1]), parseFloat(argarr[2]), parseInt(argarr[3]), parseInt(argarr[4])));
-            break;
-          case 'rectangle':
-            this.nodes[nodeID].addLeaf(new MyRectangle(this, parseFloat(argarr[0]), parseFloat(argarr[1]), parseFloat(argarr[2]), parseFloat(argarr[3])));
-            break;
-          case 'cylinder':
-            this.nodes[nodeID].addLeaf(new MyCylinder(this, parseFloat(argarr[0]), parseFloat(argarr[1]), parseFloat(argarr[2]), parseInt(argarr[3]), parseInt(argarr[4]), parseInt(argarr[5]), parseInt(argarr[6])));
-            break;
-          case 'sphere':
-            this.nodes[nodeID].addLeaf(new MySphere(this, parseFloat(argarr[0]), parseInt(argarr[1]), parseInt(argarr[2])));
-            break;
-          case 'triangle':
-            this.nodes[nodeID].addLeaf(new MyTriangle(this, parseFloat(argarr[0]), parseFloat(argarr[1]), parseFloat(argarr[2]), parseFloat(argarr[3]), parseFloat(argarr[4]), parseFloat(argarr[5]), parseFloat(argarr[6]), parseFloat(argarr[7]), parseFloat(argarr[8])));
-            break;
-          case 'patch':
-            var ctrlLines = [];
-            var cplines = descendants[j].children;
-            for (var l = 0; l < cplines.length; l++) {
-              var ctrlPoints = [];
-              var cppoint = cplines[l].children;
-              for (var p = 0; p < cppoint.length; p++) {
-                var x = this.reader.getFloat(cppoint[p], 'xx');
-                if (x == null) {
-                  this.onXMLMinorError("unable to parse x-coordinate of control point");
-                  break;
-                } else if (isNaN(x))
-                  return "non-numeric value for x-coordinate of control point";
+            switch (type) {
+              case 'torus':
+                this.nodes[nodeID].addLeaf(new MyTorus(this, parseFloat(argarr[0]), parseFloat(argarr[1]), parseFloat(argarr[2]), parseInt(argarr[3]), parseInt(argarr[4])));
+                break;
+              case 'rectangle':
+                this.nodes[nodeID].addLeaf(new MyRectangle(this, parseFloat(argarr[0]), parseFloat(argarr[1]), parseFloat(argarr[2]), parseFloat(argarr[3])));
+                break;
+              case 'cylinder':
+                this.nodes[nodeID].addLeaf(new MyCylinder(this, parseFloat(argarr[0]), parseFloat(argarr[1]), parseFloat(argarr[2]), parseInt(argarr[3]), parseInt(argarr[4]), parseInt(argarr[5]), parseInt(argarr[6])));
+                break;
+              case 'sphere':
+                this.nodes[nodeID].addLeaf(new MySphere(this, parseFloat(argarr[0]), parseInt(argarr[1]), parseInt(argarr[2])));
+                break;
+              case 'triangle':
+                this.nodes[nodeID].addLeaf(new MyTriangle(this, parseFloat(argarr[0]), parseFloat(argarr[1]), parseFloat(argarr[2]), parseFloat(argarr[3]), parseFloat(argarr[4]), parseFloat(argarr[5]), parseFloat(argarr[6]), parseFloat(argarr[7]), parseFloat(argarr[8])));
+                break;
+              case 'patch':
+                var ctrlLines = [];
+                var cplines = descendants[j].children;
+                for (var l = 0; l < cplines.length; l++) {
+                  var ctrlPoints = [];
+                  var cppoint = cplines[l].children;
+                  for (var p = 0; p < cppoint.length; p++) {
+                    var x = this.reader.getFloat(cppoint[p], 'xx');
+                    if (x == null) {
+                      this.onXMLMinorError("unable to parse x-coordinate of control point");
+                      break;
+                    } else if (isNaN(x))
+                      return "non-numeric value for x-coordinate of control point";
 
-                var y = this.reader.getFloat(cppoint[p], 'yy');
-                if (y == null) {
-                  this.onXMLMinorError("unable to parse y-coordinate of control point");
-                  break;
-                } else if (isNaN(y))
-                  return "non-numeric value for y-coordinate of control point";
+                    var y = this.reader.getFloat(cppoint[p], 'yy');
+                    if (y == null) {
+                      this.onXMLMinorError("unable to parse y-coordinate of control point");
+                      break;
+                    } else if (isNaN(y))
+                      return "non-numeric value for y-coordinate of control point";
 
-                var z = this.reader.getFloat(cppoint[p], 'zz');
-                if (z == null) {
-                  this.onXMLMinorError("unable to parse z-coordinate of control point");
-                  break;
-                } else if (isNaN(z))
-                  return "non-numeric value for z-coordinate of control point";
+                    var z = this.reader.getFloat(cppoint[p], 'zz');
+                    if (z == null) {
+                      this.onXMLMinorError("unable to parse z-coordinate of control point");
+                      break;
+                    } else if (isNaN(z))
+                      return "non-numeric value for z-coordinate of control point";
 
-                var w = this.reader.getFloat(cppoint[p], 'ww');
-                if (w == null) {
-                  this.onXMLMinorError("unable to parse w of control point");
-                  break;
-                } else if (isNaN(w))
-                  return "non-numeric value for w of control point";
+                    var w = this.reader.getFloat(cppoint[p], 'ww');
+                    if (w == null) {
+                      this.onXMLMinorError("unable to parse w of control point");
+                      break;
+                    } else if (isNaN(w))
+                      return "non-numeric value for w of control point";
 
-                ctrlPoints.push([x, y, z, w]);
-              }
-              ctrlLines.push(ctrlPoints);
+                    ctrlPoints.push([x, y, z, w]);
+                  }
+                  ctrlLines.push(ctrlPoints);
+                }
+                this.nodes[nodeID].addLeaf(new MyNurb(this, parseInt(argarr[0]), parseInt(argarr[1]), ctrlLines));
+                break;
+
+              default:
+                break;
             }
-            this.nodes[nodeID].addLeaf(new MyNurb(this, parseInt(argarr[0]), parseInt(argarr[1]), ctrlLines));
-            break;
-
-          default:
-            break;
-          }
-          sizeChildren++;
-        } else
-          this.onXMLMinorError("unknown tag <" + descendants[j].nodeName + ">");
+            sizeChildren++;
+          } else
+            this.onXMLMinorError("unknown tag <" + descendants[j].nodeName + ">");
 
       }
       if (sizeChildren == 0)
@@ -1695,7 +1695,7 @@ MySceneGraph.prototype.parseNodes = function (nodesNode) {
   console.log("Parsed nodes");
   return null;
 
-  
+
 }
 
 /*
@@ -1755,13 +1755,13 @@ MySceneGraph.generateRandomString = function (length) {
  */
 MySceneGraph.prototype.displayScene = function () {
   // entry point for graph rendering
-  if(this.scene.pickMode) {
-    for(let i = 0; i < this.invisiblePieces.length; i++) {
+  if (this.scene.pickMode) {
+    for (let i = 0; i < this.invisiblePieces.length; i++) {
       this.invisiblePieces[i].display("birch");
     }
   }
-  
-  
+
+
   this.nodes[this.idRoot].display(this.defaultMaterialID);
 
   // console.log(this.initialTransforms);
@@ -1772,10 +1772,10 @@ MySceneGraph.prototype.displayScene = function () {
 MySceneGraph.prototype.update = function (currTime) {
 
   this.pickingId = 1;
-  this.shadersFactor = (Math.cos(currTime/400) + 1) / 2;
+  this.shadersFactor = (Math.cos(currTime / 400) + 1) / 2;
 
-  this.testShaders[0].setUniformsValues({normScale: this.shadersFactor, colourScale: this.shadersFactor});
-  
+  this.testShaders[0].setUniformsValues({ normScale: 0, colourScale: this.shadersFactor });
+
   this.nodes[this.idRoot].update(currTime);
 
   //this.game.PersonPlay(1,1,"n1h");

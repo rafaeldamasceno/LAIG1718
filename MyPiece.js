@@ -203,6 +203,7 @@ MyPiece.prototype.update = function (currTime) {
   if (this.currAnimation == this.animations.length) {
     this.played = true;
     this.onAnimation = false;
+    this.animationMatrix = null;
     return;
   }
 
