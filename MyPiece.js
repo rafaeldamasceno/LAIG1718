@@ -11,10 +11,11 @@ function MyPiece(graph, nodeID, pickingID) {
 
   //Piece new elements
   this.shaderFlag = false;
-  this.onAnimation = false;
+
   this.played = false;
-  this.directionUp = false;
-  this.stuckDirection = false;
+
+  this.holeUp = null;
+
   this.dualPiece = false;
 
   switch (this.pickingID / 10 >> 0) {
@@ -27,8 +28,6 @@ function MyPiece(graph, nodeID, pickingID) {
     case 5:
       this.position = this.graph.dualPiecesPosition[(this.pickingID % 10) - 1];
       this.dualPiece = true;
-      this.directionUp = this.graph.holeUp;
-      this.stuckDirection = this.graph.holeUp;
       break;
   }
 
@@ -113,18 +112,19 @@ MyPiece.prototype.display = function (materialID, textureID = null) {
   let transMatrix = mat4.create();
   mat4.identity(transMatrix);
     //mat4.translate(transMatrix, transMatrix, coords);
-  if(!this.onAnimation) {
+  if(!this.animationMatrix) {
     mat4.translate(transMatrix, transMatrix, this.position);
   }
-  
-  this.directionUp = this.graph.holeUp;
-  if (this.dualPiece && !this.directionUp && !this.played && !this.onAnimation) {
-    mat4.rotate(transMatrix, transMatrix, Math.PI, [0, 0, 1]);
-    this.stuckDirection = this.directionUp;
-  }
 
-  if(!this.stuckDirection && (this.played || this.onAnimation) && this.dualPiece) {
-    mat4.rotate(transMatrix, transMatrix, Math.PI, [0, 0, 1]);
+  if (!this.played) {
+    this.holeUp = this.graph.holeUp;
+  }
+  
+  if (this.dualPiece) {
+    if(!this.played && !this.graph.holeUp || (this.played && !this.holeUp)) {    
+      mat4.translate(transMatrix, transMatrix, [0, 1.2, 0]);
+      mat4.rotate(transMatrix, transMatrix, Math.PI, [0, 0, 1]);
+    }
   }
 
   if(this.pickingID >= 100) {
@@ -205,8 +205,6 @@ MyPiece.prototype.update = function (currTime) {
   }
   this.currAnimation = i - 1;
   if (this.currAnimation == this.animations.length) {
-    this.played = true;
-    this.onAnimation = false;
     this.animationMatrix = null;
     return;
   }

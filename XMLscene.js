@@ -162,21 +162,18 @@ XMLscene.prototype.pickingHandle = function (ID, object) {
     if (this.graph.currPlayingPiece == null) {
       return;
     }
-    object.played = true;
+    this.graph.currPlayingPiece.played = true;
     let x = ID % 10;
     let y = (ID - 100) / 10 >> 0;
     let point1 = this.graph.currPlayingPiece.position;
     let point4 = this.graph.game.getPosition(x, y);
-    console.log(x);
-    console.log(y);
-    console.log(point4);
     let point3 = [point4[0], point4[1] + 10, point4[2]];
     let point2 = [(point4[0] + point1[0]) / 2, point4[1] + 10, (point4[2] + point1[2]) / 2];
     var animation = new BezierAnimation(this.graph, 30, [point1, point2, point3, point4]);
+    this.graph.currPlayingPiece.animations.push(animation);
     this.graph.currPlayingPiece.shaderFlag = false;
     this.graph.currPlayingPiece.onAnimation = true;
     this.graph.currPlayingPiece.position = point4;
-    this.graph.currPlayingPiece.animations.push(animation);
     this.graph.invisiblePieces = [];
     let pieceType = 11;
     if (this.graph.currPlayingPiece.dualPiece) {
