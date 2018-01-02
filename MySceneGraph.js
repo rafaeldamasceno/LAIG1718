@@ -86,8 +86,27 @@ function MySceneGraph(filename, scene) {
   this.testShaders=[
 		new CGFshader(this.scene.gl, "shaders/MyShader.vert", "shaders/MyShader.frag")
   ];
-  
-  this.pickingId = 1;
+
+  this.invisiblePieces = [];
+}
+
+MySceneGraph.prototype.createInvisiblePieces = function() {
+  for(let i = 0; i < 4; i++) {
+    for(let j = 0; j < 4; j++) {
+      if (this.game.board[i][j] >= 20) {
+        continue;
+      }
+      console.log()
+      var invisiblePiece = new MyPiece(this, "", 100 + j*10 + i);
+      invisiblePiece.position = this.game.getPosition(j, i);
+      invisiblePiece.leaves = this.nodes["plainPiece"].leaves;
+      invisiblePiece.children = this.nodes["plainPiece"].children;
+      invisiblePiece.materialID = "null";
+      invisiblePiece.textureID = "null";
+      console.log(invisiblePiece.position);
+      this.invisiblePieces.push(invisiblePiece);
+    }
+  }
 }
 
 /*
@@ -1738,6 +1757,12 @@ MySceneGraph.generateRandomString = function (length) {
  */
 MySceneGraph.prototype.displayScene = function () {
   // entry point for graph rendering
+  if(this.scene.pickMode) {
+    for(let i = 0; i < this.invisiblePieces.length; i++) {
+      this.invisiblePieces[i].display("birch");
+    }
+  }
+  
   
   this.nodes[this.idRoot].display(this.defaultMaterialID);
 

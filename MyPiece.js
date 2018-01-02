@@ -116,9 +116,15 @@ MyPiece.prototype.display = function (materialID, textureID = null) {
     mat4.rotate(transMatrix, transMatrix, Math.PI, [0, 0, 1]);
     this.stuckDirection = this.directionUp;
   }
+
   if(!this.stuckDirection && this.played) {
     mat4.rotate(transMatrix, transMatrix, Math.PI, [0, 0, 1]);
   }
+
+  if(this.pickingID >= 100) {
+    mat4.rotate(transMatrix, transMatrix, -Math.PI/2, [1, 0, 0]);
+  }
+
   this.graph.scene.multMatrix(transMatrix);
 
   this.graph.materials[newMaterial].apply();

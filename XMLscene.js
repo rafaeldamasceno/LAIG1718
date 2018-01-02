@@ -121,6 +121,7 @@ XMLscene.prototype.logPicking = function ()
 	}
 
 XMLscene.prototype.pickingHandle = function(ID, object) {
+  console.log(ID);
     if(ID == 1) {
       this.graph.idRoot = "root";
       return;
@@ -144,12 +145,15 @@ XMLscene.prototype.pickingHandle = function(ID, object) {
     case 3: //Ids para as peças plain
     case 4: //Ids para as peças holed
     case 5: //Ids para as peças dual
-      if(this.graph.currPlayingPiece)
+      if(this.graph.currPlayingPiece) {
         this.graph.currPlayingPiece.shaderFlag = false;
+        this.graph.invisiblePieces = [];
       }
       this.graph.currPlayingPiece = object;
       object.shaderFlag = true;
-
+      this.graph.createInvisiblePieces();
+      return;
+    }
 }
 XMLscene.prototype.display = function () {
   this.logPicking();
