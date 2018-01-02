@@ -117,7 +117,7 @@ MyPiece.prototype.display = function (materialID, textureID = null) {
     mat4.translate(transMatrix, transMatrix, this.position);
   }
   
-    
+  this.directionUp = this.graph.holeUp;
   if (this.dualPiece && !this.directionUp && !this.played && !this.onAnimation) {
     mat4.rotate(transMatrix, transMatrix, Math.PI, [0, 0, 1]);
     this.stuckDirection = this.directionUp;
