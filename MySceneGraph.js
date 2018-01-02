@@ -31,8 +31,6 @@ function MySceneGraph(filename, scene) {
 
   this.currPlayingPiece = null;
 
-  this.player1Turn = true;
-
   this.axisCoords = [];
   this.axisCoords['x'] = [1, 0, 0];
   this.axisCoords['y'] = [0, 1, 0];

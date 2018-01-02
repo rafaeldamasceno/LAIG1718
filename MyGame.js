@@ -9,6 +9,8 @@ function MyGame(graph) { //1 - plain  2 - holed
   this.difficulty = 1;
   this.gamemode = 1; //1 - pvp, 2 - pve, 3 - eve
 
+  this.player = -1;
+
   this.response = "";
 
 }
@@ -32,7 +34,7 @@ MyGame.prototype.toString = function () {
   var returnString = "";
   for (let i = 0; i < this.board.length; i++) {
     for (let j = 0; j < this.board.length; j++) {
-      console.log(this.board.length);
+      //console.log(this.board.length);
       let type;
       if (this.board[i][j] % 10 == 1) {
         type = "p";
@@ -70,6 +72,19 @@ function getPrologRequest(requestString, onSuccess, onError, port) {
 
 }
 
+MyGame.prototype.handleReplyBot = function(data) {
+  let response = data.target.response.slice(1, -1).split(",");
+  // console.log(response);
+  if (response[0] == "w") {
+    return;
+  } else if (response[0] == "c") {
+    let piece = parseInt(response[3][1]) * 10;
+    piece += response[3][2] == "p" ? 1 : 2;
+    this.play(response[2], response[1], piece);
+  }
+  this.nextTurn();
+}
+
 MyGame.prototype.handleReply = function(data) {
   let response = data.target.response;
   console.log(response);
@@ -78,16 +93,13 @@ MyGame.prototype.handleReply = function(data) {
   }
 }
 
-MyGame.prototype.aIplay = function () {
+MyGame.prototype.botPlay = function () {
   var sendString = "[b,";
   sendString += this.toString();
   sendString += this.difficulty - 1;
   sendString += "]";
 
-  getPrologRequest(sendString, "", "", 8081);
-
-  return this.response;
-
+  getPrologRequest(sendString, this.handleReplyBot.bind(this));
 }
 
 MyGame.prototype.personPlay = function (x, y, piece) {
@@ -111,5 +123,23 @@ MyGame.prototype.personPlay = function (x, y, piece) {
   getPrologRequest(sendString, this.handleReply);
 
   this.play(x, y, piece); //gravar jogada no nosso jogo ainda por testar vitória com o prolog
-  this.graph.player1Turn = !this.graph.player1Turn;
+}
+
+MyGame.prototype.nextTurn = function () {
+  this.player++;
+  this.player %= 2;
+  if(!this.humanPlaying()) {
+    this.botPlay();
+  }
+}
+
+MyGame.prototype.humanPlaying = function () {
+  switch (this.gamemode) {
+    case 1:
+      return true;
+    case 2:
+      return this.player;
+    case 3:
+      return false;
+  }
 }

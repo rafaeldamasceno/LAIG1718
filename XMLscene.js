@@ -122,8 +122,10 @@ XMLscene.prototype.pickingHandle = function (ID, object) {
 
   if (ID == 1) {
     this.graph.idRoot = "game";
+    this.graph.game.nextTurn();
     return;
   }
+
   let currentID;
   switch (ID / 10 >> 0) {
     case 1: //Ids para os botões de tipo de jogo
@@ -142,6 +144,9 @@ XMLscene.prototype.pickingHandle = function (ID, object) {
     case 3: //Ids para as peças plain
     case 4: //Ids para as peças holed
     case 5: //Ids para as peças dual
+        if (!this.graph.game.humanPlaying()) {
+          return;
+        }
       if (object.played || object.onAnimation) {
         return;
       }

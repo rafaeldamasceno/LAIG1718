@@ -114,20 +114,17 @@ botPlay([[[A,B,C,D],[E,F,G,H],[I,J,K,L],[M,N,O,P]],Stock1,Stock2,Stock3], Diffic
 parse_input([p,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Stock1,Stock2,Stock3,X,Y,Piece],Res) :-
 personPlay([[[A,B,C,D],[E,F,G,H],[I,J,K,L],[M,N,O,P]],Stock1,Stock2,Stock3],X,Y,Piece,Res).
 
-
-
-
 botPlay(Game, Difficulty, Res) :-
-	botTurn(Game,1,NewGame,Difficulty),
-	ite(gameWin(NewGame), Res = win, (diff(Game, NewGame, X, Y, Piece), Res = [Y,X,Piece])).
+	botTurn(Game, 1, NewGame, Difficulty),
+	diff(Game, NewGame, X, Y, Piece),
+	ite(gameWin(NewGame), Res = [w, Y, X, Piece], Res = [c, Y, X, Piece]).
 
 personPlay(Game, X, Y, Piece, Res) :-
 	movePiece(Piece, Y, X, Game, NewGame),
 	NewGame = [Board | _],
-  write(Board),
 	ite(gameWin(Board), Res = win, Res = yes).
 	
-personPlay(_,_,_,_,Res) :-
+personPlay(_, _, _, _, Res) :-
 	Res = no.
 	
 
