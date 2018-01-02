@@ -28,6 +28,8 @@ function MySceneGraph(filename, scene) {
 
   this.idRoot = null; // The id of the root element.
 
+  this.currPlayingPiece = null;
+
   this.axisCoords = [];
   this.axisCoords['x'] = [1, 0, 0];
   this.axisCoords['y'] = [0, 1, 0];

@@ -13,7 +13,18 @@ function MyGame(graph) { //1 - plain  2 - holed
 }
 
 MyGame.prototype.play = function(x, y, piece) {
-  this.board[x][y] = (this.board[x][y] / 10) * 10 + piece;
+  this.board[y][x] = (this.board[y][x] / 10 >> 0) * 10 + piece;
+}
+
+MyGame.prototype.getPosition = function(x, y) {
+
+  let posZ = - 3.54*x + 5.31;
+  let posX = 3.54*y - 5.31;
+  let posY = 1.1 + (this.board[y][x] / 10 >> 0)*0.6;
+
+  let pos = [posX, posY, posZ];
+
+  return pos;
 }
 
 MyGame.prototype.toString = function() {

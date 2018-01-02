@@ -22,6 +22,8 @@ function MyGraphNode(graph, nodeID, pickingID) {
   this.animationsTimes = [0];
   this.currAnimation = null;
 
+  
+
   // The material ID.
   this.materialID = null;
 

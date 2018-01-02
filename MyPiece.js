@@ -13,6 +13,7 @@ function MyPiece(graph, nodeID, pickingID) {
   this.shaderFlag = false;
   this.played = false;
   this.directionUp = this.graph.holeUp;
+  this.stuckDirection = this.graph.holeUp;
   this.dualPiece = false;
 
   switch (this.pickingID / 10 >> 0) {
@@ -111,7 +112,11 @@ MyPiece.prototype.display = function (materialID, textureID = null) {
     //mat4.translate(transMatrix, transMatrix, coords);
   mat4.translate(transMatrix, transMatrix, this.position);
     
-  if (this.dualPiece && !this.directionUp) {
+  if (this.dualPiece && !this.directionUp && !this.played) {
+    mat4.rotate(transMatrix, transMatrix, Math.PI, [0, 0, 1]);
+    this.stuckDirection = this.directionUp;
+  }
+  if(!this.stuckDirection && this.played) {
     mat4.rotate(transMatrix, transMatrix, Math.PI, [0, 0, 1]);
   }
   this.graph.scene.multMatrix(transMatrix);

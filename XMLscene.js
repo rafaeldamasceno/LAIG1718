@@ -141,7 +141,15 @@ XMLscene.prototype.pickingHandle = function(ID, object) {
       this.graph.game.difficulty = ID % 10;
       object.shaderFlag = true;
       return;
-    }
+    case 3: //Ids para as peças plain
+    case 4: //Ids para as peças holed
+    case 5: //Ids para as peças dual
+      if(this.graph.currPlayingPiece)
+        this.graph.currPlayingPiece.shaderFlag = false;
+      }
+      this.graph.currPlayingPiece = object;
+      object.shaderFlag = true;
+
 }
 XMLscene.prototype.display = function () {
   this.logPicking();
