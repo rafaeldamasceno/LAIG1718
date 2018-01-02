@@ -48,6 +48,8 @@ LinearAnimation.prototype.getTransMatrix = function (elapsedTime) {
   coords[1] += this.ctrlPoints[seg - 1][1] + segVector[1] * perTime;
   coords[2] += this.ctrlPoints[seg - 1][2] + segVector[2] * perTime;
 
+  return coords;
+  
   let transMatrix = mat4.create();
   mat4.identity(transMatrix);
   mat4.translate(transMatrix, transMatrix, coords);

@@ -31,6 +31,15 @@ function MySceneGraph(filename, scene) {
 
   this.currPlayingPiece = null;
 
+  this.currCamera = 0;
+  this.cameras = [
+    [vec3.fromValues(0.001, 25, 0.001), vec3.fromValues(0, 0, 0)],
+    [vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0, 0)]
+  ];
+
+  this.cameraAnimationPos = null;
+  this.cameraAnimationPoint = null;
+
   this.axisCoords = [];
   this.axisCoords['x'] = [1, 0, 0];
   this.axisCoords['y'] = [0, 1, 0];
@@ -38,6 +47,9 @@ function MySceneGraph(filename, scene) {
 
   // File reading
   this.reader = new CGFXMLreader();
+
+  this.scene.interface.gui.add(this, 'changeCamera');
+  this.startTime = null;
 
   this.plainPiecesPosition = [
     [-15, 0, 10.5],
@@ -130,6 +142,14 @@ MySceneGraph.prototype.getNextPlayablePiece = function(piece) {
   }
 
 }
+
+MySceneGraph.prototype.changeCamera = function() {
+  let nextCamera = (this.currCamera + 1) % this.cameras.length;
+  this.cameraAnimationPos = new LinearAnimation(this, 6, [this.cameras[this.currCamera][0], this.cameras[nextCamera][0]]);
+  this.cameraAnimationPoint = new LinearAnimation(this, 6, [this.cameras[this.currCamera][1], this.cameras[nextCamera][1]]);
+  this.startTime = 0;
+}
+
 
 /*
  * Callback to be executed after successful reading
@@ -1797,10 +1817,17 @@ MySceneGraph.prototype.displayScene = function () {
 
 MySceneGraph.prototype.update = function (currTime) {
 
-  this.pickingId = 1;
   this.shadersFactor = (Math.cos(currTime / 400) + 1) / 2;
 
   this.testShaders[0].setUniformsValues({ normScale: 0, colourScale: this.shadersFactor });
+
+  if(this.startTime === 0) {
+    this.startTime = currTime;
+  }
+  let elapsedTime = currTime - this.startTime;
+  if(this.cameraAnimationPos) {
+    this.scene.camera.setPosition(this.cameraAnimationPos.getTransMatrix(elapsedTime));
+  }
 
   this.nodes[this.idRoot].update(currTime);
 

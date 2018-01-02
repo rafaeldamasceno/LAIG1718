@@ -77,7 +77,7 @@ XMLscene.prototype.initLights = function () {
  * Initializes the scene cameras.
  */
 XMLscene.prototype.initCameras = function () {
-  this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(0.1, 15, 0.1), vec3.fromValues(0, 0, 0));
+  this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(0.001, 15, 0.001), vec3.fromValues(0, 0, 0));
 }
 
 /* Handler called when the graph is finally loaded.
@@ -123,6 +123,7 @@ XMLscene.prototype.pickingHandle = function (ID, object) {
   if (ID == 1) {
     this.graph.idRoot = "game";
     this.graph.game.nextTurn();
+    this.camera.setPosition(this.graph.cameras[0][0]);
     return;
   }
 
