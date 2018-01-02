@@ -190,56 +190,56 @@
 
         <!-- Plain Pieces -->
 
-        <NODE id="plainPiece1" pickingID="31">
+        <NODE id="plainPiece1" pickingID="31" piece="true">
             <MATERIAL id="null" />
             <TEXTURE id="null" />
             <DESCENDANTS>
                <NODEREF id="plainPiece" />
             </DESCENDANTS>
         </NODE>
-        <NODE id="plainPiece2" pickingID="32">
+        <NODE id="plainPiece2" pickingID="32" piece="true">
             <MATERIAL id="null" />
             <TEXTURE id="null" />
             <DESCENDANTS>
                <NODEREF id="plainPiece" />
             </DESCENDANTS>
         </NODE>
-        <NODE id="plainPiece3" pickingID="33">
+        <NODE id="plainPiece3" pickingID="33" piece="true">
             <MATERIAL id="null" />
             <TEXTURE id="null" />
             <DESCENDANTS>
                <NODEREF id="plainPiece" />
             </DESCENDANTS>
         </NODE>
-        <NODE id="plainPiece4" pickingID="34">
+        <NODE id="plainPiece4" pickingID="34" piece="true">
             <MATERIAL id="null" />
             <TEXTURE id="null" />
             <DESCENDANTS>
                <NODEREF id="plainPiece" />
             </DESCENDANTS>
         </NODE>
-        <NODE id="plainPiece5" pickingID="35">
+        <NODE id="plainPiece5" pickingID="35" piece="true">
             <MATERIAL id="null" />
             <TEXTURE id="null" />
             <DESCENDANTS>
                <NODEREF id="plainPiece" />
             </DESCENDANTS>
         </NODE>
-        <NODE id="plainPiece6" pickingID="36">
+        <NODE id="plainPiece6" pickingID="36" piece="true">
             <MATERIAL id="null" />
             <TEXTURE id="null" />
             <DESCENDANTS>
                <NODEREF id="plainPiece" />
             </DESCENDANTS>
         </NODE>
-        <NODE id="plainPiece7" pickingID="37">
+        <NODE id="plainPiece7" pickingID="37" piece="true">
             <MATERIAL id="null" />
             <TEXTURE id="null" />
             <DESCENDANTS>
                <NODEREF id="plainPiece" />
             </DESCENDANTS>
         </NODE>
-        <NODE id="plainPiece8" pickingID="38">
+        <NODE id="plainPiece8" pickingID="38" piece="true">
             <MATERIAL id="null" />
             <TEXTURE id="null" />
             <DESCENDANTS>
@@ -249,56 +249,56 @@
 
         <!-- Holed Pieces -->
 
-        <NODE id="holedPiece1" pickingID="41">
+        <NODE id="holedPiece1" pickingID="41" piece="true">
             <MATERIAL id="null" />
             <TEXTURE id="null" />
             <DESCENDANTS>
                <NODEREF id="holedPiece" />
             </DESCENDANTS>
         </NODE>
-        <NODE id="holedPiece2" pickingID="42">
+        <NODE id="holedPiece2" pickingID="42" piece="true">
             <MATERIAL id="null" />
             <TEXTURE id="null" />
             <DESCENDANTS>
                <NODEREF id="holedPiece" />
             </DESCENDANTS>
         </NODE>
-        <NODE id="holedPiece3" pickingID="43">
+        <NODE id="holedPiece3" pickingID="43" piece="true">
             <MATERIAL id="null" />
             <TEXTURE id="null" />
             <DESCENDANTS>
                <NODEREF id="holedPiece" />
             </DESCENDANTS>
         </NODE>
-        <NODE id="holedPiece4" pickingID="44">
+        <NODE id="holedPiece4" pickingID="44" piece="true">
             <MATERIAL id="null" />
             <TEXTURE id="null" />
             <DESCENDANTS>
                <NODEREF id="holedPiece" />
             </DESCENDANTS>
         </NODE>
-        <NODE id="holedPiece5" pickingID="45">
+        <NODE id="holedPiece5" pickingID="45" piece="true">
             <MATERIAL id="null" />
             <TEXTURE id="null" />
             <DESCENDANTS>
                <NODEREF id="holedPiece" />
             </DESCENDANTS>
         </NODE>
-        <NODE id="holedPiece6" pickingID="46">
+        <NODE id="holedPiece6" pickingID="46" piece="true">
             <MATERIAL id="null" />
             <TEXTURE id="null" />
             <DESCENDANTS>
                <NODEREF id="holedPiece" />
             </DESCENDANTS>
         </NODE>
-        <NODE id="holedPiece7" pickingID="47">
+        <NODE id="holedPiece7" pickingID="47" piece="true">
             <MATERIAL id="null" />
             <TEXTURE id="null" />
             <DESCENDANTS>
                <NODEREF id="holedPiece" />
             </DESCENDANTS>
         </NODE>
-        <NODE id="holedPiece8" pickingID="48">
+        <NODE id="holedPiece8" pickingID="48" piece="true">
             <MATERIAL id="null" />
             <TEXTURE id="null" />
             <DESCENDANTS>
@@ -308,56 +308,56 @@
 
         <!-- Dual Pieces -->
 
-        <NODE id="dualPiece1" pickingID="51">
+        <NODE id="dualPiece1" pickingID="51" piece="true">
             <MATERIAL id="null" />
             <TEXTURE id="null" />
             <DESCENDANTS>
                <NODEREF id="dualPiece" />
             </DESCENDANTS>
         </NODE>
-        <NODE id="dualPiece2" pickingID="52">
+        <NODE id="dualPiece2" pickingID="52" piece="true">
             <MATERIAL id="null" />
             <TEXTURE id="null" />
             <DESCENDANTS>
                <NODEREF id="dualPiece" />
             </DESCENDANTS>
         </NODE>
-        <NODE id="dualPiece3" pickingID="53">
+        <NODE id="dualPiece3" pickingID="53" piece="true">
             <MATERIAL id="null" />
             <TEXTURE id="null" />
             <DESCENDANTS>
                <NODEREF id="dualPiece" />
             </DESCENDANTS>
         </NODE>
-        <NODE id="dualPiece4" pickingID="54">
+        <NODE id="dualPiece4" pickingID="54" piece="true">
             <MATERIAL id="null" />
             <TEXTURE id="null" />
             <DESCENDANTS>
                <NODEREF id="dualPiece" />
             </DESCENDANTS>
         </NODE>
-        <NODE id="dualPiece5" pickingID="55">
+        <NODE id="dualPiece5" pickingID="55" piece="true">
             <MATERIAL id="null" />
             <TEXTURE id="null" />
             <DESCENDANTS>
                <NODEREF id="dualPiece" />
             </DESCENDANTS>
         </NODE>
-        <NODE id="dualPiece6" pickingID="56">
+        <NODE id="dualPiece6" pickingID="56" piece="true">
             <MATERIAL id="null" />
             <TEXTURE id="null" />
             <DESCENDANTS>
                <NODEREF id="dualPiece" />
             </DESCENDANTS>
         </NODE>
-        <NODE id="dualPiece7" pickingID="57">
+        <NODE id="dualPiece7" pickingID="57" piece="true">
             <MATERIAL id="null" />
             <TEXTURE id="null" />
             <DESCENDANTS>
                <NODEREF id="dualPiece" />
             </DESCENDANTS>
         </NODE>
-        <NODE id="dualPiece8" pickingID="58">
+        <NODE id="dualPiece8" pickingID="58" piece="true">
             <MATERIAL id="null" />
             <TEXTURE id="null" />
             <DESCENDANTS>

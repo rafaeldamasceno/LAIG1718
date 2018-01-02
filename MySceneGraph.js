@@ -24,7 +24,7 @@ function MySceneGraph(filename, scene) {
 
   this.pickingIdToId = [];
 
-  this.holeDown = true;
+  this.holeUp = true;
 
   this.idRoot = null; // The id of the root element.
 
@@ -1406,8 +1406,17 @@ MySceneGraph.prototype.parseNodes = function (nodesNode) {
       if (pickingID) {
         this.pickingIdToId[pickingID] = nodeID;
       }
+
+      var isPiece = this.reader.getBoolean(children[i], 'piece', 0);
+
+      if(isPiece) {
+        this.nodes[nodeID] = new MyPiece(this, nodeID, parseInt(pickingID));
+      } else {
+        this.nodes[nodeID] = new MyGraphNode(this, nodeID, parseInt(pickingID));
+      }
+
       // Creates node.
-      this.nodes[nodeID] = new MyGraphNode(this, nodeID, parseInt(pickingID));
+      
 
       // Gathers child nodes.
       var nodeSpecs = children[i].children;

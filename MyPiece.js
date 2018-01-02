@@ -2,14 +2,31 @@
  * MyGraphNode class, representing an intermediate node in the scene graph.
  * @constructor
  **/
-function MyGraphNode(graph, nodeID, pickingID) {
+function MyPiece(graph, nodeID, pickingID) {
   this.graph = graph;
 
   this.nodeID = nodeID;
 
   this.pickingID = pickingID;
 
+  //Piece new elements
   this.shaderFlag = false;
+  this.played = false;
+  this.directionUp = this.graph.holeUp;
+  this.dualPiece = false;
+
+  switch (this.pickingID / 10 >> 0) {
+    case 3:
+      this.position = this.graph.plainPiecesPosition[(this.pickingID % 10) - 1];
+      break;
+    case 4:
+      this.position = this.graph.holedPiecesPosition[(this.pickingID % 10) - 1];
+      break;
+    case 5:
+      this.position = this.graph.dualPiecesPosition[(this.pickingID % 10) - 1];
+      this.dualPiece = true;
+      break;
+  }
 
   // IDs of child nodes.
   this.children = [];
@@ -42,7 +59,7 @@ function MyGraphNode(graph, nodeID, pickingID) {
 /**
  * Adds the reference (ID) of another node to this node's children array.
  */
-MyGraphNode.prototype.addChild = function (nodeID) {
+MyPiece.prototype.addChild = function (nodeID) {
   this.children.push(nodeID);
 }
 
@@ -62,11 +79,11 @@ MyGraphNode.prototype.addChild = function (nodeID) {
 /**
  * Adds a leaf to this node's leaves array.
  */
-MyGraphNode.prototype.addLeaf = function (leaf) {
+MyPiece.prototype.addLeaf = function (leaf) {
   this.leaves.push(leaf);
 }
 
-MyGraphNode.prototype.display = function (materialID, textureID = null) {
+MyPiece.prototype.display = function (materialID, textureID = null) {
 
   var newTexture = this.textureID;
   if (this.textureID == "null") {
@@ -86,6 +103,18 @@ MyGraphNode.prototype.display = function (materialID, textureID = null) {
     this.graph.scene.multMatrix(this.animationMatrix);
     // console.log("applying animation");
   }
+
+  // Add position to pieces
+  //if para melhorar a eficiência (só as peças é que executam o que está a seguir)
+  let transMatrix = mat4.create();
+  mat4.identity(transMatrix);
+    //mat4.translate(transMatrix, transMatrix, coords);
+  mat4.translate(transMatrix, transMatrix, this.position);
+    
+  if (this.dualPiece && !this.directionUp) {
+    mat4.rotate(transMatrix, transMatrix, Math.PI, [0, 0, 1]);
+  }
+  this.graph.scene.multMatrix(transMatrix);
 
   this.graph.materials[newMaterial].apply();
   if (newTexture != null) {
@@ -125,7 +154,7 @@ MyGraphNode.prototype.display = function (materialID, textureID = null) {
 
 }
 
-MyGraphNode.prototype.update = function (currTime) {
+MyPiece.prototype.update = function (currTime) {
   for (let i = 0; i < this.children.length; i++) {
     this.graph.nodes[this.children[i]].update(currTime);
   }

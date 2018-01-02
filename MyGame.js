@@ -31,7 +31,7 @@ MyGame.prototype.toString = function() {
           continue;
         }
         returnString += "n";
-        returnString += this.board[i][j] / 10;
+        returnString += this.board[i][j] / 10 >> 0;
         returnString += type;
         returnString += ",";
       }
