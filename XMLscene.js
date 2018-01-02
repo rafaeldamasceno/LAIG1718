@@ -121,7 +121,7 @@ XMLscene.prototype.logPicking = function () {
 XMLscene.prototype.pickingHandle = function (ID, object) {
 
   if (ID == 1) {
-    this.graph.idRoot = "root";
+    this.graph.idRoot = "game";
     return;
   }
   let currentID;
@@ -172,7 +172,7 @@ XMLscene.prototype.pickingHandle = function (ID, object) {
     console.log(point4);
     let point3 = [point4[0], point4[1] + 10, point4[2]];
     let point2 = [(point4[0] + point1[0]) / 2, point4[1] + 10, (point4[2] + point1[2]) / 2];
-    var animation = new BezierAnimation(this.graph, 9, [point1, point2, point3, point4]);
+    var animation = new BezierAnimation(this.graph, 30, [point1, point2, point3, point4]);
     this.graph.currPlayingPiece.shaderFlag = false;
     this.graph.currPlayingPiece.onAnimation = true;
     this.graph.currPlayingPiece.position = point4;

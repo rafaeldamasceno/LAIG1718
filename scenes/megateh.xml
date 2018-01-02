@@ -97,6 +97,11 @@
             <file path="images/playButton.png" />
             <amplif_factor s="20" t="20" />
         </TEXTURE>
+
+        <TEXTURE id="tatami">
+            <file path="images/tatami.png" />
+            <amplif_factor s="35" t="35" />
+        </TEXTURE>
     </TEXTURES>
     <MATERIALS>
         <!-- A default material -->
@@ -155,7 +160,7 @@
     <NODES>
         <ROOT id="menu" />
         <!-- The root node -->
-        <NODE id="root">
+        <NODE id="game">
             <MATERIAL id="defaultMaterial" />
             <TEXTURE id="null" />
             <!-- <TRANSLATION x="5" y="1" z="5" /> -->
@@ -185,6 +190,7 @@
                <NODEREF id="dualPiece6" />
                <NODEREF id="dualPiece7" />
                <NODEREF id="dualPiece8" />
+               <NODEREF id="tatami" />
             </DESCENDANTS>
         </NODE>
 
@@ -702,6 +708,17 @@
             <ROTATION axis="y" angle="90" />
             <DESCENDANTS>
                 <LEAF type="rectangle" args="-10 10 10 -10" />
+            </DESCENDANTS>
+        </NODE>
+
+        <NODE id="tatami">
+            <MATERIAL id="null" />
+            <TEXTURE id="tatami" />
+            <TRANSLATION x="-17.5" y="-0.01" z="17.5" />            
+            <ROTATION axis="x" angle="-90" />
+            <DESCENDANTS>
+                <LEAF type="rectangle" args="0 35 35 0" />
+                <LEAF type="rectangle" args="0 0 35 35" />
             </DESCENDANTS>
         </NODE>
             

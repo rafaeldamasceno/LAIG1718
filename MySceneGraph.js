@@ -25,6 +25,7 @@ function MySceneGraph(filename, scene) {
   this.pickingIdToId = [];
 
   this.holeUp = true;
+  this.scene.interface.gui.add(this, 'holeUp');
 
   this.idRoot = null; // The id of the root element.
 
@@ -1756,10 +1757,12 @@ MySceneGraph.generateRandomString = function (length) {
  * Displays the scene, processing each node, starting in the root node.
  */
 MySceneGraph.prototype.displayScene = function () {
+  console.log(this.holeUp);
+
   // entry point for graph rendering
   if (this.scene.pickMode) {
     for (let i = 0; i < this.invisiblePieces.length; i++) {
-      this.invisiblePieces[i].display("birch");
+      this.invisiblePieces[i].display(this.defaultMaterialID);
     }
   }
 
