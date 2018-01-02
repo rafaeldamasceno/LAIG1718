@@ -1,6 +1,6 @@
 
 diff(FirstGame, SecondGame, DiffX, DiffY, DiffPiece) :-
-  movePiece(DiffPiece, DiffX, DiffY, FirstGame, SecondGame).
+  movePiece(DiffPiece, DiffY, DiffX, FirstGame, SecondGame).
 
 test234(X, Y, P) :- 
   initialGame(Game),

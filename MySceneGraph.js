@@ -108,6 +108,29 @@ MySceneGraph.prototype.createInvisiblePieces = function () {
   }
 }
 
+MySceneGraph.prototype.getNextPlayablePiece = function(piece) {
+  let d;
+  switch(piece) {
+    case 11:
+      d = 3;
+      break;
+    case 12:
+      d = 4;
+      break;
+    case 21:
+    case 22:
+      d = 5;
+      break;
+  }
+  for (let i = 1; i <= 8; i++) {
+    let node = this.nodes[this.pickingIdToId[d* 10 + i]];
+    if(!node.played) {
+      return node;
+    }
+  }
+
+}
+
 /*
  * Callback to be executed after successful reading
  */

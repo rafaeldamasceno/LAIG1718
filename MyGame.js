@@ -17,6 +17,19 @@ function MyGame(graph) { //1 - plain  2 - holed
 
 MyGame.prototype.play = function (x, y, piece) {
   this.board[y][x] = (this.board[y][x] / 10 >> 0) * 10 + piece;
+  switch(piece) {
+    case 11:
+    this.stockPlainPieces--;
+      break;
+    case 12:
+    this.stockHoledPieces--;
+      break;
+    case 21:
+    case 22:
+    this.stockDualPieces--;
+    break;
+  }
+
 }
 
 MyGame.prototype.getPosition = function (x, y) {
@@ -75,14 +88,34 @@ function getPrologRequest(requestString, onSuccess, onError, port) {
 MyGame.prototype.handleReplyBot = function(data) {
   let response = data.target.response.slice(1, -1).split(",");
   // console.log(response);
-  if (response[0] == "w") {
-    return;
-  } else if (response[0] == "c") {
-    let piece = parseInt(response[3][1]) * 10;
-    piece += response[3][2] == "p" ? 1 : 2;
-    this.play(response[2], response[1], piece);
+  let piece = parseInt(response[3][1]) * 10;
+  piece += response[3][2] == "p" ? 1 : 2;
+  
+  let pieceToPlay = this.graph.getNextPlayablePiece(piece);
+  let point1 = pieceToPlay.position;
+  let point4 = this.graph.game.getPosition(response[1], response[2]);
+  let point3 = [point4[0], point4[1] + 10, point4[2]];
+  let point2 = [(point4[0] + point1[0]) / 2, point4[1] + 10, (point4[2] + point1[2]) / 2];
+
+  var animation = new BezierAnimation(this.graph, 30, [point1, point2, point3, point4]);
+  this.play(response[2], response[1], piece);
+  pieceToPlay.animations.push(animation);
+  //pieceToPlay.position = point4;
+
+  pieceToPlay.played = true;
+  if(piece == 21) {
+    pieceToPlay.holeUp = false;
+  } else if (piece == 22) {
+    pieceToPlay.holeUp = true;
   }
-  this.nextTurn();
+
+  if (response[0] == "w") {
+    console.log("win");
+  } else if (response[0] == "c") {
+    this.nextTurn();
+  }
+  
+
 }
 
 MyGame.prototype.handleReply = function(data) {
@@ -123,6 +156,8 @@ MyGame.prototype.personPlay = function (x, y, piece) {
   getPrologRequest(sendString, this.handleReply);
 
   this.play(x, y, piece); //gravar jogada no nosso jogo ainda por testar vitória com o prolog
+
+  this.nextTurn();
 }
 
 MyGame.prototype.nextTurn = function () {
@@ -138,7 +173,7 @@ MyGame.prototype.humanPlaying = function () {
     case 1:
       return true;
     case 2:
-      return this.player;
+      return !this.player;
     case 3:
       return false;
   }

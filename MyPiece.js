@@ -206,6 +206,7 @@ MyPiece.prototype.update = function (currTime) {
   this.currAnimation = i - 1;
   if (this.currAnimation == this.animations.length) {
     this.animationMatrix = null;
+    this.position = this.animations[this.animations.length - 1].p4;
     return;
   }
 

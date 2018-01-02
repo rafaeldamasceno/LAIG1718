@@ -177,8 +177,7 @@ XMLscene.prototype.pickingHandle = function (ID, object) {
     var animation = new BezierAnimation(this.graph, 30, [point1, point2, point3, point4]);
     this.graph.currPlayingPiece.animations.push(animation);
     this.graph.currPlayingPiece.shaderFlag = false;
-    this.graph.currPlayingPiece.onAnimation = true;
-    this.graph.currPlayingPiece.position = point4;
+    //this.graph.currPlayingPiece.position = point4;
     this.graph.invisiblePieces = [];
     let pieceType = 11;
     if (this.graph.currPlayingPiece.dualPiece) {
