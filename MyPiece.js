@@ -11,6 +11,7 @@ function MyPiece(graph, nodeID, pickingID) {
 
   //Piece new elements
   this.shaderFlag = false;
+  this.onAnimation = false;
   this.played = false;
   this.directionUp = this.graph.holeUp;
   this.stuckDirection = this.graph.holeUp;
@@ -110,14 +111,17 @@ MyPiece.prototype.display = function (materialID, textureID = null) {
   let transMatrix = mat4.create();
   mat4.identity(transMatrix);
     //mat4.translate(transMatrix, transMatrix, coords);
-  mat4.translate(transMatrix, transMatrix, this.position);
+  if(!this.onAnimation) {
+    mat4.translate(transMatrix, transMatrix, this.position);
+  }
+  
     
-  if (this.dualPiece && !this.directionUp && !this.played) {
+  if (this.dualPiece && !this.directionUp && !this.played && !this.onAnimation) {
     mat4.rotate(transMatrix, transMatrix, Math.PI, [0, 0, 1]);
     this.stuckDirection = this.directionUp;
   }
 
-  if(!this.stuckDirection && this.played) {
+  if(!this.stuckDirection && (this.played || this.onAnimation)) {
     mat4.rotate(transMatrix, transMatrix, Math.PI, [0, 0, 1]);
   }
 
@@ -197,6 +201,8 @@ MyPiece.prototype.update = function (currTime) {
   }
   this.currAnimation = i - 1;
   if (this.currAnimation == this.animations.length) {
+    this.played = true;
+    this.onAnimation = false;
     return;
   }
 

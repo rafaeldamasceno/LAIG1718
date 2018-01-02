@@ -96,14 +96,12 @@ MySceneGraph.prototype.createInvisiblePieces = function() {
       if (this.game.board[i][j] >= 20) {
         continue;
       }
-      console.log()
       var invisiblePiece = new MyPiece(this, "", 100 + j*10 + i);
       invisiblePiece.position = this.game.getPosition(j, i);
       invisiblePiece.leaves = this.nodes["plainPiece"].leaves;
       invisiblePiece.children = this.nodes["plainPiece"].children;
       invisiblePiece.materialID = "null";
       invisiblePiece.textureID = "null";
-      console.log(invisiblePiece.position);
       this.invisiblePieces.push(invisiblePiece);
     }
   }

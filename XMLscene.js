@@ -121,7 +121,7 @@ XMLscene.prototype.logPicking = function ()
 	}
 
 XMLscene.prototype.pickingHandle = function(ID, object) {
-  console.log(ID);
+  
     if(ID == 1) {
       this.graph.idRoot = "root";
       return;
@@ -145,14 +145,50 @@ XMLscene.prototype.pickingHandle = function(ID, object) {
     case 3: //Ids para as peças plain
     case 4: //Ids para as peças holed
     case 5: //Ids para as peças dual
+      if(object.played || object.onAnimation) {
+        return;
+      }
       if(this.graph.currPlayingPiece) {
         this.graph.currPlayingPiece.shaderFlag = false;
         this.graph.invisiblePieces = [];
+        if(this.graph.currPlayingPiece.pickingID == ID) {
+          this.graph.currPlayingPiece = null;
+          return;
+        }
       }
       this.graph.currPlayingPiece = object;
+      console.log(object);
       object.shaderFlag = true;
       this.graph.createInvisiblePieces();
       return;
+    }
+    if(ID >= 100 && ID < 140) {
+      if(this.graph.currPlayingPiece == null) {
+        return;
+      }
+      object.played = true;
+      let x = ID % 10;
+      let y = (ID - 100) / 10 >> 0;
+      console.log(this.graph.currPlayingPiece);
+      let point1 = this.graph.currPlayingPiece.position;
+      let point4 = this.graph.game.getPosition(y, x);
+      let point3 = [point4[0], point4[1] + 10, point4[2]];
+      let point2 = [(point4[0] + point1[0]) / 2, point4[1] + 10, (point4[2] + point1[2]) / 2];
+      var animation = new BezierAnimation(this.graph, 3, [point1, point2, point3, point4]);
+      this.graph.currPlayingPiece.shaderFlag = false;
+      this.graph.currPlayingPiece.onAnimation = true;
+      this.graph.currPlayingPiece.position = point4;
+      this.graph.currPlayingPiece.animations.push(animation);
+      this.graph.invisiblePieces = [];
+      let pieceType = 11;
+      if(this.graph.currPlayingPiece.dualPiece) {
+        pieceType += 10;
+      }
+      if(this.graph.currPlayingPiece.directionUp || this.graph.currPlayingPiece.pickingID / 10 >> 0 == 4) {
+        pieceType++;
+      }
+      this.graph.game.play(x, y, pieceType); //gravar jogada no nosso jogo ainda por testar vitória com o prolog
+
     }
 }
 XMLscene.prototype.display = function () {
