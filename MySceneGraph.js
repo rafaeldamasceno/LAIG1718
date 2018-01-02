@@ -1757,7 +1757,7 @@ MySceneGraph.generateRandomString = function (length) {
  * Displays the scene, processing each node, starting in the root node.
  */
 MySceneGraph.prototype.displayScene = function () {
-  console.log(this.holeUp);
+  // console.log(this.holeUp);
 
   // entry point for graph rendering
   if (this.scene.pickMode) {

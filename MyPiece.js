@@ -164,8 +164,10 @@ MyPiece.prototype.display = function (materialID, textureID = null) {
   if (this.shaderFlag) {
     this.graph.scene.setActiveShader(this.graph.scene.defaultShader);
   }
-
-  this.graph.scene.clearPickRegistration();
+  
+  if (this.pickingID) {
+    this.graph.scene.clearPickRegistration();
+  }
 
   this.graph.scene.popMatrix();
 
