@@ -128,7 +128,6 @@ XMLscene.prototype.pickingHandle = function (ID, object) {
   switch (ID / 10 >> 0) {
     case 1: //Ids para os botões de tipo de jogo
       currentID = 10 + this.graph.game.gamemode;
-      console.log("here");
       //console.log(this.graph.nodes[this.graph.pickingIdToId[currentID]]);
       this.graph.nodes[this.graph.pickingIdToId[currentID]].shaderFlag = false;
       this.graph.game.gamemode = ID % 10;
@@ -155,7 +154,6 @@ XMLscene.prototype.pickingHandle = function (ID, object) {
         }
       }
       this.graph.currPlayingPiece = object;
-      console.log(object);
       object.shaderFlag = true;
       this.graph.createInvisiblePieces(object);
       return;
@@ -167,9 +165,11 @@ XMLscene.prototype.pickingHandle = function (ID, object) {
     object.played = true;
     let x = ID % 10;
     let y = (ID - 100) / 10 >> 0;
-    console.log(this.graph.currPlayingPiece);
     let point1 = this.graph.currPlayingPiece.position;
-    let point4 = this.graph.game.getPosition(y, x);
+    let point4 = this.graph.game.getPosition(x, y);
+    console.log(x);
+    console.log(y);
+    console.log(point4);
     let point3 = [point4[0], point4[1] + 10, point4[2]];
     let point2 = [(point4[0] + point1[0]) / 2, point4[1] + 10, (point4[2] + point1[2]) / 2];
     var animation = new BezierAnimation(this.graph, 9, [point1, point2, point3, point4]);
@@ -185,8 +185,10 @@ XMLscene.prototype.pickingHandle = function (ID, object) {
     if (this.graph.currPlayingPiece.directionUp || this.graph.currPlayingPiece.pickingID / 10 >> 0 == 4) {
       pieceType++;
     }
-    this.graph.game.play(x, y, pieceType); //gravar jogada no nosso jogo ainda por testar vitória com o prolog
 
+    this.graph.game.personPlay(y, x, pieceType);
+    
+    
   }
 }
 XMLscene.prototype.display = function () {

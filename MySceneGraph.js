@@ -30,6 +30,8 @@ function MySceneGraph(filename, scene) {
 
   this.currPlayingPiece = null;
 
+  this.player1Turn = true;
+
   this.axisCoords = [];
   this.axisCoords['x'] = [1, 0, 0];
   this.axisCoords['y'] = [0, 1, 0];
@@ -97,7 +99,7 @@ MySceneGraph.prototype.createInvisiblePieces = function () {
         continue;
       }
       var invisiblePiece = new MyPiece(this, "", 100 + j * 10 + i);
-      invisiblePiece.position = this.game.getPosition(j, i);
+      invisiblePiece.position = this.game.getPosition(i, j);
       invisiblePiece.leaves = this.nodes["plainPiece"].leaves;
       invisiblePiece.children = this.nodes["plainPiece"].children;
       invisiblePiece.materialID = "null";

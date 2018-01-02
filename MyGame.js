@@ -9,6 +9,7 @@ function MyGame(graph) { //1 - plain  2 - holed
   this.difficulty = 1;
   this.gamemode = 1; //1 - pvp, 2 - pve, 3 - eve
 
+  this.response = "";
 
 }
 
@@ -20,7 +21,7 @@ MyGame.prototype.getPosition = function (x, y) {
 
   let posZ = - 3.54 * x + 5.31;
   let posX = 3.54 * y - 5.31;
-  let posY = 1.1 + (this.board[y][x] / 10 >> 0) * 0.6;
+  let posY = 1.1 + (this.board[x][y] / 10 >> 0) * 0.6;
 
   let pos = [posX, posY, posZ];
 
@@ -57,43 +58,58 @@ MyGame.prototype.toString = function () {
   return returnString;
 }
 
-function getPrologRequest(requestString, onSuccess, onError, port, response) {
+function getPrologRequest(requestString, onSuccess, onError, port) {
   var requestPort = port || 8081;
   var request = new XMLHttpRequest();
   request.open('GET', 'http://localhost:' + requestPort + '/' + requestString, true);
-
-  request.onload = onSuccess || function (data) { console.log("Request successful. Reply: " + data.target.response); response = data.target.response };
+  request.onload = onSuccess || function (data) { console.log("Request successful. Reply: " + data.target.response); return data.target.response};
   request.onerror = onError || function () { console.log("Error waiting for response"); };
 
   request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
   request.send();
+
 }
 
-MyGame.prototype.AIplay = function () {
+MyGame.prototype.handleReply = function(data) {
+  let response = data.target.response;
+  console.log(response);
+  if (response == "win") {
+    console.log("here");
+  }
+}
+
+MyGame.prototype.aIplay = function () {
   var sendString = "[b,";
   sendString += this.toString();
   sendString += this.difficulty - 1;
   sendString += "]";
 
-  var response;
-  getPrologRequest(sendString, "", "", 8081, response);
+  getPrologRequest(sendString, "", "", 8081);
 
-  return response;
+  return this.response;
 
 }
 
-MyGame.prototype.PersonPlay = function (x, y, piece) {
+MyGame.prototype.personPlay = function (x, y, piece) {
+  
+  let piecePlog = "n";
+  piecePlog += piece / 10 >> 0;
+  if(piece % 10 == 1) {
+    piecePlog += "p";
+  } else {
+    piecePlog += "h";
+  }
   var sendString = "[p,";
   sendString += this.toString();
   sendString += x;
   sendString += ",";
   sendString += y;
   sendString += ",";
-  sendString += piece;
+  sendString += piecePlog;
   sendString += "]";
 
-  var response;
-  getPrologRequest(sendString, "", "", 8081, response);
+  getPrologRequest(sendString, this.handleReply);
 
-  return response;
+  this.play(x, y, piece); //gravar jogada no nosso jogo ainda por testar vitória com o prolog
+  this.graph.player1Turn = !this.graph.player1Turn;
 }

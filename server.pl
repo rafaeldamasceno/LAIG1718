@@ -124,6 +124,7 @@ botPlay(Game, Difficulty, Res) :-
 personPlay(Game, X, Y, Piece, Res) :-
 	movePiece(Piece, Y, X, Game, NewGame),
 	NewGame = [Board | _],
+  write(Board),
 	ite(gameWin(Board), Res = win, Res = yes).
 	
 personPlay(_,_,_,_,Res) :-

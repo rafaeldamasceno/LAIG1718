@@ -13,8 +13,8 @@ function MyPiece(graph, nodeID, pickingID) {
   this.shaderFlag = false;
   this.onAnimation = false;
   this.played = false;
-  this.directionUp = this.graph.holeUp;
-  this.stuckDirection = this.graph.holeUp;
+  this.directionUp = false;
+  this.stuckDirection = false;
   this.dualPiece = false;
 
   switch (this.pickingID / 10 >> 0) {
@@ -27,6 +27,8 @@ function MyPiece(graph, nodeID, pickingID) {
     case 5:
       this.position = this.graph.dualPiecesPosition[(this.pickingID % 10) - 1];
       this.dualPiece = true;
+      this.directionUp = this.graph.holeUp;
+      this.stuckDirection = this.graph.holeUp;
       break;
   }
 
@@ -121,7 +123,7 @@ MyPiece.prototype.display = function (materialID, textureID = null) {
     this.stuckDirection = this.directionUp;
   }
 
-  if(!this.stuckDirection && (this.played || this.onAnimation)) {
+  if(!this.stuckDirection && (this.played || this.onAnimation) && this.dualPiece) {
     mat4.rotate(transMatrix, transMatrix, Math.PI, [0, 0, 1]);
   }
 
@@ -182,7 +184,7 @@ MyPiece.prototype.update = function (currTime) {
     this.startTime = currTime;
     let time = 0;
     for (ani of this.animations) {
-      console.log(ani);
+      //console.log(ani);
       time += ani.getAnimationTime();
       this.animationsTimes.push(time);
     }
