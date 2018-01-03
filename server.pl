@@ -115,7 +115,7 @@ parse_input([p,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Stock1,Stock2,Stock3,X,Y,Piece],R
 personPlay([[[A,B,C,D],[E,F,G,H],[I,J,K,L],[M,N,O,P]],Stock1,Stock2,Stock3],X,Y,Piece,Res).
 
 botPlay(Game, Difficulty, Res) :-
-  write(Game),nl,
+  % write(Game),nl,
 	botTurn(Game, 1, NewGame, Difficulty),
 	diff(Game, NewGame, X, Y, Piece),
   NewGame = [Board | _],

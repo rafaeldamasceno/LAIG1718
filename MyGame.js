@@ -125,20 +125,20 @@ MyGame.prototype.handleReplyBot = function(data) {
 
   if (response[0] == "w") {
     this.graph.idRoot = "winMenu";
-    this.scene.camera.setPosition(vec3.fromValues(0.1, 15, 0.1));
+    this.graph.scene.initCameras();
   } else if (response[0] == "c") {
     this.nextTurn();
   }
-  
-
 }
 
 MyGame.prototype.handleReply = function(data) {
   let response = data.target.response;
-  console.log(response);
+  // console.log(response);
   if (response == "win") {
     this.graph.idRoot = "winMenu";
-    this.graph.scene.camera.setPosition(vec3.fromValues(0.1, 15, 0.1));
+    this.graph.scene.initCameras();
+  } else {
+    this.nextTurn();
   }
 }
 
@@ -172,8 +172,6 @@ MyGame.prototype.personPlay = function (x, y, piece) {
   getPrologRequest(sendString, this.handleReply.bind(this));
 
   this.play(x, y, piece); //gravar jogada no nosso jogo ainda por testar vitória com o prolog
-
-  this.nextTurn();
 }
 
 MyGame.prototype.nextTurn = function () {

@@ -119,7 +119,6 @@ XMLscene.prototype.logPicking = function () {
 }
 
 XMLscene.prototype.pickingHandle = function (ID, object) {
-
   if (ID == 1) {
     this.graph.idRoot = "game";
     this.graph.game.nextTurn();
@@ -148,7 +147,7 @@ XMLscene.prototype.pickingHandle = function (ID, object) {
         if (!this.graph.game.humanPlaying()) {
           return;
         }
-      if (object.played || object.onAnimation) {
+      if (object.played) {
         return;
       }
       if (this.graph.currPlayingPiece) {
@@ -174,6 +173,8 @@ XMLscene.prototype.pickingHandle = function (ID, object) {
           break;
         case 3:
           this.graph.idRoot = "game";
+          this.camera.setPosition(this.graph.cameras[this.graph.currCamera][0]);
+          this.camera.setTarget(this.graph.cameras[this.graph.currCamera][1]);
       }
   }
   if (ID >= 100 && ID < 140) {
@@ -204,9 +205,6 @@ XMLscene.prototype.pickingHandle = function (ID, object) {
     }
 
     this.graph.game.personPlay(y, x, pieceType);
-    
-    
-    
   }
 }
 XMLscene.prototype.display = function () {
