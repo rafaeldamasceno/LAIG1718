@@ -163,6 +163,18 @@ XMLscene.prototype.pickingHandle = function (ID, object) {
       object.shaderFlag = true;
       this.graph.createInvisiblePieces(object);
       return;
+    case 6:
+      switch(ID % 10) {
+        case 1:
+          console.log("replay");
+          //this.graph.replay();
+          break;
+        case 2:
+          this.graph.restartGame();
+          break;
+        case 3:
+          this.graph.idRoot = "game";
+      }
   }
   if (ID >= 100 && ID < 140) {
     if (this.graph.currPlayingPiece == null) {
@@ -187,7 +199,7 @@ XMLscene.prototype.pickingHandle = function (ID, object) {
     if (this.graph.currPlayingPiece.dualPiece) {
       pieceType += 10;
     }
-    if (this.graph.currPlayingPiece.directionUp || this.graph.currPlayingPiece.pickingID / 10 >> 0 == 4) {
+    if ((this.graph.currPlayingPiece.holeUp && this.graph.currPlayingPiece.pickingID / 10 >> 0 == 5) || this.graph.currPlayingPiece.pickingID / 10 >> 0 == 4) {
       pieceType++;
     }
 

@@ -34,6 +34,7 @@ function MyPiece(graph, nodeID, pickingID) {
   if(this.position) {
     this.startPosition = this.position;
   }
+  this.endPosition = null;
   
   
 
@@ -215,10 +216,15 @@ MyPiece.prototype.update = function (currTime) {
   this.currAnimation = i - 1;
   if (this.currAnimation == this.animations.length) {
     this.position = this.animations[this.animations.length - 1].p4;
+    //this.endPosition = this.animations[this.animations.length - 1].p4;  REPLAY
     this.animations = [];
     this.animationsTimes = [0];
     this.animationMatrix = null;
-    
+    /***REPLAY***********************************
+    if(this.graph.onReplay) {
+      this.graph.animationEnd = true;
+    }
+    ********************************************/
     return;
   }
 

@@ -35,7 +35,6 @@ MyGame.prototype.play = function (x, y, piece) {
     return arr.slice();
   });
   this.boardsStack.push(newBoard);
-
 }
 
 MyGame.prototype.undo = function() {
@@ -125,7 +124,8 @@ MyGame.prototype.handleReplyBot = function(data) {
   }
 
   if (response[0] == "w") {
-    console.log("win");
+    this.graph.idRoot = "winMenu";
+    this.scene.camera.setPosition(vec3.fromValues(0.1, 15, 0.1));
   } else if (response[0] == "c") {
     this.nextTurn();
   }
@@ -137,7 +137,8 @@ MyGame.prototype.handleReply = function(data) {
   let response = data.target.response;
   console.log(response);
   if (response == "win") {
-    console.log("here");
+    this.graph.idRoot = "winMenu";
+    this.graph.scene.camera.setPosition(vec3.fromValues(0.1, 15, 0.1));
   }
 }
 
@@ -168,7 +169,7 @@ MyGame.prototype.personPlay = function (x, y, piece) {
   sendString += piecePlog;
   sendString += "]";
 
-  getPrologRequest(sendString, this.handleReply);
+  getPrologRequest(sendString, this.handleReply.bind(this));
 
   this.play(x, y, piece); //gravar jogada no nosso jogo ainda por testar vitória com o prolog
 

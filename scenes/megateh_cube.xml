@@ -73,6 +73,21 @@
             <amplif_factor s="20" t="20" />
         </TEXTURE>
 
+        <TEXTURE id="winMenuPanel">
+            <file path="images/winMenuPanel.png" />
+            <amplif_factor s="20" t="20" />
+        </TEXTURE>
+
+        <TEXTURE id="closeButton">
+            <file path="images/close.png" />
+            <amplif_factor s="20" t="20" />
+        </TEXTURE>
+
+        <TEXTURE id="replayButton">
+            <file path="images/replay.png" />
+            <amplif_factor s="10" t="10" />
+        </TEXTURE>
+
         <TEXTURE id="dif0">
             <file path="images/dif0.png" />
             <amplif_factor s="20" t="20" />
@@ -721,6 +736,42 @@
             <DESCENDANTS>
                 <LEAF type="rectangle" args="0 35 35 0" />
                 <LEAF type="rectangle" args="0 0 35 35" />
+            </DESCENDANTS>
+        </NODE>
+
+        <NODE id="winPanel">
+            <MATERIAL id="null" />
+            <TEXTURE id="winMenuPanel" />
+            <ROTATION axis="y" angle="90" />
+            <DESCENDANTS>
+                <LEAF type="rectangle" args="-10 10 10 -10" />
+            </DESCENDANTS>
+        </NODE>
+
+        <NODE id="replayButton" pickingID="61">
+            <MATERIAL id="null" />
+            <TEXTURE id="replayButton" />
+            <TRANSLATION x="0" y="-4.5" z="5.3" />
+            <DESCENDANTS>
+                <NODEREF id="button" />
+            </DESCENDANTS>
+        </NODE>
+
+        <NODE id="newGameButton" pickingID="62">
+            <MATERIAL id="null" />
+            <TEXTURE id="playButton" />
+            <TRANSLATION x="0" y="-4.5" z="-4.1" />
+            <DESCENDANTS>
+                <NODEREF id="button" />
+            </DESCENDANTS>
+        </NODE>
+
+        <NODE id="closeButton" pickingID="63">
+            <MATERIAL id="null" />
+            <TEXTURE id="closeButton" />
+            <TRANSLATION x="0" y="7" z="-7" />
+            <DESCENDANTS>
+                <NODEREF id="button" />
             </DESCENDANTS>
         </NODE>
             

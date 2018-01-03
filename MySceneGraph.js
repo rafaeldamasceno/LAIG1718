@@ -26,6 +26,12 @@ function MySceneGraph(filename, scene) {
 
   this.playsStack = []; //x, y, Piece
 
+  //Replay needed variables
+  this.onReplay = false;
+  this.animationEnd = false;
+
+  this.newGameFlag = false;
+
   this.holeUp = true;
   this.scene.interface.gui.add(this, 'holeUp');
 
@@ -107,8 +113,65 @@ function MySceneGraph(filename, scene) {
 
   this.invisiblePieces = [];
 }
+/* REPLAY HERE ****************************************************************************************************
+MySceneGraph.prototype.replay = function() {
+  this.game = new MyGame(this);
+  this.currCamera = 0;
+  this.currPlayingPiece = null;
+  this.scene.camera.setPosition(this.cameras[0][0]);
+  this.idRoot = "game";
+  for(node in this.nodes) {
+    if(this.nodes[node] instanceof MyPiece) {
+      this.nodes[node].animations = [];
+      this.nodes[node].currAnimation = 0;
+      this.nodes[node].startTime = 0;
+      this.nodes[node].position = this.nodes[node].startPosition;
+      this.nodes[node].animationsTimes = [0];
+      this.nodes[node].holeUp = this.holeUp;
+      this.nodes[node].played = false;
+    }
+  }
+  this.onReplay = true;
 
-MySceneGraph.prototype.createInvisiblePieces = function () {
+  for(let i = 0; i < this.playsStack.length; i++) {
+    let point1 = this.playsStack[i].position;
+    let point4 = this.playsStack[i].endPosition;
+    let point3 = [point4[0], point4[1] + 10, point4[2]];
+    let point2 = [(point4[0] + point1[0]) / 2, point4[1] + 10, (point4[2] + point1[2]) / 2];
+
+    var animation = new BezierAnimation(this, 30, [point1, point2, point3, point4]);
+
+    this.playsStack[i].animations.push(animation);
+    this.playsStack[i].currAnimation = 0;
+    this.playsStack[i].startTime = 0;
+
+    //while(!this.animationEnd) {}
+    this.animationEnd = false;
+  }
+}
+*********************************************************************************************************************/
+
+MySceneGraph.prototype.restartGame = function() {
+  this.game = new MyGame(this);
+  this.currCamera = 0;
+  this.playsStack = [];
+  this.currPlayingPiece = null;
+  this.scene.camera.setPosition(this.cameras[0][0]);
+  this.idRoot = "game";
+  for(node in this.nodes) {
+    if(this.nodes[node] instanceof MyPiece) {
+      this.nodes[node].animations = [];
+      this.nodes[node].currAnimation = 0;
+      this.nodes[node].startTime = 0;
+      this.nodes[node].position = this.nodes[node].startPosition;
+      this.nodes[node].animationsTimes = [0];
+      this.nodes[node].holeUp = this.holeUp;
+      this.nodes[node].played = false;
+    }
+  }
+}
+
+MySceneGraph.prototype.createInvisiblePieces = function() {
   for (let i = 0; i < 4; i++) {
     for (let j = 0; j < 4; j++) {
       if (this.game.board[i][j] >= 20) {
