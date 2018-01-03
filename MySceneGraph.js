@@ -24,6 +24,8 @@ function MySceneGraph(filename, scene) {
 
   this.pickingIdToId = [];
 
+  this.playsStack = []; //x, y, Piece
+
   this.holeUp = true;
   this.scene.interface.gui.add(this, 'holeUp');
 
@@ -51,6 +53,7 @@ function MySceneGraph(filename, scene) {
   this.reader = new CGFXMLreader();
 
   this.scene.interface.gui.add(this, 'changeCamera');
+  this.scene.interface.gui.add(this, 'undo');
   this.startTime = null;
 
   this.plainPiecesPosition = [
@@ -120,6 +123,26 @@ MySceneGraph.prototype.createInvisiblePieces = function () {
       this.invisiblePieces.push(invisiblePiece);
     }
   }
+}
+
+MySceneGraph.prototype.undo = function (){
+  if(this.playsStack == []) {
+    return;
+  }
+  let piece = this.playsStack[this.playsStack.length - 1];
+
+  let point1 = piece.position;
+  let point4 = piece.startPosition;
+  let point2 = [point4[0], point4[1] + 10, point4[2]];
+  let point3 = [(point4[0] + point1[0]) / 2, point4[1] + 10, (point4[2] + point1[2]) / 2];
+
+  var animation = new BezierAnimation(this.graph, 30, [point1, point2, point3, point4]);
+
+  piece.animations.push(animation);
+
+  this.graph.currPlayingPiece.played = false;
+
+  this.playsStack = this.playsStack.slice(0,-1);
 }
 
 MySceneGraph.prototype.getNextPlayablePiece = function(piece) {

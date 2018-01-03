@@ -21,15 +21,19 @@ function MyPiece(graph, nodeID, pickingID) {
   switch (this.pickingID / 10 >> 0) {
     case 3:
       this.position = this.graph.plainPiecesPosition[(this.pickingID % 10) - 1];
+      this.startPosition = this.graph.plainPiecesPosition[(this.pickingID % 10) - 1];
       break;
     case 4:
       this.position = this.graph.holedPiecesPosition[(this.pickingID % 10) - 1];
+      this.startPosition = this.graph.holedPiecesPosition[(this.pickingID % 10) - 1];
       break;
     case 5:
       this.position = this.graph.dualPiecesPosition[(this.pickingID % 10) - 1];
+      this.startPosition = this.graph.dualPiecesPosition[(this.pickingID % 10) - 1];
       this.dualPiece = true;
       break;
   }
+  
 
   // IDs of child nodes.
   this.children = [];

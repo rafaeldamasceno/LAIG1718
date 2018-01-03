@@ -101,6 +101,7 @@ MyGame.prototype.handleReplyBot = function(data) {
   this.play(response[2], response[1], piece);
   pieceToPlay.animations.push(animation);
   //pieceToPlay.position = point4;
+  this.graph.playsStack.push(pieceToPlay);
 
   pieceToPlay.played = true;
   if(piece == 21) {

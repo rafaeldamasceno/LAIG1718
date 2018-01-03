@@ -189,6 +189,7 @@ XMLscene.prototype.pickingHandle = function (ID, object) {
     }
 
     this.graph.game.personPlay(y, x, pieceType);
+    this.graph.playsStack.push(this.graph.currPlayingPiece);
     
     
   }
