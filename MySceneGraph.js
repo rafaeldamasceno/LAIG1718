@@ -38,7 +38,7 @@ function MySceneGraph(filename, scene) {
     [vec3.fromValues(0.1, 25, 0.1), vec3.fromValues(0, 0, 0)],
     [vec3.fromValues(0, 15, 10), vec3.fromValues(0, 0, 0)],
     [vec3.fromValues(0, 15, -10), vec3.fromValues(0, 0, 0)],
-    [vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0, 0)]
+    [vec3.fromValues(8, 8, 8), vec3.fromValues(0, 0, 0)]
   ];
 
   this.cameraAnimationPos = null;
@@ -114,10 +114,11 @@ MySceneGraph.prototype.createInvisiblePieces = function () {
       if (this.game.board[i][j] >= 20) {
         continue;
       }
-      var invisiblePiece = new MyPiece(this, "", 100 + j * 10 + i);
+      var invisiblePiece = new MyPiece(this, null, 100 + j * 10 + i);
       invisiblePiece.position = this.game.getPosition(i, j);
       invisiblePiece.leaves = this.nodes["plainPiece"].leaves;
       invisiblePiece.children = this.nodes["plainPiece"].children;
+      invisiblePiece.transformMatrix = this.nodes["plainPiece"].transformMatrix;
       invisiblePiece.materialID = "null";
       invisiblePiece.textureID = "null";
       this.invisiblePieces.push(invisiblePiece);

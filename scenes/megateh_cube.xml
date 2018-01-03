@@ -99,24 +99,9 @@
         </TEXTURE>
 
         <TEXTURE id="tatami">
-            <file path="images/tatami.png" />
+            <file path="images/felt.jpg" />
             <amplif_factor s="35" t="35" />
         </TEXTURE>
-
-        <TEXTURE id="birch">
-            <file path="images/birch.jpg" />
-            <amplif_factor s="35" t="35" />
-        </TEXTURE>
-
-        <TEXTURE id="spruce">
-            <file path="images/spruce.jpg" />
-            <amplif_factor s="35" t="35" />
-        </TEXTURE>
-
-        <TEXTURE id="oak">
-            <file path="images/oak.jpg" />
-            <amplif_factor s="1" t="10" />
-        </TEXTURE>        
     </TEXTURES>
     <MATERIALS>
         <!-- A default material -->
@@ -131,7 +116,7 @@
         <MATERIAL id="birch">
             <shininess value="1" />
             <specular r="0.0" g="0.0" b="0.0" a="1" />
-            <diffuse r="0.781" g="0.6289" b="0.46875" a="1" />
+            <diffuse r="0.9" g="0.9" b="0.9" a="1" />
             <ambient r="0.1" g="0.1" b="0.1" a="1" />
             <emission r="0.0" g="0.0" b="0.0" a="1" />
         </MATERIAL>
@@ -139,7 +124,7 @@
         <MATERIAL id="spruce">
             <shininess value="1" />
             <specular r="0.0" g="0.0" b="0.0" a="1" />
-            <diffuse r="0.3125" g="0.16" b="0" a="1" />
+            <diffuse r="0.1" g="0.1" b="0.1" a="1" />
             <ambient r="0" g="0" b="0" a="1" />
             <emission r="0.0" g="0.0" b="0.0" a="1" />
         </MATERIAL>
@@ -390,10 +375,11 @@
 
         <NODE id="plainPiece">
             <MATERIAL id="spruce" />
-            <TEXTURE id="spruce" />
-            <ROTATION axis="x" angle="-90" />
+            <TEXTURE id="null" />
+            <TRANSLATION x="-1.25" y="0" z="-1.25" />
+            <SCALE sx="2.5" sy="0.6" sz="2.5" />
             <DESCENDANTS>
-                <LEAF type="cylinder" args="0.6 1.25 1.25 10 20 1 1" />
+                <NODEREF id="cube" />
             </DESCENDANTS>
         </NODE>
 
@@ -401,47 +387,17 @@
 
         <NODE id="holedPiece">
             <MATERIAL id="birch" />
-            <TEXTURE id="birch" />
+            <TEXTURE id="null" />
+            <TRANSLATION x="-1.25" y="0" z="-1.25" />
+            <SCALE sx="2.5" sy="0.6" sz="2.5" />
             <DESCENDANTS>
-                <NODEREF id="holedPieceTopCap" />
-                <NODEREF id="holedPieceBottomCap" />
-                <NODEREF id="holedPieceInner" />
-                <NODEREF id="holedPieceOuter" />
+                <NODEREF id="cube" />
             </DESCENDANTS>
         </NODE>
 
-        <NODE id="holedPieceOuter">
+        <NODE id="holedPieceCap">
             <MATERIAL id="null" />
             <TEXTURE id="null" />
-            <ROTATION axis="x" angle="-90" />
-            <DESCENDANTS>
-                <LEAF type="cylinder" args="0.6 1.25 1.25 10 20 0 0" />
-            </DESCENDANTS>
-        </NODE>
-
-        <NODE id="holedPieceInner">
-            <MATERIAL id="null" />
-            <TEXTURE id="null" />
-            <ROTATION axis="x" angle="-90" />
-            <SCALE sx="-1" sy="1" sz="1" />
-            <DESCENDANTS>
-                <LEAF type="cylinder" args="0.6 0.51666 0.51666 10 20 0 0" />
-            </DESCENDANTS>
-        </NODE>
-
-        <NODE id="holedPieceTopCap">
-            <MATERIAL id="null" />
-            <TEXTURE id="null" />
-            <ROTATION axis="x" angle="-90" />
-            <DESCENDANTS>
-                <LEAF type="cylinder" args="0 0.51666 1.25 10 20 0 0" />
-            </DESCENDANTS>
-        </NODE>
-
-        <NODE id="holedPieceBottomCap">
-            <MATERIAL id="null" />
-            <TEXTURE id="null" />
-            <ROTATION axis="x" angle="-90" />
             <TRANSLATION x="0" y="0" z="0.6" />
             <DESCENDANTS>
                 <LEAF type="cylinder" args="0 1.25 0.51666 10 20 0 0" />
@@ -545,7 +501,7 @@
 
         <NODE id="board">
             <MATERIAL id="oak" />
-            <TEXTURE id="oak" />
+            <TEXTURE id="null" />
             <TRANSLATION x="-7.5" y="0" z="-7.5"/>
             <DESCENDANTS>
                 <NODEREF id="boardBottom" />
@@ -636,8 +592,10 @@
             <MATERIAL id="null" />
             <TEXTURE id="null" />
             <SCALE sx="15" sy="1.2" sz="0.84" />
+            <TRANSLATION x="0" y="0.5" z="0.5" />
+            <ROTATION axis="y" angle="90" />
             <DESCENDANTS>
-                <NODEREF id="cube" />
+                <LEAF type="cylinder" args="1 0.42 0.42 10 20 1 1" />
             </DESCENDANTS>
         </NODE>       
 
