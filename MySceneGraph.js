@@ -150,8 +150,9 @@ MySceneGraph.prototype.undo = function (){
 
 
   this.game.undo();
-
+  
   this.playsStack = this.playsStack.slice(0,-1);
+  this.game.nextTurn();
 }
 
 MySceneGraph.prototype.getNextPlayablePiece = function(piece) {
