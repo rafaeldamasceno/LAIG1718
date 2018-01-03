@@ -167,6 +167,7 @@ MySceneGraph.prototype.restartGame = function() {
       this.nodes[node].animations = [];
       this.nodes[node].currAnimation = 0;
       this.nodes[node].startTime = 0;
+      this.nodes[node].animationMatrix = null;
       this.nodes[node].position = this.nodes[node].startPosition;
       this.nodes[node].animationsTimes = [0];
       this.nodes[node].holeUp = this.holeUp;
