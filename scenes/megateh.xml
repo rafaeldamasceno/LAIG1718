@@ -78,6 +78,11 @@
             <amplif_factor s="20" t="20" />
         </TEXTURE>
 
+        <TEXTURE id="botWinMenuPanel">
+            <file path="images/botWinMenuPanel.png" />
+            <amplif_factor s="20" t="20" />
+        </TEXTURE>
+
         <TEXTURE id="closeButton">
             <file path="images/close.png" />
             <amplif_factor s="20" t="20" />
