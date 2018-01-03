@@ -177,9 +177,12 @@ XMLscene.prototype.pickingHandle = function (ID, object) {
     let point2 = [(point4[0] + point1[0]) / 2, point4[1] + 10, (point4[2] + point1[2]) / 2];
     var animation = new BezierAnimation(this.graph, 30, [point1, point2, point3, point4]);
     this.graph.currPlayingPiece.animations.push(animation);
+    this.graph.currPlayingPiece.currAnimation = 0;
+    this.graph.currPlayingPiece.startTime = 0;
     this.graph.currPlayingPiece.shaderFlag = false;
     //this.graph.currPlayingPiece.position = point4;
     this.graph.invisiblePieces = [];
+    this.graph.playsStack.push(this.graph.currPlayingPiece);
     let pieceType = 11;
     if (this.graph.currPlayingPiece.dualPiece) {
       pieceType += 10;
@@ -189,7 +192,7 @@ XMLscene.prototype.pickingHandle = function (ID, object) {
     }
 
     this.graph.game.personPlay(y, x, pieceType);
-    this.graph.playsStack.push(this.graph.currPlayingPiece);
+    
     
     
   }

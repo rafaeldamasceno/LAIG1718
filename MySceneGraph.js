@@ -127,21 +127,29 @@ MySceneGraph.prototype.createInvisiblePieces = function () {
 }
 
 MySceneGraph.prototype.undo = function (){
-  if(this.playsStack == []) {
+  if(this.playsStack.length == 0) {
     return;
   }
   let piece = this.playsStack[this.playsStack.length - 1];
 
   let point1 = piece.position;
   let point4 = piece.startPosition;
-  let point2 = [point4[0], point4[1] + 10, point4[2]];
-  let point3 = [(point4[0] + point1[0]) / 2, point4[1] + 10, (point4[2] + point1[2]) / 2];
+  let point3 = [point1[0], point1[1] + 10, point1[2]];
+  let point2 = [(point1[0] + point4[0]) / 2, point1[1] + 10, (point1[2] + point4[2]) / 2];
 
-  var animation = new BezierAnimation(this.graph, 30, [point1, point2, point3, point4]);
+  var animation = new BezierAnimation(this, 30, [point1, point2, point3, point4]);
+
+  piece.startTime = 0;
 
   piece.animations.push(animation);
+  piece.currAnimation = 0;
 
-  this.graph.currPlayingPiece.played = false;
+  piece.played = false;
+  this.currPlayingPiece = null;
+  this.invisiblePieces = [];
+
+
+  this.game.undo();
 
   this.playsStack = this.playsStack.slice(0,-1);
 }

@@ -21,18 +21,20 @@ function MyPiece(graph, nodeID, pickingID) {
   switch (this.pickingID / 10 >> 0) {
     case 3:
       this.position = this.graph.plainPiecesPosition[(this.pickingID % 10) - 1];
-      this.startPosition = this.graph.plainPiecesPosition[(this.pickingID % 10) - 1];
       break;
     case 4:
       this.position = this.graph.holedPiecesPosition[(this.pickingID % 10) - 1];
-      this.startPosition = this.graph.holedPiecesPosition[(this.pickingID % 10) - 1];
       break;
     case 5:
       this.position = this.graph.dualPiecesPosition[(this.pickingID % 10) - 1];
-      this.startPosition = this.graph.dualPiecesPosition[(this.pickingID % 10) - 1];
       this.dualPiece = true;
       break;
   }
+
+  if(this.position) {
+    this.startPosition = this.position;
+  }
+  
   
 
   // IDs of child nodes.
@@ -212,8 +214,11 @@ MyPiece.prototype.update = function (currTime) {
   }
   this.currAnimation = i - 1;
   if (this.currAnimation == this.animations.length) {
-    this.animationMatrix = null;
     this.position = this.animations[this.animations.length - 1].p4;
+    this.animations = [];
+    this.animationsTimes = [0];
+    this.animationMatrix = null;
+    
     return;
   }
 

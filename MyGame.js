@@ -13,6 +13,8 @@ function MyGame(graph) { //1 - plain  2 - holed
 
   this.response = "";
 
+  this.boardsStack = [[[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]];
+
 }
 
 MyGame.prototype.play = function (x, y, piece) {
@@ -29,8 +31,20 @@ MyGame.prototype.play = function (x, y, piece) {
     this.stockDualPieces--;
     break;
   }
+  var newBoard = this.board.map(function(arr) {
+    return arr.slice();
+  });
+  this.boardsStack.push(newBoard);
 
 }
+
+MyGame.prototype.undo = function() {
+  this.board = this.boardsStack[this.boardsStack.length - 2].map(function(arr) {
+    return arr.slice();
+  });
+  this.boardsStack = this.boardsStack.slice(0,-1);
+}
+
 
 MyGame.prototype.getPosition = function (x, y) {
 
