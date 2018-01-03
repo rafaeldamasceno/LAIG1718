@@ -111,13 +111,6 @@ MyPiece.prototype.display = function (materialID, textureID = null) {
   if (!this.played) {
     this.holeUp = this.graph.holeUp;
   }
-  
-  if (this.dualPiece) {
-    if(!this.played && !this.graph.holeUp || (this.played && !this.holeUp)) {    
-      mat4.translate(transMatrix, transMatrix, [0, 1.2, 0]);
-      mat4.rotate(transMatrix, transMatrix, Math.PI, [0, 0, 1]);
-    }
-  }
 
   // if(this.pickingID >= 100) {
   //   mat4.rotate(transMatrix, transMatrix, -Math.PI/2, [1, 0, 0]);
@@ -129,6 +122,15 @@ MyPiece.prototype.display = function (materialID, textureID = null) {
     this.graph.scene.multMatrix(this.animationMatrix);
     // console.log("applying animation");
   }
+
+  mat4.identity(transMatrix);
+  if (this.dualPiece) {
+    if(!this.played && !this.graph.holeUp || (this.played && !this.holeUp)) {    
+      mat4.translate(transMatrix, transMatrix, [0, 1.2, 0]);
+      mat4.rotate(transMatrix, transMatrix, Math.PI, [0, 0, 1]);
+    }
+  }
+  this.graph.scene.multMatrix(transMatrix);
 
   // Add position to pieces
   //if para melhorar a eficiência (só as peças é que executam o que está a seguir)
