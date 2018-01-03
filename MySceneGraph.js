@@ -33,12 +33,14 @@ function MySceneGraph(filename, scene) {
 
   this.currCamera = 0;
   this.cameras = [
-    [vec3.fromValues(0.001, 25, 0.001), vec3.fromValues(0, 0, 0)],
+    [vec3.fromValues(0.1, 25, 0.1), vec3.fromValues(0, 0, 0)],
+    [vec3.fromValues(0, 15, 10), vec3.fromValues(0, 0, 0)],
+    [vec3.fromValues(0, 15, -10), vec3.fromValues(0, 0, 0)],
     [vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0, 0)]
   ];
 
   this.cameraAnimationPos = null;
-  this.cameraAnimationPoint = null;
+  this.cameraAnimationTar = null;
 
   this.axisCoords = [];
   this.axisCoords['x'] = [1, 0, 0];
@@ -146,8 +148,9 @@ MySceneGraph.prototype.getNextPlayablePiece = function(piece) {
 MySceneGraph.prototype.changeCamera = function() {
   let nextCamera = (this.currCamera + 1) % this.cameras.length;
   this.cameraAnimationPos = new LinearAnimation(this, 6, [this.cameras[this.currCamera][0], this.cameras[nextCamera][0]]);
-  this.cameraAnimationPoint = new LinearAnimation(this, 6, [this.cameras[this.currCamera][1], this.cameras[nextCamera][1]]);
+  this.cameraAnimationTar = new LinearAnimation(this, 6, [this.cameras[this.currCamera][1], this.cameras[nextCamera][1]]);
   this.startTime = 0;
+  this.currCamera = nextCamera;
 }
 
 
@@ -1824,9 +1827,24 @@ MySceneGraph.prototype.update = function (currTime) {
   if(this.startTime === 0) {
     this.startTime = currTime;
   }
+
   let elapsedTime = currTime - this.startTime;
+
   if(this.cameraAnimationPos) {
-    this.scene.camera.setPosition(this.cameraAnimationPos.getTransMatrix(elapsedTime));
+    if (this.cameraAnimationPos.animationTime > elapsedTime) {
+      this.scene.camera.setPosition(this.cameraAnimationPos.getTransMatrix(elapsedTime));
+    } else {
+      this.scene.camera.setPosition(this.cameraAnimationPos.getTransMatrix(this.cameraAnimationPos.animationTime - 0.0000001));
+      this.cameraAnimationPos = null;
+    }
+  }
+
+  if(this.cameraAnimationTar) {
+    if (this.cameraAnimationTar.animationTime > elapsedTime) {
+      this.scene.camera.setTarget(this.cameraAnimationTar.getTransMatrix(elapsedTime));
+    } else {
+      this.cameraAnimationTar = null;
+    }
   }
 
   this.nodes[this.idRoot].update(currTime);
