@@ -113,6 +113,11 @@
             <amplif_factor s="20" t="20" />
         </TEXTURE>
 
+        <TEXTURE id="menuButton">
+            <file path="images/menuButton.png" />
+            <amplif_factor s="20" t="20" />
+        </TEXTURE>
+
         <TEXTURE id="tatami">
             <file path="images/tatami.png" />
             <amplif_factor s="35" t="35" />
@@ -221,6 +226,7 @@
                <NODEREF id="dualPiece7" />
                <NODEREF id="dualPiece8" />
                <NODEREF id="tatami" />
+               <NODEREF id="menuButton" />
             </DESCENDANTS>
         </NODE>
 
@@ -827,6 +833,17 @@
             <MATERIAL id="null" />
             <TEXTURE id="closeButton" />
             <TRANSLATION x="0" y="7" z="-7" />
+            <DESCENDANTS>
+                <NODEREF id="button" />
+            </DESCENDANTS>
+        </NODE>
+
+        <NODE id="menuButton" pickingID="64">
+            <MATERIAL id="null" />
+            <TEXTURE id="menuButton" />
+            <TRANSLATION x="0" y="0.1" z="13" />
+            <ROTATION axis="x" angle="-90" />
+            <ROTATION axis="y" angle="-90" />
             <DESCENDANTS>
                 <NODEREF id="button" />
             </DESCENDANTS>

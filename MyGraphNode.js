@@ -70,6 +70,10 @@ MyGraphNode.prototype.addLeaf = function (leaf) {
 
 MyGraphNode.prototype.display = function (materialID, textureID = null) {
 
+  if (this.nodeID == "menuButton" && !this.graph.game.over) {
+    return;
+  }
+
   var newTexture = this.textureID;
   if (this.textureID == "null") {
     newTexture = textureID;

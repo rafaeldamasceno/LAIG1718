@@ -144,7 +144,7 @@ XMLscene.prototype.pickingHandle = function (ID, object) {
     case 3: //Ids para as peças plain
     case 4: //Ids para as peças holed
     case 5: //Ids para as peças dual
-        if (!this.graph.game.humanPlaying()) {
+        if (!this.graph.game.humanPlaying() || this.graph.game.over) {
           return;
         }
       if (object.played) {
@@ -175,6 +175,11 @@ XMLscene.prototype.pickingHandle = function (ID, object) {
           this.graph.idRoot = "game";
           this.camera.setPosition(this.graph.cameras[this.graph.currCamera][0]);
           this.camera.setTarget(this.graph.cameras[this.graph.currCamera][1]);
+          break;
+        case 4:
+          this.graph.idRoot = "winMenu";
+          this.initCameras();
+          break;
       }
   }
   if (ID >= 100 && ID < 140) {

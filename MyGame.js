@@ -15,6 +15,7 @@ function MyGame(graph) { //1 - plain  2 - holed
 
   this.boardsStack = [[[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]];
 
+  this.over = false;
 }
 
 MyGame.prototype.play = function (x, y, piece) {
@@ -125,7 +126,9 @@ MyGame.prototype.handleReplyBot = function(data) {
 
   if (response[0] == "w") {
     this.graph.idRoot = "winMenu";
+    this.graph.nodes["winPanel"].textureID = "botWinMenuPanel";
     this.graph.scene.initCameras();
+    this.over = true;
   } else if (response[0] == "c") {
     this.nextTurn();
   }
@@ -136,7 +139,9 @@ MyGame.prototype.handleReply = function(data) {
   // console.log(response);
   if (response == "win") {
     this.graph.idRoot = "winMenu";
+    this.graph.nodes["winPanel"].textureID = "winMenuPanel";
     this.graph.scene.initCameras();
+    this.over = true;
   } else {
     this.nextTurn();
   }

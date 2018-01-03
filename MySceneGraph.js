@@ -152,11 +152,15 @@ MySceneGraph.prototype.replay = function() {
 *********************************************************************************************************************/
 
 MySceneGraph.prototype.restartGame = function() {
+  let difficulty = this.game.difficulty;
+  let gamemode = this.game.gamemode;
   this.game = new MyGame(this);
-  this.currCamera = 0;
+  this.game.difficulty = difficulty;
+  this.game.gamemode = gamemode;
   this.playsStack = [];
   this.currPlayingPiece = null;
-  this.scene.camera.setPosition(this.cameras[0][0]);
+  this.scene.camera.setPosition(this.cameras[this.currCamera][0]);
+  this.scene.camera.setTarget(this.cameras[this.currCamera][1]);
   this.idRoot = "game";
   for(node in this.nodes) {
     if(this.nodes[node] instanceof MyPiece) {
@@ -169,6 +173,7 @@ MySceneGraph.prototype.restartGame = function() {
       this.nodes[node].played = false;
     }
   }
+  this.game.nextTurn();
 }
 
 MySceneGraph.prototype.createInvisiblePieces = function() {
