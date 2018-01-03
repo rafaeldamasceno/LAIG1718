@@ -101,14 +101,6 @@ MyPiece.prototype.display = function (materialID, textureID = null) {
   }
 
   this.graph.scene.pushMatrix();
-  this.graph.scene.multMatrix(this.transformMatrix);
-  if (this.animationMatrix) {
-    this.graph.scene.multMatrix(this.animationMatrix);
-    // console.log("applying animation");
-  }
-
-  // Add position to pieces
-  //if para melhorar a eficiência (só as peças é que executam o que está a seguir)
   let transMatrix = mat4.create();
   mat4.identity(transMatrix);
     //mat4.translate(transMatrix, transMatrix, coords);
@@ -127,11 +119,20 @@ MyPiece.prototype.display = function (materialID, textureID = null) {
     }
   }
 
-  if(this.pickingID >= 100) {
-    mat4.rotate(transMatrix, transMatrix, -Math.PI/2, [1, 0, 0]);
-  }
+  // if(this.pickingID >= 100) {
+  //   mat4.rotate(transMatrix, transMatrix, -Math.PI/2, [1, 0, 0]);
+  // }
 
   this.graph.scene.multMatrix(transMatrix);
+  this.graph.scene.multMatrix(this.transformMatrix);
+  if (this.animationMatrix) {
+    this.graph.scene.multMatrix(this.animationMatrix);
+    // console.log("applying animation");
+  }
+
+  // Add position to pieces
+  //if para melhorar a eficiência (só as peças é que executam o que está a seguir)
+ 
 
   this.graph.materials[newMaterial].apply();
   if (newTexture != null) {
