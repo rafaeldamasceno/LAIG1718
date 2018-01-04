@@ -750,6 +750,20 @@
             </DESCENDANTS>
         </NODE>
 
+        <NODE id="winMenu">
+            <MATERIAL id="null" />
+            <TEXTURE id="null" />
+            <TRANSLATION x="0" y="20" z="0" />
+            <ROTATION axis="y" angle="-45" />
+            <ROTATION axis="z" angle="90" />
+            <DESCENDANTS>
+              <NODEREF id="winPanel" />
+              <NODEREF id="replayButton" />
+              <NODEREF id="newGameButton" />
+              <NODEREF id="closeButton" />
+            </DESCENDANTS>
+        </NODE>
+
         <NODE id="winPanel">
             <MATERIAL id="null" />
             <TEXTURE id="winMenuPanel" />
